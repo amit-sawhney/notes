@@ -1,0 +1,104 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{MATH 413} % This is the name of the course 
+\newcommand{\examnum}{Homework 7} % This is the name of the assignment
+\newcommand{\examdate}{October 2022} % This is the due date
+\newcommand{\timelimit}{}
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+
+\begin{enumerate} %You can make lists!
+
+\item Question 9
+
+We introduce new variables $$y_1 = x_1 - 1, y_2 = x_2, y_3 = x_3 - 4, y_4 = x_4 - 2$$ and our equation becomes $$y_1 + y_2 + y_3 + y_4 = 20 - 1 - 4 - 2 = 13.$$ The inequalities on the $x_i$'s side are satisfied if and only if $$0 \le y_1 \le 5, 0 \le y_2 \le 7, 0 \le y_3 \le 4, 0 \le y_4 \le 4.$$
+
+Let $S$ be the set of all nonnegative integral solutions of the previous equation. The size of $S$ is $$|S| = \binom{13 + 4 - 1}{13} = 560.$$ 
+
+Let $P_1$ be the property that $y_1 \ge 6$, $P_2$ the property that $y_2 \ge 8$, $P_3$ the property that $y_3 \ge 5$, and $P_4$ the property that $y_4 \ge 5$. Let $A_i$ denote the subset of $S$ consisting of the solutions satisfying property $P_i$, $(i = 1, 2, 3, 4)$. We wish to evaluate the size of the set $\overline{A_1} \cap \overline{A_2} \cap \overline{A_3} \cap \overline{A_4}$, and we do so by applying the inclusion-exclusion principle. The set of $A_1$ consists of all those solutions in $S$ for which $y_1 \ge 6$. Performing a change in variable ($z_1 = y_1 - 6, z_2 = y_2, z_3 = y_3, z_4 = y_4)$, we see that the number of solutions in $A_1$ is the same as the number of nonnegative integral solutions of $$z_1 + z_2 + z_3 + z_4 = 7$$ Hence, $$|A_1| = \binom{10}{7} = 120$$
+
+In a similar way, we obtain $$|A_2| = \binom{8}{5} = 56, |A_3| = \binom{11}{8} = 165, |A_4| = \binom{11}{8} = 165.$$
+
+The set of $A_1 \cap A_2$ consists of all those solutions in $S$ for which $y_1 \ge 6$ and $y_2 \ge 8$. Performing a change in variable $(u_1 = y_1 - 6, u_2 = y_2 - 8, u_3 = y_3, u_4 = y_4$, we see that the number of solutions in $A_1 \cap A_2$ is the same as the number of nonnegative integral solutions of $$u_1 + u_2 + u_3 + u_4 = -1.$$ Hence, $$|A_1 \cap A_2| = \binom{2}{-1} = 0.$$
+
+Similarly, we get 
+
+$$|A_1 \cap A_3| = \binom{5}{2} = 1-, |A_1 \cap A_4| = \binom{5}{2} = 10$$
+$$|A_2 \cap A_3| = \binom{3}{0} = 1, |A_2 \cap A_4| = \binom{3}{0} = 1$$
+$$\text{and } |A_3 \cap A_4| = \binom{6}{3} = 20.$$
+
+The intersection of any three of the sets $A_1, A_2, A_3, A_4$ is empty. We now apply the inclusion-exclusion principle to obtain
+
+$$|\overline{A_1} \cap \overline{A_2} \cap \overline{A_3} \cap \overline{A_4}| = 560 - (120 + 56 + 165 + 165) + (0 + 10 + 10 + 1 + 1 + 20) = 96.$$
+
+Citation: Page 171-172 of the book.
+
+\item Question 13
+
+Let $A_1, A_3, A_5, A_7, A_9$ be the sets of permutations where $1, 3, 5, 7, 9$ are respectively in their natural position. We then apply the complementary form of the inclusion-exclusion principle. In this situation it reads
+
+$$|A_1^c \cup A_3^c \cup A_5^c \cup A_7^c \cup A_9^c| = \sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k|$$ $$ - \sum | A_i \cap A_j \cap A_k \cap A_l| + |A_1 \cap A_3 \cap A_5 \cap A_7 \cap A_9|$$ where the sums are taken in the obvious way. 
+
+We have
+
+$$|A_i| = (9 - 1)!$$
+$$|A_i \cap A_j| = (9 - 2)!$$
+$$|A_i \cap A_j \cap A_k| = (9 - 3)!$$
+$$|A_i \cap A_j \cap A_k \cap A_l| = (9 - 4)!$$
+and 
+$$|A_1 \cap A_3 \cap A_5 \cap A_7 \cap A_9| = (9 - 5)!$$
+
+Hence the answer is $\binom{5}{1}8! - \binom{5}{2} 7! + \binom{5}{3} 6! - \binom{5}{4} 5! + 4!$
+
+\item Question 24b
+
+The answer is based on the formula: $$n! - r_1(n - 1)! + r_2(n - 2)! - \cdots + (-1)^kr_l(n -k)! + \cdots (-1)^nr_n$$
+
+$$r_1 = 12$$ $$r_2 = 2 + 4(4) + 4(4) + 2 + 4(2) + 4(2) + 2 =  54$$ $$r_3 = 112$$ $$r_4 = 44$$ $$r_5 = 48$$ $$r_6 = 8$$
+
+Answer: $6! - 12 \cdot 5! + 54 \cdot 4! - 102 \cdot 3! + 44 \cdot 2! - 48 + 8$
+
+Citation: https://www.math.hkust.edu.hk/~mabfchen/Math3343/Homework3.pdf 
+
+(I couldn't derive all of the $r_1 -- r_6$ in time so take off points as necessary). I made an attempt to break up each set of numbers into their cases (e.g. there are $\binom{6}{3}$ ways to pick 3 unordered numbers from 6 options ($1, 2, 3, 4, 5, 6$). And then I tried to break up how many of those cases generated 4 possibilities and then how many generated 8 and create a sum, but the closest I get from $r_2$ is $112$ which appears to be wrong. Attempted the same idea for $4, 5$ and couldn't get the right answer for those either so for $r_3, r_4, r_5$ I wasn't able to count those myself). 
+
+
+\end{enumerate}
+
+
+
+
+\end{document}

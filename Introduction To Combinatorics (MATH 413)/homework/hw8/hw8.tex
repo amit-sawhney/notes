@@ -1,0 +1,249 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{MATH 413} % This is the name of the course 
+\newcommand{\examnum}{Homework 8} % This is the name of the assignment
+\newcommand{\examdate}{11/7/2022} % This is the due date
+\newcommand{\timelimit}{}
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+\begin{enumerate} %You can make lists!
+
+\item Question 2
+
+Following the inclusion exlclusion principle, we can start by calculating the number of ways to choose 2 double letters and then rearrange the remaining 9 symbols. This is computed as $$\binom{5}{2} \frac{9!}{2!2!2!}$$
+
+However, this computed the case where there are three double letters three times, once for each pair. We must recompute the count to subtract the overcounted cases. So, 
+
+$$\binom{5}{2} \frac{9!}{2!2!2!} - 2\binom{5}{3}\frac{8!}{2!2!}$$
+
+Similarly, we have now subtracted out too many cases where there are 4 double letters. So we must add those back in. 
+
+$$\binom{5}{2} \frac{9!}{2!2!2!} - 2\binom{5}{3}\frac{8!}{2!2!} + 3 \binom{5}{4} \frac{7!}{2!}$$
+
+Lastly, we have overcounted once more, so following this pattern, 
+
+$$\binom{5}{2} \frac{9!}{2!2!2!} - 2\binom{5}{3}\frac{8!}{2!2!} + 3 \binom{5}{4} \frac{7!}{2!} - 4 \binom{5}{5}6! = 286920$$
+
+\newpage
+
+\item Question 32
+
+Consider an arbitrary $n$. If you divide by any prime number $p$, this is the number of positive integers $\le n$ that are a multiple of $p$. (e.g. $\frac{12}{2} = 6$ and $2, 4, 6, 8, 10, 12$). Consequently, these numbers cannot be coprime with $n$ as they are a multiple of $p$. Imagine we want to calculate all of the numbers that are a multiple of two primes $p_1$ or $p_2$. Then we can compute $\frac{n}{p_1} + \frac{n}{p_2}$. However, this double counts the numbers that are a multiple of both $p_1$ and $p_2$. So to count the number of multiples of $p_1$ or $p_2$ this is $\frac{n}{p_1} + \frac{n}{p_2} - \frac{n}{p_1 \cdot p_2}$
+
+We can expand upon this idea to apply inclusion-exclusion principle to all of the primes up to $n$. 
+
+$$
+\phi(n) = n - \sum_{p_i \text{ prime } p_i|n} \frac{n}{p_i} + \sum_{p_i, p_j \text{ prime } p_i, p_j | n} \frac{n}{p_i\cdot p_j} - \sum_{p_i,p_j, p_k \text{ prime } p_i, p_j, p_k | n} \frac{n}{p_i, p_j, p_k} $$ $$ + \cdots + (-1)^{|P|} \frac{n}{p_1\cdot p_2 \cdots p}
+$$
+
+For clarification, each summation is over the set of primes that divide $n$ and $|P|$ represents the cardinality of set $P$ where $P$ is the set of primes that are dividing $n$.
+
+Simplifying, this expression, we see
+
+$$
+\phi(n) = n\Bigg (1 - \sum_{p_i \text{ prime } p_i|n} \frac{1}{p_i} + \sum_{p_i, p_j \text{ prime } p_i, p_j | n} \frac{1}{p_i\cdot p_j} - \sum_{p_i,p_j, p_k \text{ prime } p_i, p_j, p_k | n} \frac{1}{p_i, p_j, p_k} $$ $$ + \cdots + (-1)^{|P|} \frac{1}{p_1\cdot p_2 \cdots p} \Bigg)
+$$
+
+Consider the following identity, 
+
+$$
+\prod_{i = 1}^{n} (1 - x_i) = 1 - \sum_{i = 1}^{n} x_i + \sum_{i, j = 1}^{n} x_i\cdot x_j - \sum_{i, j, k = 1}^n x_i \cdot x_j \cdot x_k + \cdots + (-1)^n x_1\cdot x_2\cdots x_n
+$$
+$$
+= \sum_{I \subset 1, 2, \dots, n} (-1)^{|I|} \prod_{i \in I} x_i
+$$
+
+By applying this to the simplified inclusion exclusion principle above, we see that, 
+
+$$
+\phi(n) = \prod_{i = 1}^{k} \Big ( 1 - \frac{1}{p_i} \Big )
+$$
+
+
+Citation: https://math.stackexchange.com/questions/1734597/inclusion-exclusion-principle-challenging-problem
+
+\newpage
+
+\item Question 4
+
+At a base case, $f_n = a_n$ for $n = \{0, 1, 2, 3, 4\}$ trivially by the definition of this problem. For $n \ge 5$, 
+
+$$
+f_n = f_{n - 1} + f_{n - 2} = f_{n - 2} + f_{n - 3} + f_{n - 2} = 2f_{n - 2} + f_{n - 3}
+$$
+$$
+f_{n} = 2\cdot f_{n - 2} + f_{n - 3} = 2\cdot f_{n - 2} + f_{n - 4} + f_{n - 5} = 2\cdot (f_{n - 3} + f_{n - 4}) + f_{n - 4} + f_{n - 5}
+$$
+$$
+f_{n} = 2f_{n - 3} + 3f_{n - 4} + f_{n - 5} = 2\cdot (f_{n - 4} + f_{n - 5}) + 3f_{n - 4} + f_{n - 5} = 5f_{n - 4} + 3f_{n - 5}
+$$
+
+So clearly, the Fibonacci sequence is a solution to the recurrence relation $a_n$. 
+
+To prove the next part, consider $r \in \{0, 1, 2, 3, 4\}$ such that $r$ is a remainder of an arbitrary $n$ divided by $5$. We know that because $5 \cdot f_{n - 4}$ is trivially divisible by $5$, then there must be $f_r$ that is divisible by $5$. So, 
+
+$$5 | f_n \iff 5 | f_r \iff r = 0 \iff 5 | n$$
+
+Citation for second part: https://people.math.wisc.edu/~duhlenbr/475-1072Exam2Answers.pdf
+
+\item Question 9
+
+\begin{equation}
+    h_n = \begin{cases}
+    1, & \text{if $n = 0$} \\
+    3, & \text{if $n = 1$} \\
+    h_{n - 1} + h_{n - 1} + 2h_{n - 2}, & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+This is because if $n = 0$, there is only 1 possible coloring, don't color. If $n = 1$, there are 3 possible color choices because their is only 1 square. Otherwise, at the current square, if you choose blue or white, there are $h_{n-1}$ possibilities. If you choose red, there are $2\cdot h_{n - 2}$ possibilities because the previous square only has 2 choices and then everything before that can be anything. 
+
+\newpage
+
+\item Question 11
+
+\begin{enumerate}
+    \item 11a
+    
+    \begin{proof} We will show the following by induction on $n$.
+    
+    \textbf{Base case}: At $n = 1$, $\ell_{1} = 1$ and $f_{0} + f_{2} = 0 + 1 = 1$. So, the base case holds. 
+    
+    \textbf{Inductive Hypothesis}: Assume $\ell_{n} = f_{n - 1} + f_{n + 1}, n = \{ 1, 2, \dots, k - 1\}$. 
+    
+    \textbf{Inductive Step} WTS $\ell_{k} = f_{k - 1} + f_{k + 1}$. 
+    
+    By the definition of Lucas numbers, $$\ell_{k} = \ell_{k - 1} + \ell_{k - 2}$$
+    
+    By the inductive hypothesis, $$\ell_{k} = f_{k - 2} + f_{k} + f_{k - 3} + f_{k - 1}$$
+    
+    Note that by the definition of Fibonacci numbers, $$f_{k - 1} = f_{k - 2} + f_{k - 3}$$
+    $$f_{k + 1} = f_{k} + f_{k - 1}$$
+    
+    Simplifying, $$\ell_{k} = f_{k - 2} + f_{k} + f_{k - 3} + f_{k - 1} = f_{k - 1} + f_k + f_{k - 1} = f_{k - 1} + f_{k + 1}$$
+    
+    So, $\ell_{n} = f_{n - 1} + f_{n + 1}$ by induction. 
+    \end{proof}
+    
+    \item 11b
+    
+    \begin{proof}
+    We will prove the following by induction on $n$.  
+    
+    \textbf{Base case}: At $n = 0$, $(\ell_{0})^2 = (2)^2 = 4$. Similarly, $\ell_0\ell_1 + 2 = (2)(1) + 2 = 4$. So, the base case holds.
+    
+    \textbf{Inductive Hypothesis}: Assume $(\ell_0)^2 + (\ell_1)^2 + \cdots + (\ell_n)^2 = (\ell_n)(\ell_{n + 1}) + 2$ for $n = \{0, 1, \dots, k - 1\}$. In other words, $$\sum_{i = 0}^{n} (\ell_i)^2 = (\ell_n)(\ell_{n + 1}) + 2$$ for $n = \{0, 1, \dots, k - 1\}$
+    
+    \textbf{Inductive Step}: We want to show the following: $$\sum_{i = 0}^{k} (\ell_i)^2 = (\ell_k)(\ell_{k + 1}) + 2$$
+    
+    $$\sum_{i = 0}^{k} (\ell_i)^2 = (\ell_k)^2 + \sum_{i = 0}^{k - 1} (\ell_i)^2=(\ell_k)^2 + (\ell_{k - 1})(\ell_k) + 2 = (\ell_k)(\ell_k + \ell_{k - 1}) + 2$$
+    
+    Notice that, $\ell_{k + 1} = \ell_{k} + \ell_{k - 1}$. 
+    
+    So, $$(\ell_k)(\ell_k + \ell_{k - 1}) + 2 = (\ell_k)(\ell_{k + 1}) + 2$$. 
+    
+    Hence, $(\ell_0)^2 + (\ell_1)^2 + \cdots + (\ell_n)^2 = (\ell_n)(\ell_{n + 1}) + 2$ by induction. 
+    \end{proof}
+    
+\end{enumerate}
+
+\newpage
+
+\item Question 40
+
+At the base case $n = 0$, clearly there is only 1 string possible and that is the string with no characters. 
+
+At the next base  case $n = 1$, there is only 1 character allowed and 3 choices, so there are 3 possible strings. 
+
+At a given position $i$, there two cases: 
+
+\begin{enumerate}
+    \item Case 1: You can add a $2$ to a string of length $n - 1$. Hence, $a_{n - 1}$
+    \item Case 2: You can add a $20$ or $21$ to the string of length $n - 2$. Note that $22$ is redundant with the previous case. Hence, $2a_{n - 2}$.
+\end{enumerate}
+
+So, 
+$$
+a_n = a_{n - 1} + 2a_{n - 2}
+$$
+
+The characteristic equation for this recurrence relation is, 
+
+$$x^2 = x + 2 \iff x^2 - x - 2 = 0$$
+
+So the roots o this equation are clearly, $x = 2, -1$
+
+$a_n = a\cdot 2^n + b (-1)^n$
+
+To solve this system o equations, we plug in the values at $n = 0$ and $n = 2$. 
+
+So, 
+$$
+1 = a + b
+$$
+$$
+3 = 2a - b
+$$
+
+Solving this system, we get $a = \frac{4}{3}$ and $b = -\frac{1}{3}$
+
+So the answer is:
+
+$$a_n = \frac{4}{3}2^n - \frac{1}{3}(-1)^n$$
+
+Citation: \href{https://discrete.openmathbooks.org/dmoi2/sec_recurrence.html}{https://discrete.openmathbooks.org/dmoi2/sec\_recurrence.html}
+
+\newpage
+
+\item Question A
+
+Generation 0: 1 Canadian
+
+Generation 1: 1 American
+
+Generation 2: 1 Canadian and 1 American
+
+Generation 3: 2 American and 1 Canadian
+
+Generation 4: 3 American and 2 Canadian
+
+Clearly, this follows a Fibonacci sequence. The $n$-th generation will have $f_{n}$ people where $f_n$ is the $n$-th Fibonacci number. The reasoning for this is because each person in generation $n - 1$ contributes 1 person to generation $n$. Additionally, in generation $n - 2$ each Canadian generates 1 person for $n$ and each American ALSO generates a person for $n$. So this explains the recurrence following Fibonacci. 
+
+Citation: Eric Liu
+
+\end{enumerate}
+
+
+\end{document}

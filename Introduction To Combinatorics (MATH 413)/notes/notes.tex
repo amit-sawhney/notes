@@ -1,0 +1,265 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{MATH 413}\\Introduction to Combinatorics}
+\author{\huge{Amit Sawhney}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{What is Combinatorics?}
+
+\chapter{Permutations and Combinations}
+
+\section{Lecture 2: Four Basic Counting Principles}
+
+\section{Lecture 3: Permutations and selections of sets I}
+
+\section{Lecture 4: Permutations and selections of sets II: binomial identities}
+
+\section{Lecture 5: Permutations and Combinations of multisets I}
+
+\section{Lecture 6: Permutations and Combinations of multisets II}
+
+\chapter{The Pigeonhole Principle}
+
+\section{Lecture 7: The pigeonhole principle}
+
+\section{Lecture 8: The strong pigeonhole principle}
+
+\section{Lecture 9: Ramsey Theory}
+
+\setcounter{chapter}{4}
+
+\chapter{The Binomial Coefficients}
+
+\section{Lecture 10: Binomial coefficients and the binomial theorem I}
+
+\section{Lecture 11: Binomial coefficients and the binomial theorem II}
+
+\section{Lecture 12: Binomial coefficients and the binomial theorem III}
+
+\chapter{The Inclusion-Exclusion Principle and Applications}
+
+\section{Lecture 13: The Inclusion-Exclusion principle and applications I}
+
+\section{Lecture 14: The Inclusion-Exclusion principle and applications II: Derangements}
+
+\section{Lecture 15: The Inclusion-Exclusion principle and applications II}
+
+\section{Lecture 16: The Inclusion-Exclusion principle and applications IV: Another Forbidden Position Problem}
+
+\chapter{Recurrence Relations and Generating Functions}
+\section{Lecture 17: Some Number Sequences}
+
+\ex{Example 1}{
+    Consider a configuration of $n$ lines where every two lines
+    have a point in common, but no three do. How many regions in the
+    plane are there? Give a recurrence. \\
+
+    $$
+        a_n = a_{n-1} + n
+    $$
+
+    TODO: Give an explanation of why this is true.
+}
+
+\ex{Example 2}{
+    Give a simple recurrence for dearragements. \\
+
+    $$
+        D_n = (n - 1)(D_{n-1} + D_{n-2})
+    $$
+
+    TODO: Give an explanation of why this is true. Need to review dearragements
+    from previous lecture.
+}
+
+\subsubsection*{}
+Consider the Fibonacci sequence $f_n = f_{n-1} + f_{n-2}$, where $f_0 = 0$ and $f_1 = 1$.
+
+\dfn{The adjusted Fibonacci sequence: $\hat{F}_n$}{
+    This is the number of 1,2 lists of size $n$. In other words,
+    consider the number of ways a valet can park A cars (size $1$) and
+    B cars (size $2$) in a parking lot of size $n$.
+
+    \begin{equation*}
+        \hat{F}_n = \begin{cases}
+            1         & \text{if $n = 0$} \\
+            f_{n + 1} & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+}
+
+\qs{}{
+    Prove
+    $$
+        \sum_{n=0}^{n} f_{i} = f_{n+2} - 1
+    $$
+}
+\sol{
+    \begin{subproof}
+        We will prove this by induction on $n$. \\
+
+        \textbf{Base case}: $n = 0$.
+        $$
+            \sum_{i=0}^{0} f_{i} = f_{0} = 0
+        $$
+
+        Similarly,
+        $$
+            f_{0+2} - 1 = f_{2} - 1 = 1 - 1 = 0
+        $$
+
+        So, the base case is true. \\
+
+        \textbf{Inductive Hypothesis}: Assume that the following statement is true for $n = k$.
+
+        $$
+            \sum_{i=0}^{k} f_{i} = f_{k+2} - 1
+        $$
+
+        \textbf{Indcutive Step}: We will prove that the following statement is true for $n = k + 1$.
+
+        $$
+            \sum_{i=0}^{k+1} f_{i} = f_{k+1} + \sum_{i=0}^{k} f_{i} = f_{k+1} + f_{k+2} - 1 = f_{k+3} - 1
+        $$
+
+        Therefore, the statement is true for all $n$ by induction.
+    \end{subproof}
+}
+
+\qs{}{
+    Prove
+    $$
+        1 + \sum_{i=0}^{n} \hat{F}_i = \hat{F}_{n+2}
+    $$
+}
+\sol{
+    \begin{subproof}
+        We will prove this by induction on $n$. \\
+
+        \textbf{Base case}: $n = 0$.
+        $$
+            1 + \sum_{i=0}^{0} \hat{F}_i = 1 + \hat{F}_0 = 1 + 1 = 2
+        $$
+        Similarly,
+        $$
+            \hat{F}_{0+2} = \hat{F}_{2} = f_{2+1} = f_{3} = 2
+        $$
+        So, the base case is true. \\
+
+        \textbf{Inductive Hypothesis}: Assume that the following statement is true for $n = k$.
+        $$
+            1 + \sum_{i=0}^{k} \hat{F}_i = \hat{F}_{k+2}
+        $$
+
+        \textbf{Inductive Step}: We will prove that the following statement is true for $n = k + 1$.
+        \begin{align*}
+            1 + \sum_{i=0}^{k+1} \hat{F}_i & = 1 + \hat{F}_{k+1} + \sum_{i=0}^{k} \hat{F}_i \\
+                                           & = \hat{F}_{k+1} + \hat{F}_{k+2}                \\
+                                           & = f_{k+2} + f_{k+3}                            \\
+                                           & = f_{k+4}                                      \\
+                                           & = \hat{F}_{k+3}                                \\
+        \end{align*}
+
+        Therefore, the statement is true for all $n$ by induction.
+    \end{subproof}
+
+    \qs{}{
+        Prove that $f_n$ is even if and only if $n$ is divisible by $3$.
+    }
+    \sol{
+        \begin{subproof}
+            Given that $f_0 = 0$, $f_1 = 1$, and $f_2 = 1$, we can see that
+            at $n = 3$, $f_3 = 2$, which is even. \\
+
+            This is because the only way to get an even number is to have
+            the parity of the two numbers added togethed (odd + odd or even + even)
+            be the same. So, $f_4$, must be odd, $f_5$ must be odd and
+            $f_6$ must be even. \\
+
+            Given the starting sequence of even, odd, odd. The following sequence
+            must always be even, odd, odd, which repeats every $3$ numbers.
+
+            Since the first $n = 0$ is the first number in the sequence, every $n$
+            that is divisible by $3$ is even.
+        \end{subproof}
+    }
+    \nt{
+        Example problems for later \\
+
+        Guess and prove by induction (you may replace the Fibonnaci 
+        number by the adjusted Fibonacci number if it helps you) \\
+
+        \begin{itemize}
+            \item $f_1 + f_3 + \cdots + f_{2n - 1} = ?$
+            \item $f_0 + f_2 + \cdots + f_{2n} = ?$
+            \item $f_0 - f_1 + f_2 - \cdots + (-1)^{n}f_n = ?$
+            \item $(f_0)^2 + (f_1)^2 + \cdots + (f_n)^2 = ?$
+        \end{itemize}
+    }
+
+    \subsubsection*{Obtaining an explicit formula for $f_n$ for linear recurrences}
+    \ex{}{
+        Consider the Fibonacci sequence $f_n = f_{n-1} + f_{n-2}$, where $f_0 = 0$ and $f_1 = 1$.
+        This can be rewritten as a linear recurrence as follows:
+        $$
+        f_n - f_{n-1} - f_{n-2} = 0
+        $$
+
+        We must solve the corresponding characterstic equation. Notice how the largest
+        degree lines up with the "largest" case of the recurrence. \\
+
+        $$
+        x^2 - x - 1 = 0
+        $$
+
+        Let $q_1$ and $q_2$ be the roots of the characteristic equation. \\
+
+        It is potentially relevant to note that the following is a solution space
+        of the Fibonacci recurrence (but don't satisfy $f_0$ -- 
+        the initial condition): \\
+
+        \begin{equation*}
+            \begin{cases}
+                q_1^n - q_1^{n - 1} - q_1^{n - 2} = 0 \\
+                q_2^n - q_2^{n - 1} - q_2^{n - 2} = 0 \\
+            \end{cases}
+        \end{equation*}
+
+        The rest of this is based on an ansatz, i.e. 
+        we need to make an assumption at the answer and validate it later \\
+
+        $$
+        f_n = c_1q_1^n + c_2q_2^n,
+        $$
+
+        for \textit{some} $c_1, c_2 \in \mathbb{R}$. \\
+
+        Using the initial conditions of $f_0 = 0$ and $f_1 = 1$, 
+        we can solve for $c_1$ and $c_2$.
+    }
+
+    \section{Lecture 18: Introduction to ordinary generating series}
+
+    \chapter{Special Counting Sequences}
+
+    \section{Lecture 19: Partition identities}
+
+    \section{Lecture 20: Partition identities (continued)}
+
+    \section{Lecture 21: Exponential generating series}
+}
+
+\end{document}

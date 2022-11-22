@@ -1,0 +1,115 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{Course Name Here} % This is the name of the course 
+\newcommand{\examnum}{Assignment Name Here} % This is the name of the assignment
+\newcommand{\examdate}{Date Here} % This is the due date
+\newcommand{\timelimit}{}
+
+
+
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+
+\begin{enumerate} 
+
+\item Section 2.7 Question 18. 
+
+Based on the formula provided in the chapter,
+
+$$\frac{(\frac{8!}{2!})^2}{2! \cdot 4! } = 8467200$$
+
+Similarly you can construct an algorithm that says there are 64 choices for the first rook, 49 for the next, then 26, and so on (each rook essentially removes a dimension off the board), and then divide out the repeated blue and red rooks to avoid for duplicated arrangements. This shows:
+
+$$\frac{64 \cdot 49 \cdot 36 \cdot 25 \cdot 16 \cdot 9}{4! \cdot 2!} = 8467200$$
+
+\item Section 2.7 Question 48
+
+This can be represented by counting the number of lattice paths from $(0,0)$ to $(m+1, n)$. First let's decompose this as there are at most $n$ Bs. Consider how many lattice paths there are from $(0,0)$ to $(m, 0)$ which covers the case of $m$ As and $0$ Bs, and there are $\binom{m + 0}{0}$ ways to form $n$ As and $0$ Bs. Similarly, consider the number of paths from $(0,0)$ to $(m, 1)$ which represents $m$ As and $1$ B and thus, there can be $\binom{m + 1}{1}$ possibilities. Continuing this to $m$ As and $n$ Bs we find that the number of possibilities can be represented by $\binom{m + n}{n}$. So, the total number of possibilities for at most $n$ Bs is: $$\binom{m + 0}{0} + \binom{m + 1}{1} + \binom{m + 2}{2} + \cdots \binom{m + n}{n} = \binom{m + n + 1}{n} = \binom{m + n + 1}{m + 1}$$
+
+Citation: Consulted Eric Liu about the approach that was talked about in lecture as I missed it. 
+
+
+\item Section 2.7 Question 54
+
+Number of towers is $3^n$ by some simple number analysis. Justification for this: Each number in the set has 3 choices: \begin{enumerate}
+    \item It is in $B$
+    \item It is in $A$
+    \item It is in neither
+\end{enumerate}
+
+For fun, when I was attempting to derive a formula I came up with this, 
+
+$$2^n + (\sum_{i = 1}^{n - 1} n \cdot 2^{n - i}) + 1$$ 
+
+which can probably be simplified to $3^n$ but it became apparent that it was $3^n$ when $n = 1 \rightarrow 3, n = 2 \rightarrow 9, n = 3 \rightarrow 27$
+
+\item Q(A)
+
+Consider a situation where you have $2n$ people and room and you want to know how many ways you can form groups of 2 (pairs). Clearly, there are $\binom{2n}{2}$ ways to create the pairs. 
+
+Now decompose this set into 2 groups of size $n$ where A has $n$ elements and B has $n$ elements. Imagine you want to create pairs from these 2 decomposed sets There are three cases:
+
+\begin{enumerate}
+    \item You choose a pair both from A. There are $\binom{n}{2}$ ways to do this
+    \item You choose a pair both from B. There are $\binom{n}{2}$ ways to do this.
+    \item You choose a pair, one from A and one from B. There are $n$ elements in A and $n$ elements in B so there are $n \cdot n = n^2$ ways to pick one from A and one from B to form a pair. 
+\end{enumerate}
+
+Clearly, there are $2 \cdot \binom{n}{2} + n^2$ ways to count the number of pairs. \\
+
+Because $\binom{2n}{2}$ and $2 \cdot \binom{n}{2} + n^2$ are both ways to count the same set of forming pairs: $$\binom{2n}{2} = 2 \cdot \binom{n}{2} + n^2$$
+
+\item Q(B)
+
+For the clarity of this question, consider the same equation:
+
+$$\sum_{k=0}^{n}\binom{n}{k}\binom{k}{m} = \binom{n}{m} \cdot 2^{n - m}$$.
+
+Consider a set of $n$ people. Imagine you are attempting to count how many ways there are to select a group of people from $n$ and then a sub group of $m$ people from that selected group. 
+
+For a group size of 0, there are 0 ways to select this section. For a group of size 1, there are $\binom{n}{1}$ ways to select the first group and then $\binom{1}{m}$ ways to select the sub-group so $\binom{n}{1}\binom{1}{m}$ ways total. This pattern can continue as follows which represents the LHS. 
+
+Consider this same set of grouping. There are clearly $\binom{n}{m}$ ways of creating subgroups of size $m$. For the rest of the members (which there are $n - m$ of, they are either in the original selected group or not, so there are $2^{n - m}$ possibilities as they are in the group or not which yields $\binom{n}{m}2^{n - m}$ possibilities total. 
+
+Because the LHS and RHS count the same exact set, they must be equal. 
+
+
+Citation: Consulted Eric Liu on how he approached this problem for the RHS as I was a bit stuck. Was able to derive the LHS from the lecture. 
+
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,129 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{MATH 413} % This is the name of the course 
+\newcommand{\examnum}{Homework 3} % This is the name of the assignment
+\newcommand{\examdate}{9/14/2022} % This is the due date
+\newcommand{\timelimit}{}
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+
+\begin{enumerate} %You can make lists!
+
+\item Hotel Problem
+
+Solution: $301595092259134915263594496.0$
+
+Order of Magnitude: $26$
+
+\begin{lstlisting}[language=Python]
+import scipy.special as spys
+import numpy as np
+import math
+
+NUM_ROOMS = 8
+NUM_PEOPLE = 32
+NUM_PER_ROOM = 4
+
+dp = np.zeros((NUM_ROOMS + 1, NUM_PEOPLE + 1))
+
+for person in range(0, NUM_PEOPLE + 1):
+  # traverse from NUM_ROOMS to 0
+  for room in range(NUM_ROOMS, -1, -1):
+    if room == NUM_ROOMS and (person >= 0 or person <= 4):
+      dp[room][person] = 1
+    elif person == 0:
+      dp[room][person] = 1
+    else:
+      for occupant in range(0, NUM_PER_ROOM + 1):
+        dp[room][person] += spys.comb(person, occupant) *
+        dp[room + 1][person - occupant]
+    
+total = np.sum(dp[1:])
+
+\end{lstlisting}
+
+Essentially, we are counting how many ways we can put 1 person into 1 room, 2 rooms, 3 rooms, $\dots$, 8 rooms. And then doing the same for 2 people, 3 people, $\dots$, 32 people. By caching the amounts of previous counts using a DP algorithm, we can easily calculate later probabilities for by referencing cached values. 
+
+\item Q57
+
+$$
+\frac{\binom{13}{1} \cdot \binom{4}{2} \cdot \binom{12}{3} \cdot \binom{4}{1} \cdot \binom{4}{1} \cdot \binom{4}{1} \cdot }{\binom{52}{5}} = 0.4226
+$$
+
+There are clearly $\binom{52}{5}$ ways to select 5 cards from a deck. There are $\binom{13}{1}$ ways to pick which card will have a pair. There are $\binom{4}{2}$ ways to pick what specific cards of that rank will make up the pair. Then there are $\binom{12}{3}$ ways to choose what the remaining three cards will be. And for each of these cards there are $\binom{4}{1}$ ways to pick which card each will be. 
+
+\item Q60
+
+For the first question, 
+
+$$
+\frac{\binom{9 + 6 - 1}{9}}{\binom{15 + 6 - 1}{15}} = 0.1291
+$$
+
+This makes sense because there are $\binom{15 + 6 - 1}{15}$ ways to 15 bagels from 6 types of bagels and there are $\binom{9 + 6 - 1}{9}$ ways to select 9 free degrees of bagel from 6 types of bagel (which ensures that there is 1 type of each bagel). 
+
+$$
+\frac{\binom{7 + 6 - 1}{7}}{\binom{15 + 6 - 1}{15}} = 0.0511
+$$
+
+This makes sense in the denominator for the same reason as above. The numerator becomes $\binom{7 + 6 - 1}{7}$ because there are only 7 bagels of freedom (1 sesame bagel is already accounted for in the 1 bagel of each kind)
+
+\item Q64
+
+$$
+\frac{\binom{n}{1} \cdot \binom{n - 1}{n - 3} \cdot \frac{n!}{3!} + \binom{n}{2} \cdot \binom{n - 2}{n - 4} \cdot \frac{n!}{2! \cdot 2!}}{n^n}
+$$
+
+There are two cases: 
+
+\begin{enumerate}
+    \item There is 1 number repeated 3 times. In this case there are $\binom{n}{1}$ ways to pick the number that is repeated. There are $\binom{n - 1}{n - 3}$ ways to pick the rest of the numbers. Lastly, there are $\frac{n!}{3!}$ ways to arrange this sequence. 
+    \item There are two numbers repeated 2 times. In this case there are $\binom{n}{2}$ ways to choose the numbers that are repeated twice. There are $\binom{n - 2}{n - 4}$ ways to pick the remaining numbers. Lastly, there are $\frac{n!}{2! \cdot 2!}$ ways to arrange this sequence
+\end{enumerate}
+
+So the probability is the total number of possibilities between the two cases over the total number of ways to create a sequence this way, which is $n^n$.
+
+\item 
+
+$$\binom{n + q - 1}{n}$$
+
+This is simply a a question of how you can partition $n$ people among $q$ clubs. 
+
+\end{enumerate}
+
+
+
+\end{document}

@@ -1,0 +1,99 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{Math 413: Introduction to Combinatorics} % This is the name of the course 
+\newcommand{\examnum}{Homework 1} % This is the name of the assignment
+\newcommand{\examdate}{August 29th, 2022} % This is the due date
+\newcommand{\timelimit}{}
+
+
+
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+
+
+\begin{enumerate} %You can make lists!
+
+\item How many nonempty words can be formed from three As and five B's? (The "words" are "mathematical words" not necessarily "dictionary words". For example B, BAAB, ABABABBB are possible words you need to count.)
+
+In order to solve this, we can consider all of the possible word lengths that can be created with these letters (1, 2, 3, 4, 5, 6, 7, 8) and calculate how many possibilities there are for each length. At each length, we can determine the length as how many As we can choose from $\Big($e.g. $\binom{\text{length}}{\text{number of As}}$$\Big)$
+
+1: $$\binom{1}{0} + \binom{1}{1} = 2$$
+2: $$\binom{2}{0} + \binom{2}{1} + \binom{2}{2} = 4$$
+3: $$\binom{3}{0} + \binom{3}{1} + \binom{3}{2} + \binom{3}{3} = 8$$
+4: $$\binom{4}{0} + \binom{4}{1} + \binom{4}{2} + \binom{4}{3} = 15$$
+5: $$\binom{5}{0} + \binom{5}{1} + \binom{5}{2} + \binom{5}{3} = 26$$
+6: $$\binom{6}{1} + \binom{6}{2} + \binom{6}{3} = 41$$
+7: $$\binom{7}{2} + \binom{7}{3} + 56$$
+8: $$\binom{8}{3} = 56$$
+
+Total words: $208$
+\item How many ternary (0,1,2) sequences of length 10 are there without any consecutive digits the same?
+
+There are 3 choices for the first digit in the sequence and only 2 choices for every digit after as there cannot be repeats. Thus, $3\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2\cdot2 = 3 \cdot (2)^9 = 1536$
+
+\item What is the probability that if one letter is chosen at random from the word RECURRENCE and one letter is chosen from RELATION, the two letters are the same?
+
+This is the sum of the probability of drawing a letter from RECURRENCE and that same letter from RELATION. 
+
+$$
+\Bigg(\frac{3}{10}\Bigg) \cdot \Bigg(\frac{1}{8}\Bigg) + \Bigg(\frac{3}{10}\Bigg) \cdot \Bigg(\frac{1}{8}\Bigg) + \Bigg(\frac{1}{10}\Bigg) \cdot \Bigg(\frac{1}{8}\Bigg) = \frac{7}{80}
+$$
+
+\item Corrupt professor Z has a class of 50 students. He needs to give exactly 10 A's. However five students already have a special deal (they are professor Z's nephews and nieces) and will get A's for sure. How many ways can the 10 A's be distributed?
+
+$$
+\binom{50-5}{10-5} = \binom{45}{5}
+$$
+
+\item Prove the identity
+
+$$\sum_{i=1}^{n-1} i = \frac{n(n - 1)}{2}$$
+
+COMBINATORIALLY by counting the same combinatorial set in two different ways (in other words, "double count"). (Do NOT give the standard induction proof, nor the "Gauss argument" of summing 1+2+...+n and layering with n+...+2+1.)
+
+% Counting Method 2: If each person must give out $n - 1$ handshakes (i.e. they cannot shake their own hand) and there are $n$ individuals in the room, there must have been $n(n-1)$ handshakes. However, this double counts the same handshake because it accounts for Person A giving Person B a handshake and Person B giving Person A a handshake as 2 separate events. So, after removing the double counted handshakes, the number of handshakes is $$\frac{n(n-1)}{2}$$ 
+
+Imagine there are $n$ individuals in the room and everyone needs to shake every other persons hand and they cannot shake their own hand. Let there be a set representing every handshake that needs to happen.
+
+First, in this situation the first person will need to shake $n - 1$ hands. The second would need to shake $n - 2$, the third $n - 3$, then $n - 4$, $n - 5$, and so on until the last person only needs to shake $1$ hand. This means the number of handshakes (or number of elements in this set) is $$1 + 2 + 3 + 4 + 5 + \cdots + n - 2 + n - 1 = \sum_{i = 1}^{n - 1} i$$
+
+Additionally, there are $n$ people in the room and each pair needs to shake hands. This means that there are $\binom{n}{2}$ different combinations. Additionally, $$\binom{n}{2} = \frac{n!}{2!(n - 2)!} = \frac{n(n - 1)}{2}$$. 
+
+Since, the number of elements in this set (how many handshakes occur) can be represented by the sum of $1$ to $n - 1$ and also can be represented by $\binom{n}{2}$, then $$\sum_{i}^{n - 1} i = \frac{n(n - 1)}{2}$$. 
+
+\end{enumerate}
+
+
+\end{document}

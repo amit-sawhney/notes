@@ -1,0 +1,120 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{MATH 413} % This is the name of the course 
+\newcommand{\examnum}{Homework 4} % This is the name of the assignment
+\newcommand{\examdate}{10/03/2022} % This is the due date
+\newcommand{\timelimit}{}
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+\begin{enumerate} %You can make lists!
+
+\item Question 8
+
+\begin{proof} Let $b \in \mathbb{Q}$ s.t. $b = \frac{m}{n} = b_0.a_0a_1a_2\cdots a_n$
+By division algorithm, $m = qn + r_0$ where $q, r \in \mathbb{Z}$ and $0 \le r_0 \le n - 1$. We can construct a construct a recursive definition for some arbitrary remainder $r_i$ that is obtained when dividing $\frac{m}{n}$: $$a_i\cdot n + r_i = r_{i - 1} \cdot 10$$
+
+Consider the sequence of remainders obtained from the process of long division: $$r_0, r_1, r_2, \dots, r_n$$ There are $n + 1$ remainders, however, when dividing a number by $n$ there are only $n$ possible remainders. By the pigeonhole principle, two of the remainders have to be equal. Define these two remainders s.t. $r_i = r_j$ and $i < j$. Let $j$ be the minimum upper bound on $i$. Clearly, by the recursive definition provided above, $r_{i + 1} = r_{j + 1}$ because the next remainder is dependent on the previous one, which are equal in this case. Additionally, it follows that the corresponding $a_{i + 1} = a_{j + 1}$ must be equal. 
+
+So, inductively, $a_{i + k} = a_{j + k}$ and thus $a_i = a_{i + (j - 1)} = a_{i + 2(j - i)} = \cdots$. Essentially, this shows that the same starting number of the sequence will appear at every $j - i$ steps from the first repeating number. Clearly thne, the decimal is repeating at $a_ia_{i+1}\cdots a_{j-1}$ 
+\end{proof}
+
+
+\item Question 11
+
+\begin{proof}
+Let $a_i$ be the number of hours the student works on day $i$. Clearly, $$\sum_{i = 1}^{37} a_i = a_1 + a_2 + \cdots + a_{37} \le 60$$
+
+Additionally because the student must work 1 hour a day and can only work more hours as the days pass, $$1 \le a_1 < a_2 < \cdots < a_{37} \le 60$$
+
+We want to show that there is a sequence of days $j$ to $i$ such that the number of hours worked between $j, j + 1, \dots, i$ inclusive is $13$. In other words, we must prove $\exists i, j \in \mathbb{Z}_{\ge 0}$ s.t. $a_i = a_j + 13$ where $j \le i$. 
+
+Consider the sequence of inequalities, $$14 \le a_1 + 13 < a_2 + 13 < \cdots < a_{37} + 13 \le 73$$
+
+Between these 2 sequences, there are $37 \cdot 2 = 74$ numbers in the range of $1$ and $73$ inclusive. By the pigeonhole principle, there must be $2$ numbers that are equal. Clearly, these two numbers must cannot come from the same sequence because by the definition of each sequence, $a_i < a_{i + 1}$ and $a_i + 13 < a_{i + 1} + 13$. So clearly, there must be some $i, j$ such that $a_i = a_j + 13$. 
+
+Thus, there exists a sequence of days where the student has studied exactly $13$ hours. 
+\end{proof}
+
+\item Question 15
+
+\begin{proof}
+For any number divided $n$ there are $n$ possible remainders $0, 1, \dots, n - 1$. This means in a set of $n + 1$ numbers, 2 of these numbers must share the same remainder $r$. By the definition of remainders, $\exists a, b, r \in \mathbb{Z}$ s.t. $0 \le r \le n - 1$  $$x_i = an + r$$ $$x_j = bn + r$$
+
+So,
+$$x_i - x_j = (an + r) - (bn + r) = an - bn = (a - b)n$$
+
+Thus, $\exists x_i, x_j$ s.t. that $x_i - x_j$ is divisible by $n$.
+\end{proof}
+
+\item Question 17
+
+\begin{proof}
+There are three cases for this proof. 
+
+\begin{enumerate}
+    \item Case 1: There are three people who share 0 acquaintances. 
+    
+    Trivially, this proves that there are three people with the same number of acquaintances.
+    
+    \item Case 2: There are two people who share 0 acquaintances. 
+    
+    This means there are 98 people who share either $2, 4, \dots, 96$ acquaintances. It is impossible for anyone to know 98 acquaintances because there are 2 people who already don't know anyone. This means there are 48 possible numbers of acquaintances for any person to know. Construct an algorithm to put 2 people into each "bucket" of number of acquaintances that they know. All of the buckets would be filled after 96 people. By the pigeonhole principle, there must be a three people who know the same number of acquaintances. 
+    
+    \item Case 3: There is only one person who has no acquaintances. 
+    
+    This means that there are 99 people who share either $2, 4, \dots, 98$ acquaintances. Clearly, there are 49 different numbers of acquaintances that a person could have. Given that $49 \cdot  2$ people ($98$ people) can be places into individual buckets such that there are not three people with the same number of acquaintances, then by the pigeonhole principle, there must be three people who share the same number of acquaintances. 
+    
+    In all three cases, there must be three people who share the same number of acquaintances. 
+    
+\end{enumerate}
+\end{proof}
+
+\item Question 26
+
+\begin{proof}
+Let $p$ be a randomly selected person from the marching band at position $(r, c)$ where $r$ is the row and $c$ is the column. There are two cases:
+
+\begin{enumerate}
+    \item $p$ is in column 0. If $p$ was selected from $c = 0$ then there is no one to their left and so trivially they are taller than the person to their left no matter what ordering of the column there is.
+    
+    \item $p$ is not in column 0 ($c > 0$). Before the columns were sorted, there was a $p_0$ person to $p$'s left that $p$ was taller than. In addition, after the columns were sorted, each person in front of $p$ had to have had a person to their left in the original arrangement that they were taller than. This means that there are a guaranteed $c$ people in row $r - 1$ that $p$ is taller than (This is the set of $p_0$ and all of the people to the left of every person in front of $p$). Because these columns are sorted, all $c$ of these people must be in the front. Thus, $p$ who is in position $(r, c)$ is still taller than the person on their left.
+\end{enumerate}
+
+
+\end{proof}
+
+\end{enumerate}
+
+
+\end{document}

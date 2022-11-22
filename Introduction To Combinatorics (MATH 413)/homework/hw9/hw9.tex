@@ -1,0 +1,184 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+
+\usepackage{youngtab}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\newcommand{\class}{MATH 413} % This is the name of the course 
+\newcommand{\examnum}{Homework 9} % This is the name of the assignment
+\newcommand{\examdate}{11/14/2022} % This is the due date
+\newcommand{\timelimit}{}
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \textit{Amit Sawhney}\\ %Your name here instead, obviously 
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+
+
+\begin{enumerate} 
+
+\item Question 1
+
+\begin{proof}
+Consider every partition for $n$. Each partition can be extended to be a partition $n + 1$ by adding $1$ to the set of elements in a particular partition. Clearly, this shows that there are at least $p(n)$ partitions for $p(n + 1)$. Additionally, the value $n + 1$ by itself is a valid partition of $n + 1$. Trivially, this could not be a partition of anything less than or equal to $n$, so there must be more partitions of $n + 1$ than $n$. So, $p(n + 1)  > p(n)$.
+\end{proof}
+
+\item Question 2
+
+Given an integer $n$ construct the following algorithm to build a self-conjugate with at least 2 parts. There are two cases to construct this algorithm: 
+
+\begin{enumerate}
+    \item Case 1: $n$ is odd. Create a partition for $n$ with the value $\frac{n - 1}{2} + 1$ and $\frac{n - 1}{2}$ $1$'s. 
+    
+    $$\frac{n - 1}{2} + 1 + \frac{n - 1}{2} = n - 1 + 1 = n$$
+    
+    Additionally this is clearly self conjugate as the Ferrer diagram will be of the form: 
+    
+    \[\young(~~~,~,~)\]
+    
+    The first row will be $\frac{n - 1}{2}$ blocks wide and the first column will be $\frac{n - 1}{2}$ blocks tall. This is clearly symmetric under the transpose operation so this is a self-conjugate partition. 
+    
+    Lastly, because $n > 2$, $$\frac{n - 1}{2} \ge 1$$ So there Ferrer Diagram will always be at least 2 blocks vertically, or in other words it will always have at least 2 parts. 
+    
+    \item Case 2: $n$ is even. Create a self conjugate partition for $n - 1$ using the algorithm created in Case $1$. Then, replace a single "$1$" with a "$2$". Similarly, 
+    
+    $$\Bigg ( \frac{ (n - 1) - 1}{2} + 1\Bigg ) + \Bigg ( \frac{(n - 1) - 1}{2} \Bigg ) + 2 = n - 2 +  1 - 1 + 2 = n $$
+    
+    This creates Ferrer Diagrams of the form:
+    
+    \[\young(~~~~,~~,~,~)\]
+    
+    Clearly, this creates the Ferrer Diagram for the odd number below the even number and then adds a box to represent the original even number on a position to maintain symmetry. 
+    
+\end{enumerate}
+
+\item Question 3
+
+First, we need to construct a generating series for the number of partitions of $n$ in which no part appears exactly once. Clearly, this is represented by:
+
+$$\Big ( (x)^0 + (x)^2 + (x)^3 + (x)^4 + \cdots \Big ) \Big ( (x^2)^0 + (x^2)^2 + (x^2)^3 + \cdots \Big ) \Big ( (x^3)^0 + (x^3)^2 + (x^3)^3 + \cdots \Big )$$
+$$= (1 + x^2 + x^3 + \cdots)(1 + (x^2)^2 + (x^2)^3 + \cdots)(1 + (x^3)^2 + (x^3)^3 + \cdots)$$
+$$
+= \prod_{i = 1}^{\infty} \Big ( 1 + x^{2i} + x^{3i} + x^{4i} + \cdots \Big ) = \prod_{i = 1}^{\infty} \Big (1 + x^{2i}(1 + x^{i} + x^{2i} + x^{3i} \cdots) \Big )
+$$
+$$
+= \prod_{i = 1}^{\infty} \Big (1 + \frac{x^{2i}}{1 - x^{i}} \Big ) = \prod_{i = 1}^{\infty} \Big (\frac{1 - x^{i} + x^{2i}}{1 - x^{i}} \Big ) = \prod_{i = 1}^{\infty} \Big ( \frac{(1 - x^{i} + x^{2i})(1 + x^{i})}{(1 - x^{i})(1 + x^{i})}  \Big )
+$$
+$$
+= \prod_{i = 1}^{\infty} \Big ( \frac{1 + x^{3i}}{1 - x^{2i}} \Big )
+$$
+
+Second, we need to construct a generating series for the number of partitions of $n$ with no parts congruent to $1$ or $5 \pmod{6}$. 
+
+This will be based on the normal generating series, except only including terms that are not of this congruence class. 
+
+So the following generating series takes all of the partitions and extends to only be of congruence to $0, 2, 3, 4 \pmod 6$. However, we can rewrite this by taking all of the partitions composed of numbers congruent to $1$ or $5 \pmod{6}$ and divide out all of the partitions, leaving just the partitions with numbers congruent to $0, 2, 3, $ or $4 \pmod{6}$
+
+$$
+\prod_{i = 1}^{\infty}
+\frac{1}{(1 - x^{6i + 0})(1 - x^{6i + 2}) (1 - x^{6i + 3}) (1 - x^{6i + 4})}
+= \prod_{i = 0}^{\infty} \frac{(1 - x^{6i + 1})(1 - x^{6i + 5})}{1 - x^{i}}
+$$
+
+Algebraically, we can convert the first expression into the second expression. 
+
+$$
+= \prod_{i = 1}^{\infty} \Big ( \frac{1 + x^{3i}}{1 - x^{2i}} \Big )
+= \prod_{i = 1}^{\infty} \Bigg ( \frac{(1 + x^{3i})(1 - x^{3i})}{(1 - x^{2i})(1 - x^{3i})} \Bigg )
+= \prod_{i = 1}^{\infty} \Bigg ( \frac{(1 - x^{6i})}{(1 - x^{2i})(1 - x^{3i})} \Bigg )
+$$
+$$
+= \prod_{i = 1}^{\infty} \Bigg ( -x^{k} + \frac{1}{1 - x^{k}} \Bigg )
+= \prod_{i = 1}^{\infty} \Bigg ( \frac{x^{2i} - x^{i} + 1}{1 - x^{i}} \Bigg ) 
+$$
+
+Since, the denominators are equal, we are really just solving: 
+
+$$
+\prod_{i = 1}^{\infty} \Big (1 - x^i + x^{2i} \Big ) = \prod_{i = 0}^{\infty} \Big ( (1 - x^{6i + 1})(1 - x^{6i + 5}) \Big )
+$$
+
+As per the source, we can realize that he number of partitions of $n$ into parts that are all congruent to $1 \pmod 6$ is equal to the number to partitions $n$ into distinct parts that are all congruent to $1 \pmod 3$ through difference of squares. See as follows: 
+
+$$
+\prod_{i = 0}^{\infty} (1 + x^{3i + 1})(1 + x^{3i + 2}) = \frac{\prod_{i = 0}^{\infty} ( 1- x^{6i + 2})(1 - x^{6i + 4})}{\prod_{i = 0}^{\infty}(1 - x^{3i  + 1})( 1- x^{3i + 2})}
+$$
+$$
+\frac{\prod_{i = 0}^{\infty} ( 1- x^{6i + 2})(1 - x^{6i + 4})}{\prod_{i = 0}^{\infty}(1 - x^{6i + 1})(1 - x^{6i + 4})(1 - x^{6i + 2})(1 - x^{6i + 5})}
+$$
+$$
+= \prod_{i = 0}^{\infty} \Bigg ( \frac{1}{(1 - x^{6i + 1})(1 - x^{6i + 5})} \Bigg )
+$$
+
+Thus, 
+
+$$
+\prod_{i = 0}^{\infty}(1 - x^{6i + 1})(1 - x^{6i + 5}) = \frac{1}{\prod_{i = 0}^{\infty}(1 + x^{3i + 1})(1 + x^{3i + 2})} = \frac{\prod_{i = 1} ( 1 + x^{3i})}{\prod_{i = 1}^{\infty}( 1 + x^{i})}
+$$
+
+Lastly, we need to show
+
+$$
+\prod_{i = 1}^{\infty} (1 - x^{i} + x^{2i}) = \frac{\prod_{i = 1}^{\infty} ( 1 + x^{3i})}{\prod_{i = 1}^{\infty}( 1 + x^{i})}
+$$
+
+So, 
+
+$$
+\prod_{i = 1}^{\infty} ( 1 + x^{i})(1 - x^{i} + x^{2i}) = \prod_{i = 1}^{\infty} (1 + x^{3i})
+$$
+$$
+\iff ( 1 + x^{i})(1 - x^{i} + x^{2i}) = (1 + x^{3i})
+$$
+
+Which is the sum of cubes identity. So, the generating series are equivalent. 
+
+Citation: https://math.stackexchange.com/questions/3733360/an-application-of-integer-partitions
+
+\item Question 4
+
+\begin{proof}
+Consider an integer $n$. Let the partition into distinct parts be written as $$n = d_1 + d_2 + \cdots + d_k$$
+
+Each $d_i$ can be written as $2^j\cdot \ell$ where $j \in \mathbb{Z}$ and $\ell$ is an odd integer. So, $$n = 2^{j_1}\cdot \ell_1 + 2^{j_2} \cdot \ell_2 + \cdots 2^{j_k}\cdot \ell_k$$
+
+We can group the powers of $2$ by their odd counterparts. Such follows as: $$n = (2^{\alpha_1} + 2^{\alpha_2} + \cdots + 2^{\alpha_x}) \cdot \ell_1 + (2^{\beta_1} + 2^{\beta_2} + \cdots + 2^{\beta_y}) \cdot \ell_2 + \cdots $$ where $l_i \in \{1, 3, 5, 7, 9, \dots\}$
+
+Clearly, each $\alpha_i, \beta_j, $ and subsequent grouped powers of $2$ must be unique, otherwise there would a contradiction with the original partition being distinct integers $d_1, d_2, \dots d_k$. 
+
+Let $s$ be the sum of each group of powers of $2$. So, $s_1 = 2^{\alpha_1} + 2^{\alpha_2} + \cdots + 2^{\alpha_x}$, $s_2 = 2^{\beta_1} + 2^{\beta_2} + \cdots + 2^{\beta_y}$, etc.
+
+We can create a partition of $s_1$ $\ell_1$'s, $s_2$ $\ell_2$'s, etc. Thus, we can define a bijective function $f$ that maps partitions with distinct parts to partitions with odd parts using this process. 
+\end{proof}
+
+Each distinct partition can clearly only map to one valid odd partition due to the uniqueness and this process is clearly reversible to obtain a distinct partition from an odd partition. Thus, it is bijective.  
+
+\end{enumerate}
+
+
+\end{document}
