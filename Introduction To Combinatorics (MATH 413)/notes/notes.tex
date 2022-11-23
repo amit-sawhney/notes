@@ -6,7 +6,7 @@
 
 \title{\Huge{MATH 413}\\Introduction to Combinatorics}
 \author{\huge{Amit Sawhney}}
-\date{}
+\date{Fall 2022}
 
 \begin{document}
 
@@ -505,9 +505,377 @@ and in these cases, substitution is fine to perform.
 
 \section{Lecture 19: Partition identities}
 
+\dfn{Partition}{
+    A \textit{partition} is a decreasing sequence of positive integers whose sum is $n$.
+}
+
+\ex{}{
+    Consider $n = 5$. The partitions of $5$ are
+
+    \begin{align*}
+        & 5 \\
+        & 4, 1 \\
+        & 3, 2 \\
+        & 3, 1, 1 \\
+        & 2, 2, 1 \\
+        & 2, 1, 1, 1 \\
+        & 1, 1, 1, 1, 1
+    \end{align*}
+
+    However, this can also be represented in terms of the \textbf{Ferrers diagram}:
+
+    Partitions $5$:
+
+    \begin{align*}
+        & \young(~~~~~) \\
+        & \young(~~~~,~) \\
+        & \young(~~~,~~) \\
+        & \young(~~~,~,~) \\
+    \end{align*}
+
+    \begin{align*}
+        & \young(~~,~~,~) \\
+        & \young(~~,~,~,~) \\
+        & \young(~,~,~,~,~)
+    \end{align*}
+}
+
+\ex{Theorem 8.3.1 from the textbook}{
+    Use Ferrers diagrams to prove that the number of partitions of $n$ 
+    in which the largest part is $r$ equals the number of partitions 
+    of $n-r$ in which no part is greater than $r$. \\
+
+    Let $P$ be a partition for $n$. Remove the first part of $P$ which 
+    by definition is the largest part which has an arbitrary size $r$. 
+    This clearly yields a partition of $n-r$ in which no part is greater
+    than $r$. This process is clearly a bijection and so the number of partitions
+    of $n$ in which the largest part is $r$ equals the number of partitions
+    of $n-r$ in which no part is greater than $r$. \\
+}
+
+\nt{
+    This process for proving two partitions to be of equal size is important.
+}
+
+\subsection*{Generating Series , and partition identities}
+
+Recall generating series for partition: 
+
+\begin{align*}
+    g(x) = \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^{k}} \Big )
+\end{align*}
+
+\qs{}{
+    Write down the generating series for:
+
+    \begin{enumerate}
+        \item only odd parts
+        \item no part repeated more than $m$ times
+    \end{enumerate}
+}
+\sol{Only odd parts:}{
+    \begin{align*}
+        g(x) &= (1 + x^1 + x^{1+1} + x^{1+1+1} + \cdots) \cdot (1 + x^3 + x^{3+3} + x^{3+3+3} + \cdots) \cdot \cdots \\
+             &= \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^{2k-1}} \Big )
+    \end{align*} 
+}
+
+\sol{No part repeated more than $m$ times}{
+    \begin{align*}
+        g(x) &= (1 + x + x^{1 + 1} + \cdots + x^{m})(1 + x^{2} + x^{2 + 2} + \cdots + x^{2m})(1 + x^{3} + x^{3 + 3} + \cdots + x^{3m}) \cdots \\
+             &= (\frac{1}{1 - x} - \frac{x^m}{1 - x}) \cdot (\frac{1}{1 - x^2} - \frac{x^m}{1 - x^2}) \cdot (\frac{1}{1 - x^3} - \frac{x^m}{1 - x^3}) \cdots \\
+             &= \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^k} - \frac{x^m}{1 - x^k} \Big ) \\
+             &= \prod_{k=1}^{\infty} \Big ( \frac{1 - x^m}{1 - x^k} \Big )
+    \end{align*}
+}
+
+\subsection*{Terminology}
+
+\dfn{Partition size}{
+    The \textit{size} of a partition is the sum of its parts.
+}
+
+\dfn{Partition length}{
+    The \textit{length} of a partition is the number of parts.
+}
+
+\qs{}{
+    Write down a two variable generating series that counts partitions 
+    by both size and length, using say, a $q$ variable and a $z$ variable 
+    respectively. Hence the coefficient of $q^nz^l$ is the number of 
+    partitions of size $n$ and length $l$.
+}
+\sol{
+    \begin{align*}
+        g(q, z) &= \sum_{n=1}^{\infty} \sum_{l=1}^{\infty} P(n,l) \cdot q^{n}z^{l} \\
+                &= \prod_{k=0}^{\infty} (1 + zq^{k} + z^2q^{2k} + z^3q^{3k} + \cdots) \\
+                &= \prod_{k=0}^{\infty} \Big ( \frac{1}{1 - zq^{k}} \Big )
+    \end{align*}
+}
+\qs{}{
+    Consider the identity:
+
+    \begin{align*}
+        \prod_{k=1}^{\infty} 1 + q^k = \prod_{k=1}^{\infty} \frac{1}{1 - q^{2k - 1}}
+    \end{align*}
+
+    \begin{itemize}
+        \item Interpret both sides of the identity. 
+        \item Give an algabraic proof.
+        \item Can you give a combinatorial proof?
+    \end{itemize}
+}
+\sol{Interpret both sides of the identity}{
+    \begin{itemize}
+        \item LHS
+        
+        \begin{align*}
+            \prod_{k=1}^{\infty} 1 + q^k = (1 + q^1)(1 + q^2)(1 + q^3) \cdots
+        \end{align*}
+
+        This is clearly the number of partitions with distinct parts that 
+        are used at most one time.
+
+        \item RHS
+        
+        This is clearly the generating series for partitions with only odd parts.
+    \end{itemize}
+}
+
+\sol{Give an algebraic proof}{
+
+\begin{subproof}
+    \begin{align*}
+        \prod_{k=1}^{\infty} 1 + q^k &= \prod_{k=1}^{\infty} \frac{1-q^k}{1-q^k} (1 + q^k) \\
+        &= \prod_{k=1}^{\infty} \frac{1 - q^{2k}}{1 - q^k} \\
+        &= \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \frac{q^{2k}}{1 - q^k} \\
+        &= \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \prod_{k=1}^{\infty} \frac{q^{2k}}{1-q^k} \\
+        &= \text{ All partitions - partitions with even parts} \\
+        &= \text{ Partitions with odd parts} \\
+        &= \prod_{k=1}^{\infty} \frac{1}{1 - q^{2k-1}}
+    \end{align*}
+\end{subproof}
+}
+
+\sol{Give a combinatorial proof}{
+    \begin{subproof}
+        Fix $n$. Let $S$ be the set of all partitions of $n$ with only 
+        distinct parts. Clearly, the LHS represents the generating series that
+        counts $S$. \\
+    
+        Construct a function $f$ from distinct parts to odd parts by dividing 
+        each even number by $2$ until every number is odd. This function is 
+        clearly well defined as it will only result in odd parts. This must 
+        be a bijection because the input to $f$ must have distinct parts so 
+        the number of odd parts created is dependent on the even numbers in 
+        the input so the output is unique. Lastly, this is clearly reversible
+        by taking the largest subset of repeated odd numbers that is a power 
+        of $2$ and summing them. \\
+
+        Thus, because we can decompose $S$ into the set of partitions with
+        only odd parts through a bijective function and this decomposition 
+        is clearly counted by the RHS. Then, it is clear that the LHS and RHS 
+        equivalent. 
+    \end{subproof}
+}
+
 \section{Lecture 20: Partition identities (continued)}
 
+\dfn{Partition Conjugate}{
+    The \textit{conjugate} of a partition is the partition associated
+    to the transpose of the Ferrers diagram. \\
+
+    \begin{align*}
+        \young(~~~~,~~,~)
+    \end{align*}
+
+    has a conjugate of
+
+    \begin{align*}
+        \young(~~~,~~,~,~)
+    \end{align*}
+}
+
+\qs{}{
+    Use conjugation to prove the following fact: the number of 
+    partitions of n with no part bigger than k equals the number 
+    of partitions of n with at most k parts. \\
+
+    Determine the generating series for either of the kinds 
+    of partitions from the previous problem.
+}
+\sol{Using conjugation...}{
+    \begin{subproof}
+        This part is trivially true. If no part is bigger than $k$, then
+        the first row in the Ferrers Diagram, which must be the largest row 
+        in the diagram, has at most $k$ parts.
+    
+        By taking the transpose of the first type of parition, we get a 
+        partition with at most $k$ parts as the number of parts will be 
+        dictated by the first row. 
+    
+        Thus, the number of partitions of $n$ with no part bigger than $k$
+        is the same as the number of partitions of $n$ with at most $k$ parts.
+    \end{subproof}
+}
+\sol{Generating Series}{
+    \begin{align*}
+        g(x) = &(1 + x + x^{1+1} + \cdots + x^{k}) \\
+               &(1 + x^2 + x^{2+2} + \cdots + x^{2k}) \\
+               &(1 + x^3 + x^{3+3} + \cdots + x^{3k}) \cdots 
+    \end{align*}
+    \begin{align*}
+        g(x) &= \prod_{i=1}^{\infty} (1 + x^{i} + x^{2i} + \cdots + x^{ki}) \\
+             &= \prod_{i=1}^{\infty} \Big ( \frac{1 - x^{ki+1}}{1 - x^{i}} \Big ) 
+    \end{align*}
+}
+
+\dfn{Durfee Square}{
+    A \textit{Durfee square} is the largest square that sits in the NW 
+    corner of the Ferrers diagram of a partition. 
+}
+
+\qs{}{
+    Show that every Ferrers shape uniquely decomposes into 
+    $(D_k, A_k, B_k)$ where $D_k$ is a Durfee square of size $k$, 
+    $A_k$ is the partition with at most $k$ parts, and $B_k$ is
+    a partition with first part of size at most $k$. 
+}
+\sol{
+    Consider an arbitrary partition:
+
+    \begin{align*}
+        \young(~~~~,~~,~)
+    \end{align*}
+
+    This can obviously be decomoposed into the triple: 
+
+    \begin{align*}
+        \Bigg ( \young(~~,~~) , \young(~~) , \young(~) \Bigg )
+    \end{align*}
+
+    There are a few cases to consider: 
+
+    \begin{itemize}
+        \item First, this is unique. Clearly, this has to be unique 
+        because we are not changing any structure from the partition, 
+        but rather we are just decomposing it into a triple. So each 
+        partition must uniquely map to its own ordered triple. \\
+        \item Second, $A_k$ is the partition with at most $k$ parts. $A_k$
+        must have at most $k$ because the Durfee square is of size $k$. $A_k$
+        cannot be largely than this because it would contradict either 
+        the definition of a partition or the definition of a Durfee square. \\
+        \item Third, $B_k$ is the partition with first part of size at most $k$.
+        This is true because if the first part of $B_k$ is larger than $k$, then
+        this would contradict the definition of a Durfee square or a partition. \\
+    \end{itemize}
+
+    Thus, we have shown that every partition can be decomposed into a triple.
+}
+
+\dfn{Euler-Gauss Identity}{
+    \begin{align*}
+        \prod_{k=1}^{\infty} \frac{1}{1 - x^k} = 1 + \sum_{j=1}^{\infty} \frac{x^{j^2}}{\Big ( \prod_{t=1}^{j} 1 - x^t \Big )^2}
+    \end{align*}
+}
+
+\dfn{Self-conjugate Partition}{
+    A partition is \textit{self-conjugate} i its transpose shape is the same
+    as its original shape (e.g., the partitions (4,1,1,1) and (3,2,1) 
+    are self-conjugate, but (3,2) is not).
+}
+
+\qs{}{
+    Prove that the number of self conjugate partitions of $n$ 
+    equals the number of partitions using only distinct odd parts. 
+    Then derive an identity.
+}
+\sol{
+    First, we must prove the number of self conjugate partitions of $n$
+    equals the number of partitions using only distinct odd parts. This
+    can be done by showing a weight preserving bijection between the 
+    two sets. \\
+
+    \dfn{Weight-preserving function}{
+        Define the following function:
+
+        \begin{align*}
+            f : (S, \omega) \mapsto (S', \omega')
+        \end{align*}
+
+        such that $\omega : S \mapsto \mathbb{Z}_{\ge 0}$
+        and $\omega' : S' \mapsto \mathbb{Z}_{\ge 0}$ are weight functions. 
+        Then, $f$ is a weight-preserving function if and only if:
+
+        \begin{align*}
+            \omega(s) = \omega'(f(s)) \text{ for all } s \in S
+        \end{align*}
+    }
+
+    And so, we can make the following claim
+
+    \clm{}{}{
+        If $f : (S, \omega) \mapsto (S', \omega')$ is a weight-preserving
+        and bijective  then, 
+
+        \begin{align*}
+            g_{(S, \omega)}(x) = g_{(S', \omega')}(x) \in \mathbb{Z}[x]
+        \end{align*}
+
+        In other words, their generating functions are equal.
+    }
+
+    Now to define the actual bijection. Consider each row of the Ferrers
+    diagram of an arbitrary distinct odd partition. Each row can be 
+    bent into a self-conjugate partition. By selecting the middle element,
+    which is gaurunteed to exist because the partition is odd, we can 
+    place every square to the left below the middle element and leave
+    the other elements alone. Additionally, this is well defined as each
+    row is distinct. Thus, we have a weight preserving bijection 
+    between the set of distinct odd partitions and the set 
+    of self-conjugate partitions. \\
+
+    The generating function for the number of distinct odd partitions 
+    is trivial and given by: 
+
+    \begin{align*}
+        g(x) = \prod_{i=1}^{\infty} 1 - x^{2i-1}
+    \end{align*}
+
+    as we only want to either select an odd number or not. \\
+
+    The generating function for the number of self-conjugate partitions
+    is more complicated. Consider an arbitrary self-conjugate partition
+    $\lambda$. We can decompose it into a triple $(D_k, A_k, B_k)$ through
+    the Durfee square decomposition. We can then apply a second weight-preserving
+    bijection and conjugate the second component of the triple which makes 
+    $A_k = B_k$. Lastly, we can apply a third weight-preserving bijection
+    by compressing the triple into a tuple $(D_k, C_k)$ where $C_k$ is 
+    $A_k$ merged left-to-right with $B_k$. \\
+
+    Consequently, 
+
+    \begin{align*}
+        C_k \in \bigcup_{j=0}^{\infty} D_j \times \text{Partitions}_{\text{even}_{\le j \text { tall}}} = U
+    \end{align*}
+
+    Clearly, 
+    
+    \begin{align*}
+        g_{U}(x) &= \sum_{j=0}^{\infty} x^{j^2} \Big ( \prod_{t=1}^{j} \frac{1}{1 - x^{2t}} \Big ) \\
+                 &= \sum_{j=0}^{\infty} \frac{x^{j^2}}{\prod_{t=1}^{j} \frac{1}{1 - x^{2t}}}
+    \end{align*}
+
+    So, 
+
+    \begin{align*}
+        \prod_{k=1}^{\infty} 1 + x^{2k - 1} = \sum_{j=0}^{\infty} \frac{x^{j^2}}{\prod_{t=1}^{j} \frac{1}{1 - x^{2t}}}
+    \end{align*}
+
+
 \section{Lecture 21: Exponential generating series}
+
+\chapter*{Midterm 3}
 }
 
 \end{document}
