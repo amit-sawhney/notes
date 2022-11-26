@@ -21,46 +21,525 @@
 
 \chapter{Permutations and Combinations}
 
-\section{Lecture 2: Four Basic Counting Principles}
+\section{L2: Four Basic Counting Principles}
 
-\section{Lecture 3: Permutations and selections of sets I}
+\section{L3: Permutations and selections of sets I}
 
-\section{Lecture 4: Permutations and selections of sets II: binomial identities}
+\section{L4: Permutations and selections of sets II: binomial identities}
 
-\section{Lecture 5: Permutations and Combinations of multisets I}
+\section{L5: Permutations and Combinations of multisets I}
 
-\section{Lecture 6: Permutations and Combinations of multisets II}
+\section{L6: Permutations and Combinations of multisets II}
 
 \chapter{The Pigeonhole Principle}
 
-\section{Lecture 7: The pigeonhole principle}
+\section{L7: The pigeonhole principle}
 
-\section{Lecture 8: The strong pigeonhole principle}
+\section{L8: The strong pigeonhole principle}
 
-\section{Lecture 9: Ramsey Theory}
+\section{L9: Ramsey Theory}
 
 \setcounter{chapter}{4}
 
 \chapter{The Binomial Coefficients}
 
-\section{Lecture 10: Binomial coefficients and the binomial theorem I}
+\section{L10: Binomial coefficients and the binomial theorem I}
 
-\section{Lecture 11: Binomial coefficients and the binomial theorem II}
+\section{L11: Binomial coefficients and the binomial theorem II}
 
-\section{Lecture 12: Binomial coefficients and the binomial theorem III}
+\section{L12: Binomial coefficients and the binomial theorem III}
 
 \chapter{The Inclusion-Exclusion Principle and Applications}
 
-\section{Lecture 13: The Inclusion-Exclusion principle and applications I}
+\section{L13: The Inclusion-Exclusion principle and applications I}
 
-\section{Lecture 14: The Inclusion-Exclusion principle and applications II: Derangements}
+\qs{}{
+    How big is $A \cup B \cup C$?
+}
+\sol{
+    \begin{align*}
+        |A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C|
+    \end{align*}
 
-\section{Lecture 15: The Inclusion-Exclusion principle and applications II}
+    If we just sum up the sizes of the sets, we are counting the
+    elements in common between each of the sets twice. However,
+    after we subtract out the number of elements in each intersection,
+    we are excluding elements in commonb between all three sets.
+}
 
-\section{Lecture 16: The Inclusion-Exclusion principle and applications IV: Another Forbidden Position Problem}
+\subsection*{}
+This is the basis of the inclusion-exclusion principle.
+
+\qs{}{
+    How many elements are \textit{not} in $A, B,$ or $C$?
+}
+\sol{
+    Let $S$ be the universal set.
+    \begin{align*}
+        |A^c \cap B^c \cap C^c| & = |S| - |A \cup B \cup C|                                                                          \\
+                                & = |S| - \bigg ( |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C| \bigg )
+    \end{align*}
+}
+
+\ex{}{
+    Find the number of integers between $1$ and $1000$ inclusive
+    that are not divisible by $5$ and not divisible by $6$ and
+    not divisible by $8$. \\
+
+    Let
+
+    \begin{itemize}
+        \item $A_1$ be the subset of integers divisible by $5$,
+        \item $A_2$ be the subset of integers divisible by $6$,
+        \item $A_3$ be the subset of integers divisible by $8$.
+    \end{itemize}
+
+    Then we want to find $|A_1^c \cap A_2^c \cap A_3^c|$. \\
+
+    \begin{align*}
+        |A_1^c \cap A_2^c \cap A_3^c| & = |S| - |A_1 \cup A_2 \cup A_3|                                                                                            \\
+                                      & = |S| - \bigg ( |A_1| + |A_2| + |A_3| - |A_1 \cap A_2| - |A_1 \cap A_3| - |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3| \bigg ) \\
+    \end{align*}
+
+    Obviously, $|S| = 1000$. To obtain the number of integers between $a$
+    and $b$, where $b \geq a$, we can use the formula $\floor{\frac{b}{a}}$. \\
+
+    \begin{align*}
+        |A_1| & = \floor{\frac{1000}{5}} = 200 \\
+        |A_2| & = \floor{\frac{1000}{6}} = 166 \\
+        |A_3| & = \floor{\frac{1000}{8}} = 125
+    \end{align*}
+
+    Similarly,
+
+    \begin{align*}
+        |A_1 \cap A_2|          & = \floor{\frac{1000}{\lcm{5, 6}}} = \floor{\frac{1000}{30}} = 33    \\
+        |A_1 \cap A_3|          & = \floor{\frac{1000}{\lcm{5, 8}}} = \floor{\frac{1000}{40}} = 25    \\
+        |A_2 \cap A_3|          & = \floor{\frac{1000}{\lcm{6, 8}}} = \floor{\frac{1000}{24}} = 41    \\
+        |A_1 \cap A_2 \cap A_3| & = \floor{\frac{1000}{\lcm{5, 6, 8}}} = \floor{\frac{1000}{120}} = 8
+    \end{align*}
+
+    Thus,
+
+    \begin{align*}
+        1000 - \bigg ( 200 + 166 + 125 - 33 - 25 - 41 + 8 \bigg ) & = 1000 - 200 - 166 - 125 + 33 + 25 + 41 - 8 \\
+                                                                  & = 600
+    \end{align*}
+}
+
+\qs{}{
+    How many permutations of M,A,T,H,I,S,F,U,N are there where MATH,
+    IS and FUN do not appear as consecutive letters?
+}
+\sol{
+    Let
+
+    \begin{itemize}
+        \item $A_1$ be the set of permutations where MATH appears as consecutive letters,
+        \item $A_2$ be the set of permutations where IS appears as consecutive letters,
+        \item $A_3$ be the set of permutations where FUN appears as consecutive letters.
+    \end{itemize}
+
+    Then we want to find $|A_1^c \cap A_2^c \cap A_3^c|$. \\
+
+    \begin{align*}
+        |A_1^c \cap A_2^c \cap A_3^c| & = |S| - |A_1 \cup A_2 \cup A_3|                                                                                            \\
+                                      & = |S| - \bigg ( |A_1| + |A_2| + |A_3| - |A_1 \cap A_2| - |A_1 \cap A_3| - |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3| \bigg ) \\
+    \end{align*}
+
+    Obviously, $|S| = 9!$. \\
+
+    \begin{align*}
+        |A_1| & = 6! \\
+        |A_2| & = 8! \\
+        |A_3| & = 7!
+    \end{align*}
+
+    Similarly,
+
+    \begin{align*}
+        |A_1 \cap A_2|          & = 5! \\
+        |A_1 \cap A_3|          & = 4! \\
+        |A_2 \cap A_3|          & = 6! \\
+        |A_1 \cap A_2 \cap A_3| & = 3!
+    \end{align*}
+
+    Thus,
+
+    \begin{align*}
+        9! - \bigg ( 6! + 8! + 7! - 5! - 4! - 6! + 3! \bigg ) & = 9! - 6! - 8! - 7! + 5! + 4! + 6! - 3! \\
+    \end{align*}
+}
+
+\thm{General Form of the Complementary Inclusion-Exclusion Principle}{
+    \begin{align*}
+        |A_1^c \cap \cdots & \cap A_m^c| = |S| - \sum |A_i| + \sum |A_i \cap A_j|                            \\
+                           & - \sum |A_i \cap A_j \cap A_k| + \cdots + (-1)^{m+1} |A_1 \cap \cdots \cap A_m|
+    \end{align*}
+}
+
+\begin{subproof}
+    To begin, we can realize that the LHS counts the number of elements in $S$
+    that are not in any of the $A_i$. \\
+
+    For the RHS, Consider an arbitrary $s \in S$. There are two cases:
+
+    \begin{itemize}
+        \item Case 1. $x$ is not in any $A_i$.
+
+              In this case, $x$ would contribute $1$ to the LHS and $1$ to
+              RHS as it will not appear in any of the summations. Thus, this
+              value will have no impact on the equality.
+
+        \item Case 2. $x$ is in some $n > 0$ $A_i$ sets.
+
+              Clearly, the contribution to the LHS is $0$. For the RHS,
+              the contribution is
+
+              \begin{align*}
+                  1 + \sum_{k=1}^{n}(-1)^{k} \binom{n}{k}
+              \end{align*}
+
+              This is because we must count the number of ways to choose $k$
+              sets from the $n$ sets that $x$ is in. \\
+
+              By the binominal theorem, we have
+
+              \begin{align*}
+                  1 + \sum_{k=1}^{n}(-1)^{k} \binom{n}{k} & = \sum_{k=0}^{n} (1)^{n-k}(-1)^k\binom{n}{k} \\
+                                                          & = (1 - 1)^n                                  \\
+                                                          & = 0
+              \end{align*}
+
+    \end{itemize}
+
+    In both cases, the equality holds. Thus, the LHS and RHS are equal.
+\end{subproof}
+
+\section{L14: The Inclusion-Exclusion principle and applications II: Derangements}
+
+\subsection*{Introduction to Dearrangements}
+
+\textbf{Question}: You all get up from your chairs, and randomly move to a different
+chair. What's the probability that no one ends up sitting down
+in the same chair? What if it were a class of $300$ students? \\
+
+
+
+\nt{
+    I find this definition a little hard to initially interpret. \\
+
+    Derrangements can be thought of through the following example.
+    Suppose a teacher is attempting to pass back a test to four students:
+    $A, B, C, D$. There are obviously $4!$ ways to destribute the tests
+    (i.e. there are $4!$ permutations of $A, B, C, D$). \\
+
+    Dearrangements are the number of ways to distribute the tests such that
+    no student gets their own test back. \\
+
+    For example $A, C, D, B$ is not a dearragement because $A$ gets their
+    own test back. However, $B, A, D, C$ is a dearrangement because no
+    student gets their own test back. \\
+
+    Our goal is count the number of dearrangements. \\
+}
+
+\qs{Abstract version of the original question} {
+    Given a permutation $\pi \in S_n$, what is the probability
+    that $\pi(i) \ne i$ for all $i$. What is the number of $D_n$
+    for all such permutations?
+}
+
+\sol{Inclusion-Exclusion argument}{
+    Let $A_i$ be the set of permutations where $\pi(i) = i$. \\
+
+    Then we want to find $|A_1^c \cap A_2^c \cap \cdots \cap A_n^c|$. \\
+
+    \begin{align*}
+        |A_1^c \cap A_2^c \cap \cdots \cap A_n^c| & = |S_n| - |A_1 \cup A_2 \cup \cdots \cup A_n|                                                                    \\
+                                                  & = |S_n| - \bigg ( |A_1| + |A_2| + \cdots + |A_n| - |A_1 \cap A_2| - |A_1 \cap A_3| - \cdots - |A_{n-1} \cap A_n| \\
+                                                  & + |A_1 \cap A_2 \cap A_3| + \cdots + |A_{1} \cap \cdots \cap A_n| \bigg )                                        \\
+    \end{align*}
+
+    Clearly, there are $n!$ permutations in $S_n$. \\
+
+    For each $0 \le i \le n$, there are $(n - 1)!$ permutations where $\pi(i) = i$.
+    Thus there are $n(n - 1)!$ permutations where $\pi(i) = i$ for some $i$.
+    So,
+
+    \begin{align*}
+        \sum_{i=1}^{n} |A_i| & = n(n - 1)! \\
+                             & = n!
+    \end{align*}
+
+    For each $i,j$, there are $(n - 2)!$ permutations where $\pi(i) = i$ and $\pi(j) = j$.
+    Thus there are $n(n - 1)(n - 2)!$ permutations where $\pi(i) = i$ and $\pi(j) = j$ for some $i$ and $j$.
+
+
+    \begin{align*}
+        \sum_{i,j}^{n} |A_i \cap A_j| & = \frac{n(n-1)(n-2)!}{2!} \\
+                                      & = \frac{n!}{2}
+    \end{align*}
+
+    This makes sense because there are $n$ choices for $i$ and $n -1$
+    choices for $j$ (since $i$ and $j$ cannot be the same). This leaves
+    $(n-2)!$ ways to arrange the remaining $n - 2$ elements. However,
+    $i$ and $j$ are indistinguishable, so we must divide by $2$ to account
+    for this. \\
+
+    Following this,
+
+    \begin{align*}
+        D_n & = n! - \frac{n!}{1!} + \frac{n!}{2!} - \frac{n!}{3!} + \cdots + (-1)^{n} \frac{n!}{n!} \\
+            & = n!(1 - \frac{1}{1!} + \frac{1}{2!} - \frac{1}{3!} + \cdots + (-1)^{n} \frac{1}{n!})
+    \end{align*}
+}
+
+\qs{}{
+    What's the probability of picking a derangement as $n \to \infty$?
+}
+\sol{
+    \begin{align*}
+        \lim_{n \to \infty} \frac{D_n}{n!} & = \frac{1}{e}
+    \end{align*}
+
+    \nt{
+        Just accept that this limit is true right now. Need to prove later.
+    }
+}
+
+\qs{}{
+    At a party, seven gentlemen check their hats.
+    In how many ways can their hats be returned so that:
+
+    \begin{itemize}
+        \item no gentleman receives his own hat?
+        \item at least one gentleman receives own hat?
+        \item at least two gentlemen receive their own hat?
+    \end{itemize}
+}
+
+\sol{part a}{
+
+    This is simply the number of derangements for $n = 7$.
+
+    \begin{align*}
+        D_7 = 7!(1 - 1 + \frac{1}{2} - \frac{1}{3!} + \frac{1}{4!} - \frac{1}{5!} + \frac{1}{6!} - \frac{1}{7!})
+    \end{align*}
+}
+
+\sol{part b}{
+
+    This is just the total number of permutations - the number of
+    derangements for 7 people. So,
+
+    \begin{align*}
+        7! - D_7
+    \end{align*}
+}
+
+\sol{part c}{
+
+    This is the number of ways that at least one person receives their own hat
+    - the number of ways exactly one gentlement receives their own hat. \\
+
+    \begin{align*}
+        7! - D_7 - 7 \cdot D_6
+    \end{align*}
+}
+
+
+\section{L15: The Inclusion-Exclusion principle and applications II}
+
+\subsection*{Consider a problem we have seen before}
+How many r-combinations are there of a multiset with $k$
+distinct objects, each with infinite repetition number?
+
+This is the same as the following question: Find the number
+of integer solutions to
+
+\begin{align*}
+    x_1 + x_2 + \cdots + x_k = r
+\end{align*}
+
+subject to $x_i \ge 0$ or each $i$. We know the answer to this is
+
+\begin{align*}
+    \binom{r + k - 1}{r}
+\end{align*}
+
+Similarly, we have considered the problem where we assume instead
+$x_i \ge a_i$.
+
+\subsection*{New Problem}
+Find the number of integer solutions to
+
+\begin{align*}
+    x_1 + x_2 + \cdots + x_k = r
+\end{align*}
+
+subject to $0 \le x_i \le a_i$ for each $i$. \\
+
+\ex{How to solve this type of question}{
+
+    Let $S$ be the set of solutions where we just have $x_i \ge 0$ and
+    let $A_i$ be the set of solutions where $x_i > a_i$. Then we want
+    to find $|A_1^c \cup A_2^c \cdots \cup A_m^c|$.
+
+    \begin{align*}
+        |A_1^c \cap \cdots & \cap A_m^c| = |S| - \sum |A_i| + \sum |A_i \cap A_j|                            \\
+                           & - \sum |A_i \cap A_j \cap A_k| + \cdots + (-1)^{m+1} |A_1 \cap \cdots \cap A_m|
+    \end{align*}
+}
+
+\qs{}{
+    Find the number of integer solutions to
+
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 = 18
+    \end{align*}
+
+    subject to $5 \ge x_1 \ge 1$, $4 \ge x_2 \ge -2$, $5 \ge x_3 \ge 0$, $9 \ge x_4 \ge 3$.
+}
+\sol{
+    First, let us redefine the problem in terms of new variables with equal
+    restrictions but started with $0$ as the lowest bound. \\
+
+    The problem becomes:
+
+    \begin{align*}
+        y_1 + y_2 + y_3 + y_4 = 16
+    \end{align*}
+
+    subject to $4 \ge y_1 \ge 0$, $6 \ge y_2 \ge 0$, $5 \ge y_3 \ge 0$, $6 \ge y_4 \ge 0$. \\
+
+    Now, let $S$ be the set of solutions where each $y_i \ge 0$. There are clearly,
+
+    \begin{align*}
+        \binom{16 + 4 - 1}{16} = \binom{19}{16}
+    \end{align*}
+
+    Now, we must solve each of the following intersections, however,
+    we only need to consider the cases where the intersection is non-empty.
+    This is obviously done by solving this like we have previously
+    studied. Subtract $1 + $ the upper bound of each $y_i$ from the
+    target value of the sums. And proceed to solve this question
+    as a normal stars and bars problem. \\
+
+    \begin{align*}
+        |A_1| = \binom{11 + 4 - 1}{11} = \binom{14}{11}      \\
+        |A_2| = \binom{9 + 4 - 1}{9} = \binom{12}{9}         \\
+        |A_3| = \binom{10 + 4 - 1}{10} = \binom{13}{10}      \\
+        |A_4| = \binom{9 + 4 - 1}{9} = \binom{12}{9}         \\
+        |A_1 \cup A_2| = \binom{4 + 4 - 1}{4} = \binom{7}{4} \\
+        |A_1 \cup A_3| = \binom{5 + 4 - 1}{5} = \binom{8}{5} \\
+        |A_1 \cup A_4| = \binom{4 + 4 - 1}{4} = \binom{7}{4} \\
+        |A_2 \cup A_3| = \binom{3 + 4 - 1}{3} = \binom{6}{3} \\
+        |A_2 \cup A_4| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
+        |A_3 \cup A_4| = \binom{3 + 4 - 1}{3} = \binom{6}{3} \\
+    \end{align*}
+
+    So the final answer is
+
+    \begin{align*}
+         & = \binom{19}{16} - \Bigg ( \binom{14}{11} + \binom{12}{9} + \binom{13}{10} + \binom{12}{9}        \\
+         & - \binom{7}{4} - \binom{8}{5} - \binom{7}{4} - \binom{6}{3} - \binom{5}{2} - \binom{6}{3} \Bigg ) \\
+         & = 55
+    \end{align*}
+
+}
+
+\section{L16: The Inclusion-Exclusion principle and
+  applications IV: Another Forbidden Position Problem}
+
+\qs{}{
+    Eight people take a walk a walk in a line $$1,2,3,4,5,6,7,8$$ where
+    1 precedes 2 who precedes 3 etc. How many ways are there to
+    rearrange the people so that no one precedes the person he preceded
+    before? \\
+
+    In other words, count $w$ in $S_n$ that avoid the pairs
+    $$1 2, 2 3, \dots, (n - 1) n$$
+}
+
+\sol{
+    Let $S_n$ be the set of all permutations of $\{1, 2, \dots, n\}$.
+
+    Let $A_i$ be the set of all permutations that contain the pair $i i+1$. \\
+
+    Then we want to find
+    \begin{align*}
+        |S_n| - \Bigg ( \sum_{i=1}^{n} |A_i|     - \sum_{i,j=1}^{n} |A_i \cap A_j| + \cdots + (-1)^{n+1} |A_1 \cap \cdots \cap A_n| \Bigg )
+    \end{align*}
+
+    Clearly, $|S_n| = n!$ because there are $n!$ permutations. \\
+
+    Now, we must solve each of the following intersections. Observe the following:
+
+    \begin{align*}
+        |A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}| = \binom{n-1}{k} (n - k)!
+    \end{align*}
+
+    This is because we must think of constructing an algorithm that places the paired
+    elements and then places the remaining elements. \\
+
+    This algorithm is represented by the RHS of the above the equation. This
+    is because there are only $n-1$ positions where we can place a "block",
+    i.e., a pair of elements. Given $k$ blocks, there are $\binom{n-1}{k}$ ways to
+    place them. Then, we must place the remaining $n-k$ elements
+    which can be done in $(n-k)!$ ways given their distinct ordering \\
+
+    Thus, this gives us the final form of the answer.
+
+    \begin{align*}
+        n! - \Bigg ( \binom{n - 1}{1}(n-1)! - \binom{n - 1}{2}(n-2)! + \cdots + (-1)^{n-1} \binom{n - 1}{n-1}(1)! \Bigg )
+    \end{align*}
+}
+
+\thm{Non-attacking rook arragements}{
+    The number of non-attacking rook arragements on an $n \times n$ board
+    with forbidden positions is
+
+    \begin{align*}
+        n! - r_1(n-1)! + r_2(n-2)! - \cdots +(-1)^kr_k(n-k)! + \cdots + (-1)^n r_n
+    \end{align*}
+
+    Here $r_k$ is the number of ways to place $k$ rooks in the forbidden squares.
+}
+
+\begin{subproof}
+    This is an application of the inclusion-exclusion principle. \\
+
+    Let $A_i$ be the set of all placements where exactly one of the
+    forbidden squares in row $i$ must be used. Consider the following
+    arbitrary intersection of $A_i$s \\
+
+    \begin{align*}
+        \sum |A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}|
+    \end{align*}
+
+    Note that the sum is over all selections of the $k$ subsets. \\
+
+    This can be observed by constructing an algorithm that places the rooks
+    in the forbidden squares and then places the remaining rooks. \\
+
+    There are $r_k$ ways to place the rooks in the forbidden squares. Then,
+    there are $n - k$ positions to place the remaining rooks, so there are
+    $(n-k)!$ ways to place them. Thus,
+
+    \begin{align*}
+        \sum |A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}| = r_k(n-k)!
+    \end{align*}
+
+    Substituting this is the inclusion-exclusion principle, we get
+    the theorem.
+
+\end{subproof}
+
+\section{Practice Problems}
 
 \chapter{Recurrence Relations and Generating Functions}
-\section{Lecture 17: Some Number Sequences}
+\section{L17: Some Number Sequences}
 
 \ex{Example 1}{
     Consider a configuration of $n$ lines where every two lines
@@ -146,35 +625,36 @@ Consider the Fibonacci sequence $f_n = f_{n-1} + f_{n-2}$, where $f_0 = 0$ and $
     $$
 }
 \sol{
-\begin{subproof}
-    We will prove this by induction on $n$. \\
+    \begin{subproof}
+        We will prove this by induction on $n$. \\
 
-    \textbf{Base case}: $n = 0$.
-    $$
-        1 + \sum_{i=0}^{0} \hat{F}_i = 1 + \hat{F}_0 = 1 + 1 = 2
-    $$
-    Similarly,
-    $$
-        \hat{F}_{0+2} = \hat{F}_{2} = f_{2+1} = f_{3} = 2
-    $$
-    So, the base case is true. \\
+        \textbf{Base case}: $n = 0$.
+        $$
+            1 + \sum_{i=0}^{0} \hat{F}_i = 1 + \hat{F}_0 = 1 + 1 = 2
+        $$
+        Similarly,
+        $$
+            \hat{F}_{0+2} = \hat{F}_{2} = f_{2+1} = f_{3} = 2
+        $$
+        So, the base case is true. \\
 
-    \textbf{Inductive Hypothesis}: Assume that the following statement is true for $n = k$.
-    $$
-        1 + \sum_{i=0}^{k} \hat{F}_i = \hat{F}_{k+2}
-    $$
+        \textbf{Inductive Hypothesis}: Assume that the following statement is true for $n = k$.
+        $$
+            1 + \sum_{i=0}^{k} \hat{F}_i = \hat{F}_{k+2}
+        $$
 
-    \textbf{Inductive Step}: We will prove that the following statement is true for $n = k + 1$.
-    \begin{align*}
-        1 + \sum_{i=0}^{k+1} \hat{F}_i & = 1 + \hat{F}_{k+1} + \sum_{i=0}^{k} \hat{F}_i \\
-                                       & = \hat{F}_{k+1} + \hat{F}_{k+2}                \\
-                                       & = f_{k+2} + f_{k+3}                            \\
-                                       & = f_{k+4}                                      \\
-                                       & = \hat{F}_{k+3}                                \\
-    \end{align*}
+        \textbf{Inductive Step}: We will prove that the following statement is true for $n = k + 1$.
+        \begin{align*}
+            1 + \sum_{i=0}^{k+1} \hat{F}_i & = 1 + \hat{F}_{k+1} + \sum_{i=0}^{k} \hat{F}_i \\
+                                           & = \hat{F}_{k+1} + \hat{F}_{k+2}                \\
+                                           & = f_{k+2} + f_{k+3}                            \\
+                                           & = f_{k+4}                                      \\
+                                           & = \hat{F}_{k+3}                                \\
+        \end{align*}
 
-    Therefore, the statement is true for all $n$ by induction.
-\end{subproof}
+        Therefore, the statement is true for all $n$ by induction.
+    \end{subproof}
+}
 
 \qs{}{
     Prove that $f_n$ is even if and only if $n$ is divisible by $3$.
@@ -251,7 +731,7 @@ Consider the Fibonacci sequence $f_n = f_{n-1} + f_{n-2}$, where $f_0 = 0$ and $
     we can solve for $c_1$ and $c_2$.
 }
 
-\section{Lecture 18: Introduction to ordinary generating series}
+\section{L18: Introduction to ordinary generating series}
 
 \nt{
     Up until now, we have solved an instance combinatorial problem at a time.
@@ -501,9 +981,11 @@ and in these cases, substitution is fine to perform.
     \end{align*}
 }
 
+\section{Practice Problems}
+
 \chapter{Special Counting Sequences}
 
-\section{Lecture 19: Partition identities}
+\section{L19: Partition identities}
 
 \dfn{Partition}{
     A \textit{partition} is a decreasing sequence of positive integers whose sum is $n$.
@@ -513,13 +995,13 @@ and in these cases, substitution is fine to perform.
     Consider $n = 5$. The partitions of $5$ are
 
     \begin{align*}
-        & 5 \\
-        & 4, 1 \\
-        & 3, 2 \\
-        & 3, 1, 1 \\
-        & 2, 2, 1 \\
-        & 2, 1, 1, 1 \\
-        & 1, 1, 1, 1, 1
+         & 5             \\
+         & 4, 1          \\
+         & 3, 2          \\
+         & 3, 1, 1       \\
+         & 2, 2, 1       \\
+         & 2, 1, 1, 1    \\
+         & 1, 1, 1, 1, 1
     \end{align*}
 
     However, this can also be represented in terms of the \textbf{Ferrers diagram}:
@@ -527,26 +1009,26 @@ and in these cases, substitution is fine to perform.
     Partitions $5$:
 
     \begin{align*}
-        & \young(~~~~~) \\
-        & \young(~~~~,~) \\
-        & \young(~~~,~~) \\
-        & \young(~~~,~,~) \\
+         & \young(~~~~~)   \\
+         & \young(~~~~,~)  \\
+         & \young(~~~,~~)  \\
+         & \young(~~~,~,~) \\
     \end{align*}
 
     \begin{align*}
-        & \young(~~,~~,~) \\
-        & \young(~~,~,~,~) \\
-        & \young(~,~,~,~,~)
+         & \young(~~,~~,~)   \\
+         & \young(~~,~,~,~)  \\
+         & \young(~,~,~,~,~)
     \end{align*}
 }
 
 \ex{Theorem 8.3.1 from the textbook}{
-    Use Ferrers diagrams to prove that the number of partitions of $n$ 
-    in which the largest part is $r$ equals the number of partitions 
+    Use Ferrers diagrams to prove that the number of partitions of $n$
+    in which the largest part is $r$ equals the number of partitions
     of $n-r$ in which no part is greater than $r$. \\
 
-    Let $P$ be a partition for $n$. Remove the first part of $P$ which 
-    by definition is the largest part which has an arbitrary size $r$. 
+    Let $P$ be a partition for $n$. Remove the first part of $P$ which
+    by definition is the largest part which has an arbitrary size $r$.
     This clearly yields a partition of $n-r$ in which no part is greater
     than $r$. This process is clearly a bijection and so the number of partitions
     of $n$ in which the largest part is $r$ equals the number of partitions
@@ -559,7 +1041,7 @@ and in these cases, substitution is fine to perform.
 
 \subsection*{Generating Series , and partition identities}
 
-Recall generating series for partition: 
+Recall generating series for partition:
 
 \begin{align*}
     g(x) = \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^{k}} \Big )
@@ -575,17 +1057,17 @@ Recall generating series for partition:
 }
 \sol{Only odd parts:}{
     \begin{align*}
-        g(x) &= (1 + x^1 + x^{1+1} + x^{1+1+1} + \cdots) \cdot (1 + x^3 + x^{3+3} + x^{3+3+3} + \cdots) \cdot \cdots \\
-             &= \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^{2k-1}} \Big )
-    \end{align*} 
+        g(x) & = (1 + x^1 + x^{1+1} + x^{1+1+1} + \cdots) \cdot (1 + x^3 + x^{3+3} + x^{3+3+3} + \cdots) \cdot \cdots \\
+             & = \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^{2k-1}} \Big )
+    \end{align*}
 }
 
 \sol{No part repeated more than $m$ times}{
     \begin{align*}
-        g(x) &= (1 + x + x^{1 + 1} + \cdots + x^{m})(1 + x^{2} + x^{2 + 2} + \cdots + x^{2m})(1 + x^{3} + x^{3 + 3} + \cdots + x^{3m}) \cdots \\
-             &= (\frac{1}{1 - x} - \frac{x^m}{1 - x}) \cdot (\frac{1}{1 - x^2} - \frac{x^m}{1 - x^2}) \cdot (\frac{1}{1 - x^3} - \frac{x^m}{1 - x^3}) \cdots \\
-             &= \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^k} - \frac{x^m}{1 - x^k} \Big ) \\
-             &= \prod_{k=1}^{\infty} \Big ( \frac{1 - x^m}{1 - x^k} \Big )
+        g(x) & = (1 + x + x^{1 + 1} + \cdots + x^{m})(1 + x^{2} + x^{2 + 2} + \cdots + x^{2m})(1 + x^{3} + x^{3 + 3} + \cdots + x^{3m}) \cdots                \\
+             & = (\frac{1}{1 - x} - \frac{x^m}{1 - x}) \cdot (\frac{1}{1 - x^2} - \frac{x^m}{1 - x^2}) \cdot (\frac{1}{1 - x^3} - \frac{x^m}{1 - x^3}) \cdots \\
+             & = \prod_{k=1}^{\infty} \Big ( \frac{1}{1 - x^k} - \frac{x^m}{1 - x^k} \Big )                                                                   \\
+             & = \prod_{k=1}^{\infty} \Big ( \frac{1 - x^m}{1 - x^k} \Big )
     \end{align*}
 }
 
@@ -600,16 +1082,16 @@ Recall generating series for partition:
 }
 
 \qs{}{
-    Write down a two variable generating series that counts partitions 
-    by both size and length, using say, a $q$ variable and a $z$ variable 
-    respectively. Hence the coefficient of $q^nz^l$ is the number of 
+    Write down a two variable generating series that counts partitions
+    by both size and length, using say, a $q$ variable and a $z$ variable
+    respectively. Hence the coefficient of $q^nz^l$ is the number of
     partitions of size $n$ and length $l$.
 }
 \sol{
     \begin{align*}
-        g(q, z) &= \sum_{n=1}^{\infty} \sum_{l=1}^{\infty} P(n,l) \cdot q^{n}z^{l} \\
-                &= \prod_{k=0}^{\infty} (1 + zq^{k} + z^2q^{2k} + z^3q^{3k} + \cdots) \\
-                &= \prod_{k=0}^{\infty} \Big ( \frac{1}{1 - zq^{k}} \Big )
+        g(q, z) & = \sum_{n=1}^{\infty} \sum_{l=1}^{\infty} P(n,l) \cdot q^{n}z^{l}    \\
+                & = \prod_{k=0}^{\infty} (1 + zq^{k} + z^2q^{2k} + z^3q^{3k} + \cdots) \\
+                & = \prod_{k=0}^{\infty} \Big ( \frac{1}{1 - zq^{k}} \Big )
     \end{align*}
 }
 \qs{}{
@@ -620,7 +1102,7 @@ Recall generating series for partition:
     \end{align*}
 
     \begin{itemize}
-        \item Interpret both sides of the identity. 
+        \item Interpret both sides of the identity.
         \item Give an algabraic proof.
         \item Can you give a combinatorial proof?
     \end{itemize}
@@ -628,58 +1110,58 @@ Recall generating series for partition:
 \sol{Interpret both sides of the identity}{
     \begin{itemize}
         \item LHS
-        
-        \begin{align*}
-            \prod_{k=1}^{\infty} 1 + q^k = (1 + q^1)(1 + q^2)(1 + q^3) \cdots
-        \end{align*}
 
-        This is clearly the number of partitions with distinct parts that 
-        are used at most one time.
+              \begin{align*}
+                  \prod_{k=1}^{\infty} 1 + q^k = (1 + q^1)(1 + q^2)(1 + q^3) \cdots
+              \end{align*}
+
+              This is clearly the number of partitions with distinct parts that
+              are used at most one time.
 
         \item RHS
-        
-        This is clearly the generating series for partitions with only odd parts.
+
+              This is clearly the generating series for partitions with only odd parts.
     \end{itemize}
 }
 
 \sol{Give an algebraic proof}{
 
-\begin{subproof}
-    \begin{align*}
-        \prod_{k=1}^{\infty} 1 + q^k &= \prod_{k=1}^{\infty} \frac{1-q^k}{1-q^k} (1 + q^k) \\
-        &= \prod_{k=1}^{\infty} \frac{1 - q^{2k}}{1 - q^k} \\
-        &= \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \frac{q^{2k}}{1 - q^k} \\
-        &= \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \prod_{k=1}^{\infty} \frac{q^{2k}}{1-q^k} \\
-        &= \text{ All partitions - partitions with even parts} \\
-        &= \text{ Partitions with odd parts} \\
-        &= \prod_{k=1}^{\infty} \frac{1}{1 - q^{2k-1}}
-    \end{align*}
-\end{subproof}
+    \begin{subproof}
+        \begin{align*}
+            \prod_{k=1}^{\infty} 1 + q^k & = \prod_{k=1}^{\infty} \frac{1-q^k}{1-q^k} (1 + q^k)                                 \\
+                                         & = \prod_{k=1}^{\infty} \frac{1 - q^{2k}}{1 - q^k}                                    \\
+                                         & = \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \frac{q^{2k}}{1 - q^k}                    \\
+                                         & = \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \prod_{k=1}^{\infty} \frac{q^{2k}}{1-q^k} \\
+                                         & = \text{ All partitions - partitions with even parts}                                \\
+                                         & = \text{ Partitions with odd parts}                                                  \\
+                                         & = \prod_{k=1}^{\infty} \frac{1}{1 - q^{2k-1}}
+        \end{align*}
+    \end{subproof}
 }
 
 \sol{Give a combinatorial proof}{
     \begin{subproof}
-        Fix $n$. Let $S$ be the set of all partitions of $n$ with only 
+        Fix $n$. Let $S$ be the set of all partitions of $n$ with only
         distinct parts. Clearly, the LHS represents the generating series that
         counts $S$. \\
-    
-        Construct a function $f$ from distinct parts to odd parts by dividing 
-        each even number by $2$ until every number is odd. This function is 
-        clearly well defined as it will only result in odd parts. This must 
-        be a bijection because the input to $f$ must have distinct parts so 
-        the number of odd parts created is dependent on the even numbers in 
+
+        Construct a function $f$ from distinct parts to odd parts by dividing
+        each even number by $2$ until every number is odd. This function is
+        clearly well defined as it will only result in odd parts. This must
+        be a bijection because the input to $f$ must have distinct parts so
+        the number of odd parts created is dependent on the even numbers in
         the input so the output is unique. Lastly, this is clearly reversible
-        by taking the largest subset of repeated odd numbers that is a power 
+        by taking the largest subset of repeated odd numbers that is a power
         of $2$ and summing them. \\
 
         Thus, because we can decompose $S$ into the set of partitions with
-        only odd parts through a bijective function and this decomposition 
-        is clearly counted by the RHS. Then, it is clear that the LHS and RHS 
-        equivalent. 
+        only odd parts through a bijective function and this decomposition
+        is clearly counted by the RHS. Then, it is clear that the LHS and RHS
+        equivalent.
     \end{subproof}
 }
 
-\section{Lecture 20: Partition identities (continued)}
+\section{L20: Partition identities (continued)}
 
 \dfn{Partition Conjugate}{
     The \textit{conjugate} of a partition is the partition associated
@@ -697,49 +1179,49 @@ Recall generating series for partition:
 }
 
 \qs{}{
-    Use conjugation to prove the following fact: the number of 
-    partitions of n with no part bigger than k equals the number 
+    Use conjugation to prove the following fact: the number of
+    partitions of n with no part bigger than k equals the number
     of partitions of n with at most k parts. \\
 
-    Determine the generating series for either of the kinds 
+    Determine the generating series for either of the kinds
     of partitions from the previous problem.
 }
 \sol{Using conjugation...}{
     \begin{subproof}
         This part is trivially true. If no part is bigger than $k$, then
-        the first row in the Ferrers Diagram, which must be the largest row 
+        the first row in the Ferrers Diagram, which must be the largest row
         in the diagram, has at most $k$ parts.
-    
-        By taking the transpose of the first type of parition, we get a 
-        partition with at most $k$ parts as the number of parts will be 
-        dictated by the first row. 
-    
+
+        By taking the transpose of the first type of parition, we get a
+        partition with at most $k$ parts as the number of parts will be
+        dictated by the first row.
+
         Thus, the number of partitions of $n$ with no part bigger than $k$
         is the same as the number of partitions of $n$ with at most $k$ parts.
     \end{subproof}
 }
 \sol{Generating Series}{
     \begin{align*}
-        g(x) = &(1 + x + x^{1+1} + \cdots + x^{k}) \\
-               &(1 + x^2 + x^{2+2} + \cdots + x^{2k}) \\
-               &(1 + x^3 + x^{3+3} + \cdots + x^{3k}) \cdots 
+        g(x) = & (1 + x + x^{1+1} + \cdots + x^{k})           \\
+               & (1 + x^2 + x^{2+2} + \cdots + x^{2k})        \\
+               & (1 + x^3 + x^{3+3} + \cdots + x^{3k}) \cdots
     \end{align*}
     \begin{align*}
-        g(x) &= \prod_{i=1}^{\infty} (1 + x^{i} + x^{2i} + \cdots + x^{ki}) \\
-             &= \prod_{i=1}^{\infty} \Big ( \frac{1 - x^{ki+1}}{1 - x^{i}} \Big ) 
+        g(x) & = \prod_{i=1}^{\infty} (1 + x^{i} + x^{2i} + \cdots + x^{ki})       \\
+             & = \prod_{i=1}^{\infty} \Big ( \frac{1 - x^{ki+1}}{1 - x^{i}} \Big )
     \end{align*}
 }
 
 \dfn{Durfee Square}{
-    A \textit{Durfee square} is the largest square that sits in the NW 
-    corner of the Ferrers diagram of a partition. 
+    A \textit{Durfee square} is the largest square that sits in the NW
+    corner of the Ferrers diagram of a partition.
 }
 
 \qs{}{
-    Show that every Ferrers shape uniquely decomposes into 
-    $(D_k, A_k, B_k)$ where $D_k$ is a Durfee square of size $k$, 
+    Show that every Ferrers shape uniquely decomposes into
+    $(D_k, A_k, B_k)$ where $D_k$ is a Durfee square of size $k$,
     $A_k$ is the partition with at most $k$ parts, and $B_k$ is
-    a partition with first part of size at most $k$. 
+    a partition with first part of size at most $k$.
 }
 \sol{
     Consider an arbitrary partition:
@@ -748,26 +1230,26 @@ Recall generating series for partition:
         \young(~~~~,~~,~)
     \end{align*}
 
-    This can obviously be decomoposed into the triple: 
+    This can obviously be decomoposed into the triple:
 
     \begin{align*}
         \Bigg ( \young(~~,~~) , \young(~~) , \young(~) \Bigg )
     \end{align*}
 
-    There are a few cases to consider: 
+    There are a few cases to consider:
 
     \begin{itemize}
-        \item First, this is unique. Clearly, this has to be unique 
-        because we are not changing any structure from the partition, 
-        but rather we are just decomposing it into a triple. So each 
-        partition must uniquely map to its own ordered triple. \\
+        \item First, this is unique. Clearly, this has to be unique
+              because we are not changing any structure from the partition,
+              but rather we are just decomposing it into a triple. So each
+              partition must uniquely map to its own ordered triple. \\
         \item Second, $A_k$ is the partition with at most $k$ parts. $A_k$
-        must have at most $k$ because the Durfee square is of size $k$. $A_k$
-        cannot be largely than this because it would contradict either 
-        the definition of a partition or the definition of a Durfee square. \\
+              must have at most $k$ because the Durfee square is of size $k$. $A_k$
+              cannot be largely than this because it would contradict either
+              the definition of a partition or the definition of a Durfee square. \\
         \item Third, $B_k$ is the partition with first part of size at most $k$.
-        This is true because if the first part of $B_k$ is larger than $k$, then
-        this would contradict the definition of a Durfee square or a partition. \\
+              This is true because if the first part of $B_k$ is larger than $k$, then
+              this would contradict the definition of a Durfee square or a partition. \\
     \end{itemize}
 
     Thus, we have shown that every partition can be decomposed into a triple.
@@ -781,101 +1263,679 @@ Recall generating series for partition:
 
 \dfn{Self-conjugate Partition}{
     A partition is \textit{self-conjugate} i its transpose shape is the same
-    as its original shape (e.g., the partitions (4,1,1,1) and (3,2,1) 
+    as its original shape (e.g., the partitions (4,1,1,1) and (3,2,1)
     are self-conjugate, but (3,2) is not).
 }
 
 \qs{}{
-    Prove that the number of self conjugate partitions of $n$ 
-    equals the number of partitions using only distinct odd parts. 
+    Prove that the number of self conjugate partitions of $n$
+    equals the number of partitions using only distinct odd parts.
     Then derive an identity.
 }
 \sol{
-    First, we must prove the number of self conjugate partitions of $n$
-    equals the number of partitions using only distinct odd parts. This
-    can be done by showing a weight preserving bijection between the 
-    two sets. \\
+First, we must prove the number of self conjugate partitions of $n$
+equals the number of partitions using only distinct odd parts. This
+can be done by showing a weight preserving bijection between the
+two sets. \\
 
-    \dfn{Weight-preserving function}{
-        Define the following function:
+\dfn{Weight-preserving function}{
+    Define the following function:
 
-        \begin{align*}
-            f : (S, \omega) \mapsto (S', \omega')
-        \end{align*}
+    \begin{align*}
+        f : (S, \omega) \mapsto (S', \omega')
+    \end{align*}
 
-        such that $\omega : S \mapsto \mathbb{Z}_{\ge 0}$
-        and $\omega' : S' \mapsto \mathbb{Z}_{\ge 0}$ are weight functions. 
-        Then, $f$ is a weight-preserving function if and only if:
+    such that $\omega : S \mapsto \mathbb{Z}_{\ge 0}$
+    and $\omega' : S' \mapsto \mathbb{Z}_{\ge 0}$ are weight functions.
+    Then, $f$ is a weight-preserving function if and only if:
 
-        \begin{align*}
-            \omega(s) = \omega'(f(s)) \text{ for all } s \in S
-        \end{align*}
+    \begin{align*}
+        \omega(s) = \omega'(f(s)) \text{ for all } s \in S
+    \end{align*}
+}
+
+And so, we can make the following claim
+
+\clm{}{}{
+    If $f : (S, \omega) \mapsto (S', \omega')$ is a weight-preserving
+    and bijective  then,
+
+    \begin{align*}
+        g_{(S, \omega)}(x) = g_{(S', \omega')}(x) \in \mathbb{Z}[x]
+    \end{align*}
+
+    In other words, their generating functions are equal.
+}
+
+Now to define the actual bijection. Consider each row of the Ferrers
+diagram of an arbitrary distinct odd partition. Each row can be
+bent into a self-conjugate partition. By selecting the middle element,
+which is gaurunteed to exist because the partition is odd, we can
+place every square to the left below the middle element and leave
+the other elements alone. Additionally, this is well defined as each
+row is distinct. Thus, we have a weight preserving bijection
+between the set of distinct odd partitions and the set
+of self-conjugate partitions. \\
+
+The generating function for the number of distinct odd partitions
+is trivial and given by:
+
+\begin{align*}
+    g(x) = \prod_{i=1}^{\infty} 1 - x^{2i-1}
+\end{align*}
+
+as we only want to either select an odd number or not. \\
+
+The generating function for the number of self-conjugate partitions
+is more complicated. Consider an arbitrary self-conjugate partition
+$\lambda$. We can decompose it into a triple $(D_k, A_k, B_k)$ through
+the Durfee square decomposition. We can then apply a second weight-preserving
+bijection and conjugate the second component of the triple which makes
+$A_k = B_k$. Lastly, we can apply a third weight-preserving bijection
+by compressing the triple into a tuple $(D_k, C_k)$ where $C_k$ is
+$A_k$ merged left-to-right with $B_k$. \\
+
+Consequently,
+
+\begin{align*}
+    C_k \in \bigcup_{j=0}^{\infty} D_j \times \text{Partitions}_{\text{even}_{\le j \text { tall}}} = U
+\end{align*}
+
+Clearly,
+
+\begin{align*}
+    g_{U}(x) & = \sum_{j=0}^{\infty} x^{j^2} \Big ( \prod_{t=1}^{j} \frac{1}{1 - x^{2t}} \Big ) \\
+             & = \sum_{j=0}^{\infty} \frac{x^{j^2}}{\prod_{t=1}^{j} \frac{1}{1 - x^{2t}}}
+\end{align*}
+
+So,
+
+\begin{align*}
+    \prod_{k=1}^{\infty} 1 + x^{2k - 1} = \sum_{j=0}^{\infty} \frac{x^{j^2}}{\prod_{t=1}^{j} 1 - x^{2t}}
+\end{align*}
+
+
+\section{L21: Exponential generating series}
+
+Given a number sequence $$h_0, h_1, h_2, \dots$$ consider
+using the \textit{exponential} series:
+
+\dfn{Exponential Generating Series}{
+    \begin{align*}
+        g_{\text{exp}}(x) = \sum_{i=0}^{\infty}h_i\frac{x^i}{i!}
+    \end{align*}
+}
+
+\subsection*{Why do we care about using this?}
+
+\subsubsection*{Reason A}
+Ordinary generating series typically won't have any algabraic properties
+that are useful such as factorization. However, exponential generating
+may have these properties. \\
+
+\ex{}{
+    Fix a positive integer $n$. Let
+
+    $P(n,k) = $ the number of $k$ permutations of an $n$ set. In other words,
+    select $k$ elements from $n$ set where order matters. \\
+
+    \qs{}{
+        Compute the ordinary and exponential generating series for
+        $P(n,0), P(n,1), \dots$.
     }
 
-    And so, we can make the following claim
 
-    \clm{}{}{
-        If $f : (S, \omega) \mapsto (S', \omega')$ is a weight-preserving
-        and bijective  then, 
+    \sol{
+        Let's consider how a single $P(n,k)$ is constructed. There
+        are $\binom{n}{k}$ ways to pick $k$ elements from $n$ set
+        and $k!$ ways to order them. So,
 
         \begin{align*}
-            g_{(S, \omega)}(x) = g_{(S', \omega')}(x) \in \mathbb{Z}[x]
+            P(n,k) & = \binom{n}{k}k!        \\
+                   & = \frac{n!}{k!(n-k)!}k! \\
+                   & = \frac{n!}{(n - k)!}
         \end{align*}
 
-        In other words, their generating functions are equal.
+        Clearly the ordinary generating series is:
+
+        \begin{align*}
+            g(x) & = \sum_{i=0}^{\infty} P(n,i)x^i              \\
+                 & = \sum_{i=0}^{\infty} \frac{n!}{(n - i)!}x^i \\
+        \end{align*}
+
+        Additionally, the exponential generating series is:
+
+        \begin{align*}
+            g_{\text{exp}}(x) & = \sum_{i=0}^{\infty} P(n,i)\frac{x^i}{i!}              \\
+                              & = \sum_{i=0}^{\infty} \frac{n!}{(n - i)!}\frac{x^i}{i!} \\
+                              & = \sum_{i=0}^{\infty} \binom{n}{i} x^i                  \\
+                              & = (1 + x)^n
+        \end{align*}
+
+        \nt{
+            Note how the exponential series simplifies as compared
+            to the ordinary series.
+        }
     }
 
-    Now to define the actual bijection. Consider each row of the Ferrers
-    diagram of an arbitrary distinct odd partition. Each row can be 
-    bent into a self-conjugate partition. By selecting the middle element,
-    which is gaurunteed to exist because the partition is odd, we can 
-    place every square to the left below the middle element and leave
-    the other elements alone. Additionally, this is well defined as each
-    row is distinct. Thus, we have a weight preserving bijection 
-    between the set of distinct odd partitions and the set 
-    of self-conjugate partitions. \\
+    \qs{}{
+        What is the exponential generating series for the sequence $1,1,1,\dots$?
+    }
 
-    The generating function for the number of distinct odd partitions 
-    is trivial and given by: 
+    \sol{
+        \begin{align*}
+            g_{\text{exp}}(x) & = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots \\
+                              & = \sum_{i=0}^{\infty} \frac{x^i}{i!}              \\
+                              & = e^x
+        \end{align*}
+    }
+}
 
-    \begin{align*}
-        g(x) = \prod_{i=1}^{\infty} 1 - x^{2i-1}
-    \end{align*}
+\subsubsection*{Reason B}
+Ordinary series only work well for \textit{unlabeled} combinatorial sets,
+whereas exponential generating are better for \textit{labeled}
+combinatorial sets. \\
 
-    as we only want to either select an odd number or not. \\
+\ex{}{
+    Consider $38$ identical balls, how many ways are thre to group
+    them together into 3 different bags? This is a composition
+    problem, and is an unlabeled problem (since all balls are
+    identical). This is a composition problem with a solution of
+    $\binom{38 + 3 - 1}{3 - 1}$ \\
 
-    The generating function for the number of self-conjugate partitions
-    is more complicated. Consider an arbitrary self-conjugate partition
-    $\lambda$. We can decompose it into a triple $(D_k, A_k, B_k)$ through
-    the Durfee square decomposition. We can then apply a second weight-preserving
-    bijection and conjugate the second component of the triple which makes 
-    $A_k = B_k$. Lastly, we can apply a third weight-preserving bijection
-    by compressing the triple into a tuple $(D_k, C_k)$ where $C_k$ is 
-    $A_k$ merged left-to-right with $B_k$. \\
+    Now consider 38 students in MATH 413. How many ways are there
+    to group them into 3 different groups? This is a \textit{labeled}
+    version of the problem. The answer to this is $3^{38}$ because there
+    $3$ choices for each distint student.
+}
 
-    Consequently, 
-
-    \begin{align*}
-        C_k \in \bigcup_{j=0}^{\infty} D_j \times \text{Partitions}_{\text{even}_{\le j \text { tall}}} = U
-    \end{align*}
-
-    Clearly, 
-    
-    \begin{align*}
-        g_{U}(x) &= \sum_{j=0}^{\infty} x^{j^2} \Big ( \prod_{t=1}^{j} \frac{1}{1 - x^{2t}} \Big ) \\
-                 &= \sum_{j=0}^{\infty} \frac{x^{j^2}}{\prod_{t=1}^{j} \frac{1}{1 - x^{2t}}}
-    \end{align*}
-
-    So, 
+\qs{}{
+    What is $e^{ax}$, for a natural number $a$, the exponential
+    generating series for?
+}
+\sol{
+    We know that $e^x = \sum_{i=0}^{\infty} \frac{x^i}{i!}$, so
 
     \begin{align*}
-        \prod_{k=1}^{\infty} 1 + x^{2k - 1} = \sum_{j=0}^{\infty} \frac{x^{j^2}}{\prod_{t=1}^{j} \frac{1}{1 - x^{2t}}}
+        e^{ax} & = \sum_{i=0}^{\infty} \frac{(ax)^i}{i!} \\
+               & = \sum_{i=0}^{\infty} \frac{x^i}{i!}a^i
     \end{align*}
 
+    $a^i$ is the number of words of length $i$ that can be
+    generated from an alphabet of size $a$. \\
+}
 
-\section{Lecture 21: Exponential generating series}
+\qs{}{
+    Find the exponential generating series for the number of
+    ways to place $r$ (distinct) people into three different
+    rooms with at least one person in each room. Repeat the
+    problem with the extra condition of an even number of people.
+}
+\sol{One person in each room}{
+    \begin{align*}
+        g_{\text{exp}}(x) = \Big ( x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots \Big )^3
+    \end{align*}
+}
+\sol{Even Number of people and one person in each room}{
+    \begin{align*}
+        g_{\text{exp}}(x) = \Big ( \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots \Big )^3
+    \end{align*}
+}
 
-\chapter*{Midterm 3}
+\qs{}{
+    Now say $r=25$ in the above exercise. Compute the actual number
+    of ways to place $25$ people in three rooms with at least one
+    person in each room.
+}
+\sol{}{
+We have already computed the generating series for one person
+in each room above. This generating series can be simplified even
+further as:
+
+\begin{align*}
+    g_{\text{exp}}(x) & = \Big ( x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots \Big )^3                \\
+                      & = (e^x - 1)^3                                                                \\
+                      & = \sum_{i=0}^{3} \binom{3}{i} (e^{x})^{3-i} (-1)^i                           \\
+                      & = \binom{3}{0}e^{3x} - \binom{3}{1}e^{2x} + \binom{3}{2}e^{x} - \binom{3}{3} \\
+                      & = e^{3x} - 3e^{2x} + 3e^{x} - 1
+\end{align*}
+
+Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
+
+\begin{align*}
+    [x^{25}]g_{\text{exp}}(x) & = [x^{25}]e^{3x} - 3[x^{25}]e^{2x} + 3[x^{25}]e^{x} - [x^{25}] \\
+                              & = 3^{25} - 3\cdot 2^{25} + 3\cdot 1^{25} - 1                   \\
+                              & = 3^{25} - 3 \cdot 2^{25} + 3
+\end{align*}
+}
+
+\chapter{Homework}
+
+\section{Homework 1}
+
+\section{Homework 2}
+
+\section{Homework 3}
+
+\section{Homework 4}
+
+\section{Homework 5}
+
+\section{Homework 6}
+
+\section{Homework 7}
+
+\qs{}{
+    Determine the number of integral solutions of the equation
+
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 = 20
+    \end{align*}
+
+    that satisfy
+
+    \begin{align*}
+        1 \le x_1 \le 6, 0 \le x_2 \le 7, 4 \le x_3 \le 8, 2 \le x_4 \le 6
+    \end{align*}
+}
+\sol{
+    We first need to reformat the question with adjusted restrictions:
+
+    \begin{align*}
+         & y_1 + y_2 + y_3 + y_4 = 13                                         \\
+         & 0 \le y_1 \le 5, 0 \le y_2 \le 7, 0 \le y_3 \le 4, 0 \le y_4 \le 4
+    \end{align*}
+
+    This can be solved using the inclusion-exclusion principle: \\
+
+    Let $S$ be the set of all solutions to the above equations where
+    each $y_i \ge 0$. By stars and bars,
+
+    $$
+        |S| = \binom{13 + 4 - 1}{13} = \binom{16}{13}
+    $$
+
+    Let $A_i$ be the set of all solutions such that $y_i \ge a_i$ where
+    $a_i$ is the exclusive upper integral bound for $y_i$ (e.g. $y_1 \ge 6$) \\
+
+    \begin{align*}
+        |A_1| = \binom{7 + 4 - 1}{7} = \binom{10}{7}         \\
+        |A_2| = \binom{5 + 4 - 1}{5} = \binom{8}{5}          \\
+        |A_3| = \binom{8 + 4 - 1}{8} = \binom{11}{8}         \\
+        |A_4| = \binom{8 + 4 - 1}{8} = \binom{11}{8}         \\
+        |A_1 \cap A_2| = 0                                   \\
+        |A_1 \cap A_3| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
+        |A_1 \cap A_4| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
+        |A_2 \cap A_3| = \binom{0 + 4 - 1}{0} = \binom{3}{0} \\
+        |A_2 \cap A_4| = \binom{0 + 4 - 1}{0} = \binom{3}{0} \\
+        |A_3 \cap A_4| = \binom{3 + 4 - 1}{3} = \binom{6}{3}
+    \end{align*}
+
+    Note that the intersection of any 3 sets will have no solution. \\
+
+    Substituting this into the complementary form of the inclusion-exclusion
+    principle, we get:
+
+    \begin{align*}
+        \binom{16}{13} - \Bigg ( & \binom{10}{7} + \binom{8}{5} + \binom{11}{8} + \binom{11}{8}                       \\
+                                 & - \binom{5}{2} - \binom{5}{2} - \binom{3}{0} - \binom{3}{0} - \binom{6}{3} \Bigg ) \\
+                                 & = 96
+    \end{align*}
+}
+
+\qs{}{
+    Determine the number of permutations of $\{1, 2, \dots, 9\}$ in
+    which at least one odd integer is in its natural position.
+}
+\sol{
+    This is an application of the inclusion-exclusion principle. \\
+
+    Let $A_i$ be the set of all permutations such that $i$ is in its natural 
+    position. \\
+
+    We must calculate $|A_1 \cup A_3 \cup A_5 \cup A_7 \cup A_9|$ for the inclusion-exclusion
+    principle. \\
+
+    For the sizes of each set individually, the size of each set 
+    must be $8!$ because there is one option for the position that 
+    must be in place and then we  must place the 8 remaining numbers.
+    There are $\binom{5}{1}$ ways to pick the odd number in place. \\
+
+    Following this pattern we can build the inclusion-exclusion principle
+    as follows:
+
+    \begin{align*}
+        &= \binom{5}{1} 8! - \binom{5}{2}7! + \binom{5}{3} 6! - \binom{5}{4} 5! + \binom{5}{5}4! \\
+        &= 157824
+    \end{align*}
+}
+
+\qs{}{
+    What is the number of ways to place six nonattacking rooks on
+    the 6-by-6 boards with forbidden positions as shown?
+
+    \begin{align*}
+        \young(\times\times~~~~,\times\times~~~~,~~\times\times~~,~~\times\times~~,~~~~\times\times,~~~~\times\times)
+    \end{align*}
+}
+\sol{
+    This is an application of the inclusion-exclusion principle. \\
+
+    Let $S_n$ be the set of all boards with nonattacking rooks on an $n \times n$ board.
+    Clearly, there are $n!$ boards within $S_n$. This can be 
+    observed by constructing an algorithm to place one rook at a time. \\
+
+    Let $A_i$ be the set of all boards with exactly 1 rook in the forbidden
+    in row $i$. \\
+
+    We must calculate $$|A_1^c \cap A_2^c \cap \cdots \cap A_n^c|$$
+
+    Note that it is unecessary to consider each subset of $A_i$ individually,
+    but rather we should consider the sum of the selected subsets. This gives 
+    the following identity
+
+    \begin{align*}
+        \sum |A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}| = r_k (n - k)!
+    \end{align*}
+
+    where $r_k$ is the number of ways to place $k$ rooks in forbidden positions. \\
+
+    Substituting this into the complementary form of the inclusion-exclusion
+    principle, we get:
+
+    \begin{align*}
+        &6! - (r_1(6 - 1)! - r_2(6 - 2)! + r_3(6 - 3)! - r_4(6 - 4)! + r_5(6 - 5)! - r_6(6 - 6)!) \\
+        &= 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5(1!) + r_6(0!) \\
+        &= 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5 + r_6
+    \end{align*}
+
+    All that remains is to calculate $r_1, r_2, \dots, r_6$. \\
+
+    \begin{align*}
+        & r_1 = 12 \\
+        & r_2 = \binom{3}{1}\cdot (2)+ \binom{3}{2} (4\cdot 4) = 3 \cdot 2 + 3 \cdot 16 = 6 + 48 = 54 \\
+        & r_3 = \binom{3}{2} \binom{2}{1} \cdot (2 \cdot 4) + \binom{3}{3} (4 \cdot 4 \cdot 4) = 3\cdot 2 \cdot 2 \cdot 4 + 1\cdot 64 = 48+64= 112 \\
+        & r_4 = \binom{3}{2} \binom{2}{1} \cdot 2 + \binom{3}{1} \cdot 2 \cdot 4 \cdot 4 = 3\cdot 2\cdot 2\cdot 2 + 3\cdot 2\cdot 4\cdot 4 = 12 + 96 = 108  \\
+        & r_5 = \binom{3}{2} \binom{2}{1} \cdot 2 \cdot 4 = 48 \\
+        & r_6 = 2 \cdot 2 \cdot 2 = 8
+    \end{align*}
+
+    Substituting these values into the formula, we get:
+
+    \begin{align*}
+        6! - (12(5!) - 54(4!) + 112(3!) - 108(2!) + 48 - 8) = 80
+    \end{align*}
+}
+
+\section{Homework 8}
+
+\qs{}{
+    How many ways are there to arrange the letters in INTELLIGENT
+    with at least two pairs of consecutive identical letters? (For example
+    ITTNELLGENI is an arrangement we want to count, since it has “TT”
+    and “LL”.)
+}
+\sol{
+    This is an application of the inclusion-exclusion principle. \\
+
+    Let $A_i$ be the set of all arrangements with exactly $i$ pairs of consecutive
+    identical letters. \\
+
+    We must calculate $$|A_2 \cup A_3 \cup \cdots \cup A_5|$$
+
+    For $A_2$, there are $\binom{5}{2}$ ways to choose the two pairs of consecutive
+    identical letters. There are 7 remaining letters with 3 remaining pairs 
+    which can be arranged in $\frac{7!}{2!2!2!}$ ways. \\
+
+    For $A_3$, there are $\binom{5}{3}$ ways to choose the three pairs of consecutive
+    identical letters. There are 5 remaining letters with 2 remaining pairs
+    which can be arranged in $\frac{5!}{2!2!}$ ways. However, 
+    we must consider that the previous calculation $A_2$ double counted 
+    elements of $A_3$ by the number of pairs that were chosen, which was 
+    $2$. We must multiply this in to account for this.  \\
+
+    Following this pattern, we can see the final answer is
+
+    \begin{align*}
+        \binom{5}{2}\frac{9!}{(2!)^3} - 2\cdot \binom{5}{3}\frac{8!}{(2!)^2} + 3\cdot \binom{5}{4}\frac{7!}{(2!)} - 4\cdot \binom{5}{5}6!
+    \end{align*}
+
+    \nt{
+        Could probably use better explanations on why we need to multiply 
+        by the number of pairs chosen in the previous calculation.
+    }
+}
+
+\qs{}{
+    Let $n$ be a positive integer and let $p_1, p_2, \dots, p_n$ be
+    all of the different prime numbers that divide $n$. Consider the
+    Euler function $\phi$ defined by
+
+    \begin{align*}
+        \phi(n) = \big | \{ k : 1 \le k \le n, \gcd{(k,n)} = 1 \} \big |
+    \end{align*}
+
+    Use the inclusion-exclusion principle to show that
+
+    \begin{align*}
+        \phi(n) = n \prod_{i=1}^{n} 1 - \frac{1}{p_i}
+    \end{align*}
+}
+
+\qs{}{
+    Prove that the Fibonacci sequence is the solution of the
+    recurrence relation
+
+    \begin{align*}
+        a_n = 5a_{n-4} + 3a_{n-5}, (n \ge 5)
+    \end{align*}
+
+    where $a_0=0, a_1=1, a_2=1, a_3=2, a_4=3$. Then use this formula
+    to show that the Fibonacci numbers satisfy the condition that
+    $f_n$ is divisble by $5$ if and only if $n$ is divisible by $5$.
+}
+
+\qs{}{
+    Let $h_n$ equal the number of different ways in which the
+    squares of a $1 \times n$ chessboard can be colored, using the
+    colors red, white, and blue so that no two squares that are
+    colored red are adjacent. Find and verify a recurrence relation
+    that $h_n$ satisfies. Then find a formula for $h_n$ (using the
+    characteristic equation method).
+}
+
+\qs{}{
+    The \textit{Lucas numbers} $l_0, l_1, l_2, \dots, l_n, \dots$
+    are defined using the same recurrence relation defining the
+    Fibonacci numbers, but with different intial conditions:
+
+    \begin{align*}
+        l_n = l_{n-1} + l_{n-2}, (n \ge 2) \quad l_0 = 2, l_1 = 1
+    \end{align*}
+
+    Prove that
+
+    \begin{itemize}
+        \item $l_n = f_{n-1} + f_{n+1} \text{ for } n \ge 1$
+        \item $l_0^2 + l_1^2 + \cdots + l_n^2 = l_n l_{n+1} + 2 \text{ for } n \ge 0$
+    \end{itemize}
+}
+
+\qs{}{
+    Let $a_n$ equal  the number of ternary strings of length $n$ made
+    up of $0$s, $1$s, and $2$s such that the substrings $00$, $01$, $10$,
+    and $11$ never occur. Prove that
+
+    \begin{align*}
+        a_n = a_{n-1} + 2a_{n-2}
+    \end{align*}
+
+    for $n \ge 2$ with $a_0 = 1$ and $a_1=3$. Then find a formula for
+    $a_n$.
+}
+
+\qs{}{
+    A population grows as follows: in the current generation,
+    each Canadian chooses one American for the next generation,
+    and each American chooses one Canadian and one American for
+    the next generation. Generation 0 consists of one Canadian.
+    What is the size of generation $n$? (Here we assume all older
+    generations leave when the new generation is chosen.)
+}
+
+
+\section{Homework 9}
+
+\qs{}{
+    Prove that the partition function $p(n)(=\text{number of partitions of } n)$
+    satisfies $p(n+1) > p(n)$.
+}
+\sol{
+    By the definition of a partition, we know there are $p(n)$ sequences of decreasing 
+    positive integers that sum to $n$. \\
+
+    For each sequence, we can append a $1$ to the end to construct a new sequence, 
+    which will still be decreasing and sum to $n+1$. Therefore, we know that $p(n+1)$
+    is \textit{at least} $p(n)$. \\
+
+    Additionally, we can construct a new partition of the sequence $\{n+1, 0, 0, \dots\}$. 
+    This will be a partition of $n+1$ trivially. Additionally, this partition cannot 
+    be a partition of any integer less than $n+1$ as the sum is above $n$. Since,
+    this partition is not in $n$, we know that $p(n+1) > p(n)$.
+}
+
+\qs{}{
+    For each integer $n > 2$ determine a self-conjugate partitoin of $n$
+    that has at least two parts.
+}
+\sol{
+    There are two cases to consider:
+
+    \begin{itemize}
+        \item $n$ is odd \\
+        
+        We can construct the follwing partition of $n$:
+
+        \begin{align*}
+            \{\frac{n-1}{2} + 1, 1_1, 1_2, \dots, 1_{\frac{n-1}{2}}\}
+        \end{align*}
+
+        where there are $\frac{n-1}{2}$ $1$s. This is self-conjugate as it will create 
+        Ferrer Diagrams of the form: 
+
+        \begin{align*}
+            \young(~~~~,~,~,~)
+        \end{align*}
+
+        Since $n > 2$, we know that there are at least two parts. At $n=3$, 
+        $\frac{n-1}{2} + 1 = 2$ and $\frac{n-1}{2}=1$. So the partition is $\{2,1\}$. \\
+        
+        This is trivially bijective because $\frac{n-1}{2}$ is bijective. 
+
+        \item $n$ is even \\
+        
+        We know that $n-1$ is odd. So we can construct a sel-conjugate partition for $n-1$
+        and then modify the generated sequence by changing one of the appended $1$s to a $2$.
+
+        This generates Ferrer Diagrams of the form:
+
+        \begin{align*}
+            \young(~~~~,~~,~,~)
+        \end{align*}
+
+        We have shown in the odd case that this is a bijection and partition, 
+        so we know that this is a self-conjugate partition of $n$ because adding 
+        $1$ to one of the parts is still a bijective action. 
+    \end{itemize}
+}
+
+\qs{}{
+    Prove that the number of partitions of $n$ in which no part appears
+    exactly once is equal to the number of partitions of $n$ with no
+    parts congruent to $1$ or $5 \pmod{6}$.
+}
+
+\qs{}{
+    Do part (c) of the last in class exercise of Lecture 19.
+    That is, give a bijective proof that the number of partitions
+    of $N$ using distinct parts equals the number of partitions of
+    $N$ using only odd parts. (Hint: Consider the multiplicity $m_p$
+    of each part $p$ occuring in partitions of the second type.
+    Now look at the unique expansion of $m$ as powers of $2$ and
+    distribute.)
+}
+\sol{
+    Consider an arbitrary partition $P$ that only uses odd parts for $N$:
+
+    \begin{align*}
+        N = o_1 + o_2 + \cdots + o_k
+    \end{align*}
+
+    Group each odd number to obtain its multiplicity $m_p$ (e.g. 1 + 1 + 1 = 3(1)): 
+
+    \begin{align*}
+        N = m_1 (o_1) + m_2 (o_2) + \cdots + m_k (o_k)
+    \end{align*}
+
+    Consider the unique expansion of $m_p$ as powers of $2$:
+
+    \begin{align*}
+        m_p = 2^0 + 2^1 + \cdots + 2^r
+    \end{align*}
+
+    Distribute each $o_i$ across the expansion of $m_p$:
+
+    \begin{align*}
+        &= (2^0  + 2^1 + \cdots + 2^{r_1}) o_1 + (2^0  + 2^1 + \cdots + 2^{r_2}) o_2 + \cdots + (2^0  + 2^1 + \cdots + 2^{r_k}) o_k \\
+        &= 2^0 (o_{\alpha_1} + o_{\alpha_2} + \cdots + o_{\alpha_x}) + 2^1 (o_{\beta_1} + o_{\beta_2} + \cdots + o_{n_2}) + \cdots + 2^{r} (o_{\gamma_y} + o_{\gamma_2} + \cdots + o_{\gamma_z}) \\
+    \end{align*}
+
+    Let $a_i$ be the sum of the $o_i$s that correspond to the $2^i$ term:
+
+    \begin{align*}
+        &= 2^0 a_0 + 2^1 a_1 + \cdots + 2^{r} a_r
+    \end{align*}
+
+    We know that each of these terms must be unique as each power of $2$ is unique in this sequence.
+
+    Thus, we have constructed a bijection between the partitions of $N$ using only odd parts 
+    and the partitions of $N$ using distinct parts. 
+}
+
+\section{Homework 10}
+
+\chapter{Midterms}
+
+\section{Midterm 1}
+
+\subsection{Practice Problems}
+
+\subsection{Solutions}
+
+\subsection{Exam}
+
+\subsection{Exam Solutions}
+
+\section{Midterm 2}
+
+\subsection{Practice Problems}
+
+\subsection{Solutions}
+
+\subsection{Exam}
+
+\subsection{Exam Solutions}
+
+\section{Midterm 3}
+
+\subsection{Practice Problems}
+
+\subsection{Solutions}
+
+\subsection{Exam}
+
+\subsection{Exam Solutions}
+
 }
 
 \end{document}
