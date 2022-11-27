@@ -1128,12 +1128,11 @@ Recall generating series for partition:
 
     \begin{subproof}
         \begin{align*}
-            \prod_{k=1}^{\infty} 1 + q^k & = \prod_{k=1}^{\infty} \frac{1-q^k}{1-q^k} (1 + q^k)                                 \\
-                                         & = \prod_{k=1}^{\infty} \frac{1 - q^{2k}}{1 - q^k}                                    \\
-                                         & = \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \frac{q^{2k}}{1 - q^k}                    \\
-                                         & = \prod_{k=1}^{\infty} \frac{1}{1 - q^k} - \prod_{k=1}^{\infty} \frac{q^{2k}}{1-q^k} \\
-                                         & = \text{ All partitions - partitions with even parts}                                \\
-                                         & = \text{ Partitions with odd parts}                                                  \\
+            \prod_{k=1}^{\infty} 1 + q^k & = \prod_{k=1}^{\infty} \frac{1-q^k}{1-q^k} (1 + q^k)                                   \\
+                                         & = \prod_{k=1}^{\infty} \frac{1 - q^{2k}}{1 - q^k}                                      \\
+                                         & = \prod_{k=1}^\infty \frac{ \frac{1}{1-q^k} }{ \frac{1}{1-q^{2k}} }                    \\
+                                         & = \frac{ \prod_{k=1}^\infty \frac{1}{1-q^k} }{ \prod_{k=1}^\infty \frac{1}{1-q^{2k}} } \\
+                                         & = \text { all even partitions divided out of all partitons }                           \\
                                          & = \prod_{k=1}^{\infty} \frac{1}{1 - q^{2k-1}}
         \end{align*}
     \end{subproof}
@@ -1590,14 +1589,14 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 \sol{
     This is an application of the inclusion-exclusion principle. \\
 
-    Let $A_i$ be the set of all permutations such that $i$ is in its natural 
+    Let $A_i$ be the set of all permutations such that $i$ is in its natural
     position. \\
 
     We must calculate $|A_1 \cup A_3 \cup A_5 \cup A_7 \cup A_9|$ for the inclusion-exclusion
     principle. \\
 
-    For the sizes of each set individually, the size of each set 
-    must be $8!$ because there is one option for the position that 
+    For the sizes of each set individually, the size of each set
+    must be $8!$ because there is one option for the position that
     must be in place and then we  must place the 8 remaining numbers.
     There are $\binom{5}{1}$ ways to pick the odd number in place. \\
 
@@ -1605,8 +1604,8 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     as follows:
 
     \begin{align*}
-        &= \binom{5}{1} 8! - \binom{5}{2}7! + \binom{5}{3} 6! - \binom{5}{4} 5! + \binom{5}{5}4! \\
-        &= 157824
+         & = \binom{5}{1} 8! - \binom{5}{2}7! + \binom{5}{3} 6! - \binom{5}{4} 5! + \binom{5}{5}4! \\
+         & = 157824
     \end{align*}
 }
 
@@ -1622,7 +1621,7 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     This is an application of the inclusion-exclusion principle. \\
 
     Let $S_n$ be the set of all boards with nonattacking rooks on an $n \times n$ board.
-    Clearly, there are $n!$ boards within $S_n$. This can be 
+    Clearly, there are $n!$ boards within $S_n$. This can be
     observed by constructing an algorithm to place one rook at a time. \\
 
     Let $A_i$ be the set of all boards with exactly 1 rook in the forbidden
@@ -1631,7 +1630,7 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     We must calculate $$|A_1^c \cap A_2^c \cap \cdots \cap A_n^c|$$
 
     Note that it is unecessary to consider each subset of $A_i$ individually,
-    but rather we should consider the sum of the selected subsets. This gives 
+    but rather we should consider the sum of the selected subsets. This gives
     the following identity
 
     \begin{align*}
@@ -1644,20 +1643,20 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     principle, we get:
 
     \begin{align*}
-        &6! - (r_1(6 - 1)! - r_2(6 - 2)! + r_3(6 - 3)! - r_4(6 - 4)! + r_5(6 - 5)! - r_6(6 - 6)!) \\
-        &= 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5(1!) + r_6(0!) \\
-        &= 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5 + r_6
+         & 6! - (r_1(6 - 1)! - r_2(6 - 2)! + r_3(6 - 3)! - r_4(6 - 4)! + r_5(6 - 5)! - r_6(6 - 6)!) \\
+         & = 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5(1!) + r_6(0!)                         \\
+         & = 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5 + r_6
     \end{align*}
 
     All that remains is to calculate $r_1, r_2, \dots, r_6$. \\
 
     \begin{align*}
-        & r_1 = 12 \\
-        & r_2 = \binom{3}{1}\cdot (2)+ \binom{3}{2} (4\cdot 4) = 3 \cdot 2 + 3 \cdot 16 = 6 + 48 = 54 \\
-        & r_3 = \binom{3}{2} \binom{2}{1} \cdot (2 \cdot 4) + \binom{3}{3} (4 \cdot 4 \cdot 4) = 3\cdot 2 \cdot 2 \cdot 4 + 1\cdot 64 = 48+64= 112 \\
-        & r_4 = \binom{3}{2} \binom{2}{1} \cdot 2 + \binom{3}{1} \cdot 2 \cdot 4 \cdot 4 = 3\cdot 2\cdot 2\cdot 2 + 3\cdot 2\cdot 4\cdot 4 = 12 + 96 = 108  \\
-        & r_5 = \binom{3}{2} \binom{2}{1} \cdot 2 \cdot 4 = 48 \\
-        & r_6 = 2 \cdot 2 \cdot 2 = 8
+         & r_1 = 12                                                                                                                                         \\
+         & r_2 = \binom{3}{1}\cdot (2)+ \binom{3}{2} (4\cdot 4) = 3 \cdot 2 + 3 \cdot 16 = 6 + 48 = 54                                                      \\
+         & r_3 = \binom{3}{2} \binom{2}{1} \cdot (2 \cdot 4) + \binom{3}{3} (4 \cdot 4 \cdot 4) = 3\cdot 2 \cdot 2 \cdot 4 + 1\cdot 64 = 48+64= 112         \\
+         & r_4 = \binom{3}{2} \binom{2}{1} \cdot 2 + \binom{3}{1} \cdot 2 \cdot 4 \cdot 4 = 3\cdot 2\cdot 2\cdot 2 + 3\cdot 2\cdot 4\cdot 4 = 12 + 96 = 108 \\
+         & r_5 = \binom{3}{2} \binom{2}{1} \cdot 2 \cdot 4 = 48                                                                                             \\
+         & r_6 = 2 \cdot 2 \cdot 2 = 8
     \end{align*}
 
     Substituting these values into the formula, we get:
@@ -1684,14 +1683,14 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     We must calculate $$|A_2 \cup A_3 \cup \cdots \cup A_5|$$
 
     For $A_2$, there are $\binom{5}{2}$ ways to choose the two pairs of consecutive
-    identical letters. There are 7 remaining letters with 3 remaining pairs 
+    identical letters. There are 7 remaining letters with 3 remaining pairs
     which can be arranged in $\frac{7!}{2!2!2!}$ ways. \\
 
     For $A_3$, there are $\binom{5}{3}$ ways to choose the three pairs of consecutive
     identical letters. There are 5 remaining letters with 2 remaining pairs
-    which can be arranged in $\frac{5!}{2!2!}$ ways. However, 
-    we must consider that the previous calculation $A_2$ double counted 
-    elements of $A_3$ by the number of pairs that were chosen, which was 
+    which can be arranged in $\frac{5!}{2!2!}$ ways. However,
+    we must consider that the previous calculation $A_2$ double counted
+    elements of $A_3$ by the number of pairs that were chosen, which was
     $2$. We must multiply this in to account for this.  \\
 
     Following this pattern, we can see the final answer is
@@ -1701,7 +1700,7 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     \end{align*}
 
     \nt{
-        Could probably use better explanations on why we need to multiply 
+        Could probably use better explanations on why we need to multiply
         by the number of pairs chosen in the previous calculation.
     }
 }
@@ -1791,15 +1790,15 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     satisfies $p(n+1) > p(n)$.
 }
 \sol{
-    By the definition of a partition, we know there are $p(n)$ sequences of decreasing 
+    By the definition of a partition, we know there are $p(n)$ sequences of decreasing
     positive integers that sum to $n$. \\
 
-    For each sequence, we can append a $1$ to the end to construct a new sequence, 
+    For each sequence, we can append a $1$ to the end to construct a new sequence,
     which will still be decreasing and sum to $n+1$. Therefore, we know that $p(n+1)$
     is \textit{at least} $p(n)$. \\
 
-    Additionally, we can construct a new partition of the sequence $\{n+1, 0, 0, \dots\}$. 
-    This will be a partition of $n+1$ trivially. Additionally, this partition cannot 
+    Additionally, we can construct a new partition of the sequence $\{n+1, 0, 0, \dots\}$.
+    This will be a partition of $n+1$ trivially. Additionally, this partition cannot
     be a partition of any integer less than $n+1$ as the sum is above $n$. Since,
     this partition is not in $n$, we know that $p(n+1) > p(n)$.
 }
@@ -1813,39 +1812,39 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 
     \begin{itemize}
         \item $n$ is odd \\
-        
-        We can construct the follwing partition of $n$:
 
-        \begin{align*}
-            \{\frac{n-1}{2} + 1, 1_1, 1_2, \dots, 1_{\frac{n-1}{2}}\}
-        \end{align*}
+              We can construct the follwing partition of $n$:
 
-        where there are $\frac{n-1}{2}$ $1$s. This is self-conjugate as it will create 
-        Ferrer Diagrams of the form: 
+              \begin{align*}
+                  \{\frac{n-1}{2} + 1, 1_1, 1_2, \dots, 1_{\frac{n-1}{2}}\}
+              \end{align*}
 
-        \begin{align*}
-            \young(~~~~,~,~,~)
-        \end{align*}
+              where there are $\frac{n-1}{2}$ $1$s. This is self-conjugate as it will create
+              Ferrer Diagrams of the form:
 
-        Since $n > 2$, we know that there are at least two parts. At $n=3$, 
-        $\frac{n-1}{2} + 1 = 2$ and $\frac{n-1}{2}=1$. So the partition is $\{2,1\}$. \\
-        
-        This is trivially bijective because $\frac{n-1}{2}$ is bijective. 
+              \begin{align*}
+                  \young(~~~~,~,~,~)
+              \end{align*}
+
+              Since $n > 2$, we know that there are at least two parts. At $n=3$,
+              $\frac{n-1}{2} + 1 = 2$ and $\frac{n-1}{2}=1$. So the partition is $\{2,1\}$. \\
+
+              This is trivially bijective because $\frac{n-1}{2}$ is bijective.
 
         \item $n$ is even \\
-        
-        We know that $n-1$ is odd. So we can construct a sel-conjugate partition for $n-1$
-        and then modify the generated sequence by changing one of the appended $1$s to a $2$.
 
-        This generates Ferrer Diagrams of the form:
+              We know that $n-1$ is odd. So we can construct a sel-conjugate partition for $n-1$
+              and then modify the generated sequence by changing one of the appended $1$s to a $2$.
 
-        \begin{align*}
-            \young(~~~~,~~,~,~)
-        \end{align*}
+              This generates Ferrer Diagrams of the form:
 
-        We have shown in the odd case that this is a bijection and partition, 
-        so we know that this is a self-conjugate partition of $n$ because adding 
-        $1$ to one of the parts is still a bijective action. 
+              \begin{align*}
+                  \young(~~~~,~~,~,~)
+              \end{align*}
+
+              We have shown in the odd case that this is a bijection and partition,
+              so we know that this is a self-conjugate partition of $n$ because adding
+              $1$ to one of the parts is still a bijective action.
     \end{itemize}
 }
 
@@ -1871,7 +1870,7 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
         N = o_1 + o_2 + \cdots + o_k
     \end{align*}
 
-    Group each odd number to obtain its multiplicity $m_p$ (e.g. 1 + 1 + 1 = 3(1)): 
+    Group each odd number to obtain its multiplicity $m_p$ (e.g. 1 + 1 + 1 = 3(1)):
 
     \begin{align*}
         N = m_1 (o_1) + m_2 (o_2) + \cdots + m_k (o_k)
@@ -1886,20 +1885,20 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
     Distribute each $o_i$ across the expansion of $m_p$:
 
     \begin{align*}
-        &= (2^0  + 2^1 + \cdots + 2^{r_1}) o_1 + (2^0  + 2^1 + \cdots + 2^{r_2}) o_2 + \cdots + (2^0  + 2^1 + \cdots + 2^{r_k}) o_k \\
-        &= 2^0 (o_{\alpha_1} + o_{\alpha_2} + \cdots + o_{\alpha_x}) + 2^1 (o_{\beta_1} + o_{\beta_2} + \cdots + o_{n_2}) + \cdots + 2^{r} (o_{\gamma_y} + o_{\gamma_2} + \cdots + o_{\gamma_z}) \\
+         & = (2^0  + 2^1 + \cdots + 2^{r_1}) o_1 + (2^0  + 2^1 + \cdots + 2^{r_2}) o_2 + \cdots + (2^0  + 2^1 + \cdots + 2^{r_k}) o_k                                                              \\
+         & = 2^0 (o_{\alpha_1} + o_{\alpha_2} + \cdots + o_{\alpha_x}) + 2^1 (o_{\beta_1} + o_{\beta_2} + \cdots + o_{n_2}) + \cdots + 2^{r} (o_{\gamma_y} + o_{\gamma_2} + \cdots + o_{\gamma_z}) \\
     \end{align*}
 
     Let $a_i$ be the sum of the $o_i$s that correspond to the $2^i$ term:
 
     \begin{align*}
-        &= 2^0 a_0 + 2^1 a_1 + \cdots + 2^{r} a_r
+         & = 2^0 a_0 + 2^1 a_1 + \cdots + 2^{r} a_r
     \end{align*}
 
     We know that each of these terms must be unique as each power of $2$ is unique in this sequence.
 
-    Thus, we have constructed a bijection between the partitions of $N$ using only odd parts 
-    and the partitions of $N$ using distinct parts. 
+    Thus, we have constructed a bijection between the partitions of $N$ using only odd parts
+    and the partitions of $N$ using distinct parts.
 }
 
 \section{Homework 10}
@@ -1929,6 +1928,164 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 \section{Midterm 3}
 
 \subsection{Practice Problems}
+
+\qs{}{
+    Find a recurrence relation for the number of different ways to hand
+    out a piece of chewing gum (worth $1$ cent) or a candy bar (worth $10$
+    cents) or a donut (worth $20$ cents), one item a day, until n cents worth
+    of food has been given away. Don’t worry about the initial condition.
+}
+\sol{
+    Let $f(n)$ be the number of ways to hand out a piece of chewing gum,
+    a candy bar, or a donut with $n$ cents. At any moment with $n$ cents,
+    we can either give a piece of gum, a candy bar, or a donut. This gives
+
+    \begin{align*}
+        f(n) = f(n-1) + f(n-10) + f(n-20)
+    \end{align*}
+}
+
+\qs{}{
+    By using generating series, determine the number of integer solutions
+    to the composition problem
+
+    \begin{align*}
+        e_1 + e_2 + e_3 = 22
+    \end{align*}
+
+    subject to $3 \le e_1 \le 8$, $6 \le e_2 \le 10$, and $2 \le e_3 \le 7$.
+}
+\sol{
+    Clearly this can be solved by the following generating series:
+
+    \begin{align*}
+        g_1(x) = (x^3+x^4+x^5+x^6+x^7+x^8) (x^6+x^7+x^8+x^9+x^{10}) (x^2+x^3+x^4+x^5+x^6+x^7)
+    \end{align*}
+
+    where the solution is $[x^22] g(x)$. However, this is difficult to extract
+    a coefficient from. Instead, rewrite the problem in terms of new variables:
+
+    \begin{align*}
+        e_1 + e_2 + e_3 = 11
+    \end{align*}
+
+    where $0 \le e_1 \le 5$, $0 \le e_2 \le 4$, and $0 \le e_3 \le 5$.
+    The generating series now becomes:
+
+    \begin{align*}
+        g_2(x) = (1 + x + x^2 + x^3 + x^4 + x^5) (1 + x + x^2 + x^3 + x^4) (1 + x + x^2 + x^3 + x^4 + x^5)
+    \end{align*}
+
+    where we are solving for $[x^{11}] g_2(x)$. This generating series can be simplified as follows:
+
+    \begin{align*}
+        g_2(x) & = (1 + x + x^2 + x^3 + x^4 + x^5) (1 + x + x^2 + x^3 + x^4) (1 + x + x^2 + x^3 + x^4 + x^5) \\
+               & = (\frac{1 - x^{6}}{1 - x}) (\frac{1 - x^5}{1 - x}) (\frac{1 - x^6}{1 - x})                 \\
+               & = \frac{(1 - x^{6}) (1 - x^5) (1 - x^6)}{(1 - x) (1 - x) (1 - x)}                           \\
+               & = \frac{(1 - x^{6}) (1 - x^5) (1 - x^6)}{(1 - x)^3}                                         \\
+               & = (1 - x^{6}) (1 - x^5) (1 - x^6) (1-x)^{-3}                                                \\
+               & = (1 - x^{5} - x^{6} + x^{11})(1-x^{6}) (1-x)^{-3}                                          \\
+               & = (1 - x^{5} - x^{6} + x^{11} - x^{6} + x^{11} + x^{12} - x^{17}) (1-x)^{-3}                \\
+               & = (1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3}                               \\
+    \end{align*}
+
+    The target solution is $[x^11] g_2(x)$. Using negative binomial theorem,
+    we can find the coefficient of $x^{11}$ as follows:
+
+    Reminder that negative binomial theorem is:
+
+    \begin{align*}
+        (1 - x)^{-n} = \sum_{k=0}^{\infty} \binom{n+k-1}{k} x^k
+    \end{align*}
+
+    \begin{align*}
+        [x^{11}]g_2(x) & = [x^{11}]((1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3})                                                                                         \\
+                     & = [x^{11}] \Big ( (1-x)^{-3} - x^{5} (1-x)^{-3} - 2x^{6}(1-x)^{-3} + 2x^{11}(1-x)^{-3} + x^{12}(1-x)^{-3} - x^{17}(1-x)^{-3} \Big )                             \\
+                     & = [x^{11}](1-x)^{-3} - [x^{11}]x^{5} (1-x)^{-3} + [x^{11}] 2x^{6}(1-x)^{-3} + [x^{11}]2x^{{11}}(1-x)^{-3} + [x^{11}]x^{12}(1-x)^{-3} - [x^{11}]x^{17}(1-x)^{-3} \\
+                     & = [x^{11}](1-x)^{-3} - [x^6](1-x)^{-3} - 2 [x^{5}] (1-x)^{-3} + 2[x^0](1-x)^{-3} + [x^{-1}](1-x)^{-3} - [x^{-6}](1-x)^{-3}                                      \\
+                     & = \binom{3+11-1}{3-1} - \binom{3+6-1}{3-1} - 2 \binom{3+5-1}{3-1} + 2 \binom{3+0-1}{3-1} + 0 + 0                                                                \\
+                     & = \binom{13}{2} - \binom{8}{2} - 2 \binom{7}{2} + 2 \binom{2}{2}
+    \end{align*}
+}
+
+\qs{}{
+    Prove that the number of partitions where no part appears more
+    than two times equals the number of partitions where no part is a
+    multiple of three. (Hint: write down the generating series for the former
+    type of partition and algebraically manipulate to get to the generating
+    series for the latter type.)
+}
+\sol{
+    Number of partitions of $n$ where no part appears more than two times:
+
+    \begin{align*}
+        \prod_{i=1}^{\infty} (1 + x^i + x^{2i})
+    \end{align*}
+
+    Number of partitions of $n$ where no part is a multiple of three:
+
+    \begin{align*}
+        \frac{
+            \prod_{i=1}^{\infty} \frac{1}{1 - x^i}
+        }{
+            \prod_{i=1}^{\infty} \frac{1}{1 - x^{3i}}
+        } & = \prod_{i=1}^{\infty} \frac{ \frac{1}{1 - x^i} }{ \frac{1}{1 - x^{3i}} } \\
+          & = \prod_{i=1}^{\infty} \frac{1 - x^{3i}}{1 - x^i}
+    \end{align*}
+
+    Algabraic proof:
+
+    \begin{subproof}
+        \begin{align*}
+            \prod_{i=1}^{\infty} (1 + x^i + x^{2i}) & = \prod_{i=1}^{\infty} \frac{(1+x^i+x^{2i})(1-x^i)}{1-x^i}                \\
+                                                    & = \prod_{i=1}^{\infty} \frac{1+x^i+x^{2i} - x^i - x^{2i} - x^{3i}}{1-x^i} \\
+                                                    & = \prod_{i=1}^{\infty} \frac{1 - x^{3i}}{1-x^i}                           \\
+        \end{align*}
+    \end{subproof}
+}
+
+\qs{}{
+    Determine the number of permutations of $\{1, 2, 3, 4, 5, 6, 7, 8\}$ in
+    which no even integer is in its natural position. For example, $43258176$
+    is good, but $42358176$ is bad because of the position of the 2.
+}
+\sol{
+    This is an application of inclusion-exclusion principle. \\
+
+    Let $S$ be the set of all permutations of $\{1, 2, 3, 4, 5, 6, 7, 8\}$. Clearly,
+    $|S| = 8!$. \\
+
+    Let $A_i$ be the subset of permutations in $S$ where $i$ is in its natural position.
+    We are looking to calculate the following by the complementary form of the
+    inclusion-exclusion principle:
+
+    \begin{align*}
+        |A_2^c \cap A_4^c \cap A_6^c \cap A_8^c| = |S| - \sum |A_i| + \sum |A_i \cap A_j| - \sum |A_i \cap A_j \cap A_k| + |A_2 \cap A_4 \cap A_6 \cap A_8| \\
+    \end{align*}
+
+    Each sum can be calculated as follows:
+
+    \begin{align*}
+        \sum |A_{i_1} \cap A_{i_2} \cdots A_{i_k}| & = \binom{4}{k}(8-k)! \\
+    \end{align*}
+
+    This is because there are $4$ ways to choose the even numbers that are fixed.
+    For each of these choices, there are $8-k$ ways to choose the remaining numbers. \\
+
+    So, we have:
+
+    \begin{align*}
+        8! - \binom{4}{1}7! + \binom{4}{2} 6! - \binom{4}{3} 5! + \binom{4}{4} 4!
+    \end{align*}
+}
+
+\qs{}{
+    Define what it means for a pair $(S, \omega)$ means to be combinatorial
+    problem. Define generating series in these terms. State and prove the
+    product lemma. (As usual, on the test I might ask a \textbf{very precise}
+    question about these proofs (or any proof) so you must be able to
+    understand each line and symbol used in the argument.)
+}
 
 \subsection{Solutions}
 
