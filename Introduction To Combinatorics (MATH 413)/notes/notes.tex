@@ -17,15 +17,533 @@
 \tableofcontents
 \pagebreak
 
-\chapter{What is Combinatorics?}
+\setcounter{chapter}{1}
 
 \chapter{Permutations and Combinations}
 
 \section{L2: Four Basic Counting Principles}
 
+\dfn{Addition Principle}{
+    If $S_1$, $S_2$, $\dots$, $S_k$ are disjoint sets, then 
+
+    \begin{align*}
+        \Big | S = \cup_{i=1}^{k} S_i \Big | = |S_1| + |S_2| + \cdots + |S_k| 
+    \end{align*}
+}
+
+\dfn{Multiplication Principle}{
+    If $S = A \times B$ then $|S| = |A|\cdot|B|$. 
+}
+
+\ex{}{
+    How many ways are there to match $2n$ people? \\ 
+
+    There are clearly $(2n)!$ ways to arrange $2n$ poeople. Let the first 
+    two people be on a team, the next two people be on a team, and so on.
+    We can swap the people in each team to generate an equivalent arragement
+    of people. Given that there are $n$ pairs, there are $2^n$ ways to pick which 
+    pairs are being swapped. Moreso, there are $n$ pairs so $n!$ ways to 
+    arrange the pairs. Thus, the number of pairs is $\frac{(2n)!}{2^n\cdot n!}$.
+}
+
+\qs{}{
+    How many ways are there to form a three-letter sequence using the 
+    letters a,b,c,d,e,f?
+
+    \begin{itemize}
+        \item with repetition of letters allowed?
+        \item without repetition of any letter?
+        \item without repetition and containing the letter e?
+        \item with repetition and containing the letter e?
+    \end{itemize}
+}
+\sol{
+    \begin{itemize}
+        \item with repetition of letters allowed
+        
+        Trivially, there are $6$ choices at each of the three positions in the  
+        sequence, so there are $6^3 = 216$ ways to form the sequence. 
+
+        \item without repetition of any letter
+        
+        There are $6$ choices for the first letter, $5$ choices for the second letter,
+        and $4$ choices for the third letter. Thus, there are $6\cdot5\cdot4 = 120$ ways
+        to form the sequence. 
+
+        \item without repetition and containing the letter e
+        
+        There are three posibilities. The first letteer is e, the second 
+        letter is e, or the third letter is e. Each of the arragements within 
+        each of these three cases are disjoint. So, we can use the Addition
+        Principle. In each case there are $5$ choices for the first free position 
+        and $4$ choices for the second free position. Thus, there are $3\cdot5\cdot4 = 60$
+        ways to form the sequence. 
+
+        \item with repetition and containing the letter e
+        
+        There are three cases: there is $1$ e, $2$ e's, or $3$ e's \\
+
+        In case 1, there are $\binom{3}{1}$ ways to pick the position of the 
+        $1$ e. Then, there are $5$ choices for the first free position and $5$ choices 
+        for the second free position. Thus, there are $\binom{3}{1}\cdot5\cdot5 = 75$ 
+        the sequence. \\
+
+        In case 2, there are $\binom{3}{2}$ ways to pick the position of the $2$ e's. 
+        Then, there are $5$ choices for the remaining free position. Thus, there are 
+        $\binom{3}{2}\cdot5 = 15$ ways to form the sequence. \\
+
+        In total, there are $75 + 15 + 1=91$ ways to form this sequence. 
+    \end{itemize}
+}
+
+\qs{}{
+    A rumor is spread randomly among a group of 10 people by 
+    successively choosing one specified person (who will start the 
+    rumor) to call someone, who calls someone etc. A person can pass a 
+    rumor to anyone except the person who just called and him/herself. \\
+
+    \begin{itemize}
+        \item How many different paths can a rumor travel through
+        the group in three calls? $n$ calls?
+        \item What is the probability that if $A$ starts the rumor, 
+        $A$ received the third call?
+
+    \end{itemize}
+}
+\sol{
+    \begin{itemize}
+        \item First question 
+        
+        There are $10$ ways to pick the first person that starts the rumor.
+        The first person can call anyone except himself/herself. So, 
+        there are $9$ choices. Each the of the next people can call 
+        anyone except the person who just called and himself/herself. 
+        So, there are $8$ choices. Thus, there are $10\cdot 9\cdot8 = 72$ ways
+        This logic applies to the third group of calls. Thus, there are 
+        $10\cdot 9\cdot 8\cdot 8 = 5760$ ways to travel through the group in three calls. 
+
+        In $n$ calls, there  are $10\cdot 9\cdot 8\cdot \cdots \cdot 8 = 10\cdot 9\cdot 8^{n-1}$ ways
+        to travel through the group. 
+
+        \item Second question 
+        
+        By our previous logic, there are $9\cdot 8^{2}$ ways to travel
+        through the group in $3$ calls starting from $A$. (Note: we fixed 
+        the starting person to be $A$). The number of paths that start at $A$, 
+        travel through an intermediate person $B$ for the first call, 
+        travel through an intermediate person $C$ for the second call,
+        and travel through $A$ for the third call is $9\cdot 8$ as there 
+        are $9$ choices for the first call, $8$ choices for the second call, 
+        and $1$ choice for the last call. So the probability is 
+        $\frac{9\cdot 8}{9\cdot 8\cdot 8} = \frac{1}{8}$.
+    \end{itemize}
+}
+
+\dfn{Subtraction Principle}{
+    If $A$ is contained in $U$ and $A^c$ is the complement then 
+    
+    \begin{align*}
+        |A^c| = |U| - |A|
+    \end{align*}
+}
+
+\qs{}{
+    Until recently, area codes were created with the following rules:
+
+    \begin{enumerate}
+        \item The first digit cannot be a $0$ or $1$
+        \item The secon digit must be a $0$ or $1$
+    \end{enumerate}
+
+    In 1995 this was abandoned when 360 was used in parts of western 
+    Washington state (0 still can't be the first number).
+}
+
+\sol{
+    This is an application of subtraction principle. There are 
+    $8\cdot 2\cdot 10$ total area codes before the new rule. There are 
+    $9\cdot 10\cdot 10$ total area codes after the new rule. Thus, 
+    the number of area codes that were created is:
+
+    \begin{align*}
+        9\cdot 10\cdot 10 - 8\cdot 2\cdot 10 = 740
+    \end{align*}
+}
+
 \section{L3: Permutations and selections of sets I}
 
+\subsection*{Permutations of sets}
+
+Let $S = \{a, b, c\}$. There are $3 \times 2 \times 1 = 3!$ ways to rearrange this set. 
+This can also be thought of as creating a bijection from an $n$-set to another $n$-set.\\ 
+
+In this class, we think of permutations is to think of them in the context of the set 
+$\{1, 2,\dots, n\}$. 
+
+\ex{}{
+    Let $S = \{\text{A deck of cards}\}$. Then a permutation of $S$ is a shuffling of the deck. 
+}
+
+\dfn{$r$-permutation}{
+    We can think of this as shuffling a subset $r < n=52$ of all cards. 
+}
+
+\thm{}{
+    Let $P(n,r)$ be the number of $r$-permutations of an $n$-set. Clearly, by the multiplication
+    principle, we get that if $r \le n$: 
+
+    \begin{align*}
+        P(n,r) = n \times (n-1) \times (n-2) \times \cdots \times (n - r + 1)
+    \end{align*}
+
+    Clearly, $P(n,n) = n!$ (i.e. when $r=n$). 
+}
+
+\qs{}{
+    Consider the Movable $15$ puzzle problem: 
+
+    \begin{align*}
+        \begin{matrix*}
+            4 & 15 & 8 & 13 \\
+            5 & 11 &   & 7 \\ 
+            1 & 12 & 3 & 10 \\
+            14 & 2 & 6 & 9 
+        \end{matrix*}
+    \end{align*}
+
+    The goal is to order the numbers from $1$ to $15$ by utilizing the empty space to move 
+    the numbers around. How many starting puzzles are possible? 
+}
+\sol{
+    There are $16!$ ways to arrange $16$ symbols to start $(1, 2, \dots 15)$ and the empty square.
+}
+
+\ex{}{
+    Consider the TV show episode where James Randi asks an auro reader to guess the order of 
+    $5$ people behind a curtain without seeing them and simply be reading their auro. \\
+
+    \begin{itemize}
+        \item Why is it less than a $1\%$ chance that the "auro reader" gets it right? 
+        \item (Harder) Why is the expectation $1$. (Try the case of three people first.)
+    \end{itemize}
+}
+\sol{
+    \begin{itemize}
+        \item Probability
+        
+        There are $5!$ ways to arrange the $5$ people. So the probability is 
+        $\frac{1}{5!} = \frac{1}{120} < 1\%$.
+
+        \item Expectation 
+        
+        We need dearragements. The expectation is 
+        
+        \begin{align*}
+            \sum_{i=0}^5 i \times \text{ Prob(exactly i correct)}
+        \end{align*}
+    \end{itemize}
+}
+
+\ex{Circular Permutations}{
+    Suppose $n$ children are arranged in a circle. How many arrangemens are there? \\
+
+    There are $n!$ ways to arrange the children in this circle. However $n$ of the circles 
+    generated will just be rotations of each other. So the number of distinct arrangements
+    is $\frac{n!}{n} = (n-1)!$. 
+}
+
+Similarly, we can derive the following theorem: 
+
+\thm{}{
+    The number of circular permutations of a set of $n$ elements is $$\frac{P(n,r)}{r}$$
+}
+
+\qs{}{
+    Ten people, including two who don't want to sit next to one another are seated at a round table. 
+    How many arrangements are possible? 
+}
+\sol{
+    Let $A$ and $B$ be the people that do not want to sit by each other. Construct an algorithm that 
+    places $A$ and $B$ at the table and then places the remaining $8$ people. \\
+
+    There are $10$ choices for $A$. Because $B$ cannot sit next to $A$, there are only $7$ 
+    choices for $B$. There are $8!$ ways to arrange the remaining $8$ people at the table. However, 
+    $10$ of the arrangements of this algorithm will be rotations of each other. So the number of 
+    ways to arrange the $10$ people such that $A$ and $B$ don't sit next to each other is 
+    $$\frac{10\cdot 7 \cdot 8!}{10}$$
+}
+\sol{
+    Another way to approach this problem is to determine the number of possible arragements with 
+    no restrictions and take out the bad arragements. Clearly, there are $\frac{10!}{10}$ arragements
+    of $10$ people at a round table. To determine the number of bad permutations, 
+    join person $A$ and $B$ to be represented under one symbol. There are $9$ symbols to 
+    seat at the table now. By the same principle as above, there are $\frac{9!}{9}=8!$ ways to 
+    construct this arragement. However, within the joined symbol there could be $AB$ or $BA$. 
+    So the total number of bad arragements is $2\cdot 8!$. So the total number of arragements
+    where $A$ and $B$ are not sitting next to each other is $9! - 2\cdot 8!$. 
+
+}
+
+\dfn{}{
+    Define
+
+    \begin{align*}
+        C(n,r) := \binom{n}{k} = \frac{P(n,r)}{r!} = \frac{n!}{r!(n-r)!}
+    \end{align*}
+
+    to be the binomial coeicient. This is the number o ways o choosing $r$ elements in an $n$ 
+    element set.
+}
+
+\qs{}{
+    If a 5-card hand is chosen at random, what is the probability of obtaining a flush 
+    (all cards are the same suit?) How about a full house? (Three cards of the same kind, 
+    and two of another kind, e.g., three queens and two "4"'s)
+}
+\sol{
+    For a flush, there are $\binom{4}{1}$ ways to choose the suit and $\binom{13}{5}$ ways to
+    choose $5$ cards of that suit. There are $\binom{52}{5}$ possible hands of $5$ cards. 
+    So the probability of getting a flush is $$\frac{\binom{4}{1} \binom{13}{5}}{\binom{52}{5}}$$
+
+    For a full house, there are $\binom{13}{1}$ ways to choose the three of a kind card and 
+    $\binom{4}{3}$ ways to pick the suits from the cards. Similarly, there are $\binom{12}{1}$
+    remaining ways to pick the two of a kind card and $\binom{4}{2}$ ways to pick the suits. So, 
+    the totoal probability is 
+    $$\frac{\binom{13}{1}\binom{4}{3}\binom{12}{1}\binom{4}{2}}{\binom{52}{5}}$$
+}
+
+\qs{}{
+    How many starting setups are there in Chess 960? In this game, the back row can be rearranged 
+    in any way before the game starts as long as it abides by the following two rules:
+
+    \begin{enumerate}
+        \item The bishops are placed on opposite colors. 
+        \item The king is between the two rooks. 
+    \end{enumerate}
+}
+
+\sol{
+    There are two ways to solve this question. 
+
+    \begin{enumerate}
+        \item First way
+        
+        We will construct an algorith that places the bishops down, then places the rooks and king together, 
+        and then places the remaining pieces. \\ 
+
+        There are $\binom{4}{1}$ ways to place one bishop and $\binom{4}{1}$ ways to place the other. Thus,
+        $\binom{4}{1} \binom{4}{1} = 4\cdot 4 = 16$ ways to place the bishops. We can then imagine the board with 
+         6 remaining places. We then must place the rooks and king together. There are 4 cases where the king can be
+         on any ".":
+         \begin{itemize}
+            \item R.R 
+            
+            There are $4$ ways to place the rooks this distance apart.
+            There is only $1$ way to place the king in this arrangement. 
+            So there are $4$ possible arrangements of this form.
+
+            \item R..R
+            
+            There are 3 ways to place the rooks this distance apart. 
+            Thee are 2 ways to place the king in between these rooks. 
+            So there are $3\cdot 2 = 6$ possible arrangements of this form.
+
+            \item R...R
+            
+            There are $2$ ways to place the rooks this distance apart.
+            There are $3$ ways to place the king in between these rooks.
+            So there are $2\cdot 3 = 6$ possible arrangements of this form.
+
+            \item R....R
+            
+            There is $1$ way to place the rooks this distance apart.
+            There are $4$ ways to place the king in between these rooks.
+            So there are $1\cdot 4 = 4$ possible arrangements of this form.
+         \end{itemize}
+
+         At this point we have placed 5 of the 8 pieces. So there are $\frac{3!}{2!}$ 
+         ways to place the next three pieces, given that their are two knights
+         which are identitcal. 
+
+         All in all, there are $16\cdot (4 + 6 + 6 + 4)\cdot 3 = 960$. Hence,
+         why it is called Chess 960. 
+        
+        \item Second way, 
+        
+        We can start by repeating the start of the previous algorithm. So,
+        we place the bishops down in 16 ways. Then we place the queen. There are 
+        6 ways to do this. Then we place the knights which is possible in $5 choose 2$ ways. 
+        At this point, the position of the king and two rooks are forced. So, 
+        there are $16\cdot 6\cdot \binom{5}{2} = 960$ ways to arrange the pieces.
+    \end{enumerate}
+
+    \nt{
+        A really important part of this chapter to take away is the process 
+        of constructing an algorithm to calculate the number of ways to arrange
+        a set of objects. 
+    }
+}
+
 \section{L4: Permutations and selections of sets II: binomial identities}
+
+\subsection*{Binomial Identities}
+
+These are incredibly useful for combinatorics. Typically, if you are going to try 
+to prove binomial identities algabraically (i.e. directly from the definition), 
+they can be quite difficult, but thinking about them combinatorically can make 
+them easier to understand. 
+
+\thm{}{
+    For $0 \le r \le n$, we have $$\binom{n}{r} = \binom{n}{n - r}$$
+}
+
+\begin{subproof}{(Algabraic)}
+    Obviously, 
+
+    \begin{align*}
+        \binom{n}{r} &= \frac{n!}{r!(n-r)!} \\
+        &= \frac{n!}{(n-r)!r!} \\
+        &= \frac{n!}{(n-r)! (n - (n - r))!} \\
+        &= \binom{n}{n-r}
+    \end{align*}
+
+    However, this only works for simple binomial identities. 
+\end{subproof}
+
+\begin{subproof}{(Combinatoric)}
+    The LHS counts the number of ways to choose $r$ people from $n$ people. 
+    This equivalent to counting which of the $n$ people to exclude from our 
+    group. There are $n-r$ people to exclude. So, there are $\binom{n}{n-r}$. 
+    Clearly, this is the RHS. So the LHS and the RHS count the same set and thus 
+    are equivalent. 
+\end{subproof}
+
+\thm{Pascal's Formula}{
+    For all integers, $n$ and $k$ with $1 \le k \le n-1$,
+
+    \begin{align*}
+        \binom{n}{k} = \binom{n - 1}{k} + \binom{n - 1}{k - 1}
+    \end{align*}
+}
+\begin{subproof}
+    Let $T$ be a set of $n$ elements such that $T=\{x_1, x_2, \dots, x_n\}$. Suppose $S$ is a subset of $T$ with 
+    $k$ elements. There are two cases: 
+
+    \begin{itemize}
+        \item $x_1 \in S$. Then, there are $\binom{n-1}{k-1}$ ways 
+        to choose the remaining elements in $S$. 
+        \item $s_1 \not\in S$. Then, there are $\binom{n-1}{k}$ ways to
+        to choose the elements in $S$. 
+    \end{itemize}
+
+    By the addition principle there are $\binom{n-1}{k-1} + \binom{n-1}{k}$ ways 
+    to choose $k$ elements from $T$. So, the equality holds as the LHS and RHS 
+    count the same set (i.e. the set of all subsets of $T$ with $k$ elements).
+\end{subproof}
+
+\subsection*{Combinatorial Models}
+
+\dfn{Lattice Paths}{
+    Think of $\binom{a+b}{a}$ as the number of paths from $(0,0)$ to $(a,b)$
+}
+
+\ex{}{
+    Prove that 
+
+    \begin{align*}
+        \sum_{j=0}^{b} \binom{a+j-1}{a-1} = \binom{a+b}{a}
+    \end{align*}
+
+    \begin{subproof}
+        Let $S$ be the set of all lattice paths from $(0,0)$ to $(a,b)$ using 
+        only right (east) and up (north) moves. Clearly, the RHS counts the 
+        the number of paths in $S$. Now decompose each path in $S$ into the paths 
+        at the last time that the path touches the verticle line $x=a-1$. There are 
+        $b+1$ places that a path can touch the line $x=a-1$. After the last time 
+        it touches this line, the remaining path to $(a,b)$ is fixed (directly up). 
+        Each of these elements in the resulting decomposition is disjoint. So, we 
+        can apply the addition principle. Suppose $j$ is the $y$-coordinate that the 
+        path touches the line $x=a-1$. Then, there are $\binom{a+j-1}{a-1}$ ways
+        to reach this point. So, there are $\sum_{j=0}^{b} \binom{a+j-1}{a-1}$ ways
+        to count all of the paths that last touch the line $x=a-1$ which is the 
+        LHS. So, the LHS and RHS count the same set and thus are equivalent.
+    \end{subproof}
+}
+
+\qs{}{
+    Prove the same identity as above, expressed diferently: 
+
+    \begin{align*}
+        \sum_{k=0}^{n} \binom{k}{r} = \binom{n+1}{r+1}
+    \end{align*}
+}
+
+\sol{
+    \begin{subproof}
+        Let $S$ be the set of all sequences with $n+1$ elements containing only 
+    $0$ and $1$ and $r+1$ $1$'s. Clearly, the RHS counts the number of 
+    sequences by picking which of the $n+1$ positions will be $1$. We can 
+    decompose $S$ by removing the last instance of $1$ from each sequence.
+    This $1$ could be at position $0, 1, \dots, n+1$. Let $k$ be the position 
+    before the last $1$. Then, there are $\binom{k}{r}$ ways to choose the 
+    remaining $1$'s in the sequence. Given this, $k$ can range from $0$ to $n$ 
+    as it cannot be greater than $n$ as that would imply there are $0$ $1$'s
+    in the sequence. So, by the addition principle there are 
+    $$\sum_{k=0}^{n} \binom{k}{r}$$ 
+    total ways to count this decomposition. So, the LHS and RHS count the same
+    set and thus are equivalent.
+    \end{subproof}
+}
+
+\qs{}{
+    Prove 
+
+    \begin{align*}
+        \sum_{j=0}^{n} \binom{n}{j}^2 = \binom{2n}{n}
+    \end{align*}
+}
+\sol{
+    \begin{subproof}
+        Let $S$ be the set of all lattice paths from $(0,0)$ to $(n,n)$. The 
+        RHS clealy counts this set. Consider the line $y=n-x$ and the point 
+        $(j, n-j)$. Decompose $S$ into the paths that touch this line at an 
+        arbitrary point $(j, n-j)$. Clearly, the number of lattice paths to 
+        this point is $\binom{j + (n - j)}{j} = \binom{n}{j}$. Additionally, 
+        the number of paths from this point to 
+        $(n,n)$ is $\binom{n-j + j}{n-j} = \binom{n}{n-j} = \binom{n}{j}$.
+        This is because we can rewrite the destination point as 
+        $(n-j, n - (n-j)) = (n-j, j)$ and think of the starting point as 
+        the origin. By the addition principle, 
+
+        \begin{align*}
+            \sum_{j=0}^{n} \binom{n}{j}^2
+        \end{align*}
+
+        So, the LHS and RHS count the same set and thus are equivalent.
+    \end{subproof}
+}
+
+\qs{}{
+    Prove that $\binom{a+b}{a}$ equals the number of partitions 
+    $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_b$ satisfying 
+    $\lambda_1 \le a$. 
+}
+\sol{
+    It may help to read a later chapter to fully understand what a 
+    partition is. Essentially, these lattice paths must trace the edge 
+    of a Ferrer Diagram. Each lattice path trivially has a bijection with 
+    a Ferrer Diagram. The Ferrer Diagrams generated can only have $b$ parts
+    as the lattice path ends at $y=b$. Similarly, the largest part 
+    ($\lambda_1$) must be $\le a$ because the lattice path ends at $x=a$.
+    
+    Because a bijection exists between lattice paths and Ferrer Diagrams 
+    with these conditions, the claim must be true. 
+}
+
+\subsection*{Committees approach}
+
+Another way to view binomial identities is to think of them as two different 
+ways of picking a committee under some constraints. 
 
 \section{L5: Permutations and Combinations of multisets I}
 
@@ -98,7 +616,8 @@ This is the basis of the inclusion-exclusion principle.
 
     \begin{align*}
         |A_1^c \cap A_2^c \cap A_3^c| & = |S| - |A_1 \cup A_2 \cup A_3|                                                                                            \\
-                                      & = |S| - \bigg ( |A_1| + |A_2| + |A_3| - |A_1 \cap A_2| - |A_1 \cap A_3| - |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3| \bigg ) \\
+                                      & = |S| - \bigg ( |A_1| + |A_2| + |A_3| - |A_1 \cap A_2| - |A_1 \cap A_3| -
+                                       |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3| \bigg ) \\
     \end{align*}
 
     Obviously, $|S| = 1000$. To obtain the number of integers between $a$
@@ -936,7 +1455,7 @@ In words, this generating series is the product of compositions of just $1$'s, $
 
 They are equal coefficient by coefficient.
 
-\subsection*{Let $g(x)$ be the ggenerating series for the number of partitions.
+\subsection*{Let $g(x)$ be the generating series for the number of partitions.
     What does it mean that $g(x)$ equals the infinite product:
 }
 
@@ -982,6 +1501,35 @@ and in these cases, substitution is fine to perform.
 }
 
 \section{Practice Problems}
+
+\qs{}{
+    Find the coefficient of $x^{16}$ in $(x^2+x^3+\cdots)^5$.
+}
+\sol{
+    This is the generating series for the following composition problem:
+
+    \begin{align*}
+        e_1 + e_2 + e_3 + e_4 + e_5 = 16
+    \end{align*}
+
+    where $e_1 \ge 2$, $e_2 \ge 2$, $e_3 \ge 2$, $e_4 \ge 2$, and $e_5 \ge 2$.
+
+    This can be rewritten as:
+
+    \begin{align*}
+        e_1 + e_2 + e_3 + e_4 + e_5 = 6
+    \end{align*}
+
+    where each $e_i \ge 0$. Which represents the generating series:
+
+    \begin{align*}
+        g(x) & = (1 + x + x^2 + x^3 + x^4 + x^5 + \cdots)^5 \\
+             & = \Big ( \frac{1}{1 - x} \Big )^5            \\
+             & = (1-x)^{-5}                                 \\
+    \end{align*}
+
+    where we are solving for $[x^6]g(x) = \binom{5 + 6 - 1}{5 - 1} = \binom{10}{4}$.
+}
 
 \chapter{Special Counting Sequences}
 
@@ -1503,7 +2051,7 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 
 \begin{align*}
     [x^{25}]g_{\text{exp}}(x) & = [x^{25}]e^{3x} - 3[x^{25}]e^{2x} + 3[x^{25}]e^{x} - [x^{25}] \\
-                              & = 3^{25} - 3\cdot 2^{25} + 3\cdot 1^{25} - 1                   \\
+                              & = 3^{25} - 3\cdot 2^{25} + 3\cdot 1^{25}                       \\
                               & = 3^{25} - 3 \cdot 2^{25} + 3
 \end{align*}
 }
@@ -1989,7 +2537,7 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
                & = (1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3}                               \\
     \end{align*}
 
-    The target solution is $[x^11] g_2(x)$. Using negative binomial theorem,
+    The target solution is $[x^{11}] g_2(x)$. Using negative binomial theorem,
     we can find the coefficient of $x^{11}$ as follows:
 
     Reminder that negative binomial theorem is:
@@ -2000,11 +2548,11 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 
     \begin{align*}
         [x^{11}]g_2(x) & = [x^{11}]((1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3})                                                                                         \\
-                     & = [x^{11}] \Big ( (1-x)^{-3} - x^{5} (1-x)^{-3} - 2x^{6}(1-x)^{-3} + 2x^{11}(1-x)^{-3} + x^{12}(1-x)^{-3} - x^{17}(1-x)^{-3} \Big )                             \\
-                     & = [x^{11}](1-x)^{-3} - [x^{11}]x^{5} (1-x)^{-3} + [x^{11}] 2x^{6}(1-x)^{-3} + [x^{11}]2x^{{11}}(1-x)^{-3} + [x^{11}]x^{12}(1-x)^{-3} - [x^{11}]x^{17}(1-x)^{-3} \\
-                     & = [x^{11}](1-x)^{-3} - [x^6](1-x)^{-3} - 2 [x^{5}] (1-x)^{-3} + 2[x^0](1-x)^{-3} + [x^{-1}](1-x)^{-3} - [x^{-6}](1-x)^{-3}                                      \\
-                     & = \binom{3+11-1}{3-1} - \binom{3+6-1}{3-1} - 2 \binom{3+5-1}{3-1} + 2 \binom{3+0-1}{3-1} + 0 + 0                                                                \\
-                     & = \binom{13}{2} - \binom{8}{2} - 2 \binom{7}{2} + 2 \binom{2}{2}
+                       & = [x^{11}] \Big ( (1-x)^{-3} - x^{5} (1-x)^{-3} - 2x^{6}(1-x)^{-3} + 2x^{11}(1-x)^{-3} + x^{12}(1-x)^{-3} - x^{17}(1-x)^{-3} \Big )                             \\
+                       & = [x^{11}](1-x)^{-3} - [x^{11}]x^{5} (1-x)^{-3} + [x^{11}] 2x^{6}(1-x)^{-3} + [x^{11}]2x^{{11}}(1-x)^{-3} + [x^{11}]x^{12}(1-x)^{-3} - [x^{11}]x^{17}(1-x)^{-3} \\
+                       & = [x^{11}](1-x)^{-3} - [x^6](1-x)^{-3} - 2 [x^{5}] (1-x)^{-3} + 2[x^0](1-x)^{-3} + [x^{-1}](1-x)^{-3} - [x^{-6}](1-x)^{-3}                                      \\
+                       & = \binom{3+11-1}{3-1} - \binom{3+6-1}{3-1} - 2 \binom{3+5-1}{3-1} + 2 \binom{3+0-1}{3-1} + 0 + 0                                                                \\
+                       & = \binom{13}{2} - \binom{8}{2} - 2 \binom{7}{2} + 2 \binom{2}{2}
     \end{align*}
 }
 
