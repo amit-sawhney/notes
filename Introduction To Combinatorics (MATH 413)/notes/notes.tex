@@ -545,9 +545,249 @@ them easier to understand.
 Another way to view binomial identities is to think of them as two different 
 ways of picking a committee under some constraints. 
 
+\qs{}{
+    Prove 
+
+    \begin{align*}
+        \binom{n}{m}\binom{m}{k} = \binom{n}{m}\binom{n-m}{k-m}
+    \end{align*}
+}
+\sol{
+    \begin{subproof}
+        Let $S$ be the set of all commitees formed from $n$ people with 
+        size $k$ with subcomittees of size $m$. For the LHS. There are clearly $\binom{n}{k}$ ways to choose the 
+        committee members and $\binom{k}{m}$ ways to choose the subcommitee. For the RHS. We can choose the $m$ members of the subcommitee first. 
+        After, there are $n-m$ people left to choose from and $k-m$ spots on the 
+        entire commitee. So, there are $\binom{n-m}{k-m}$ ways to choose the 
+        rest of the commitee. Clearly, the LHS and RHS count the same set and thus are equivalent.
+    \end{subproof}
+}
+
+\qs{}{
+    Prove 
+    \begin{align*}
+        \sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k} = \binom{m+n}{r} 
+    \end{align*}
+}
+\sol{
+    Let $S$ be the set of all committees of size $r$ that we can form 
+    with $m$ men and $n$ women. Clearly, there are $\binom{m+n}{r}$ ways 
+    to choose the commitees. Similarly, we can construct an algorithm that $k$ 
+    members from the men and then the remainder from the women. This is represented 
+    by $\binom{m}{k}\binom{n}{r-k}$. The number of $k$ men on the team can range from 
+    $0$ to $r$. So, by the addition principle,
+    $$\sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k}$$
+
+    So, the LHS and RHS count the same set and thus are equivalent.
+}
+
 \section{L5: Permutations and Combinations of multisets I}
 
+\textbf{Multisets}: A multiset is a set that allows for repeated elements. \\
+
+\noindent
+This leads us to a common question regarding permutations: How many permutations 
+are there in a multiset. 
+
+\thm{}{
+    The number of "words" (meaning permutations) one can generate out of $k$ 
+    letters (elements in the multiset) which appears 
+    $n_1, n_2, \cdots, n_k$ times is 
+
+    \begin{align*}
+        \frac{n!}{n_1!n_2!\cdots n_k!}
+    \end{align*}
+
+    where $n=n_1+n_2+\cdots+n_k$.
+}
+
+\begin{subproof}
+    Imagine we distinguish the letters the repeated letters in a multiset.
+    For example,
+
+    \begin{align*}
+        \{I_1, L_1, L_2, I_2, N_1, O_1, S_1 \}
+    \end{align*}
+
+    There are $n!= 8!$ ways to arrange the letters. Ignoring the subscripts,
+    we can see how many times we overcount. For example, there are $3$ Is. Which means 
+    we overcount by a factor of $3!$. Similarly, there are $2$ Ls, $1$ O, 
+    $1$ N, and $1$ S. So, the number of permutations is
+
+    \begin{align*}
+        \frac{8!}{3!\cdot 2!\cdot 1! \cdot 1!\cdot 1! }
+    \end{align*}
+\end{subproof}
+
+\qs{}{
+    Consider the $5!=120$ permutations of the letters $a,b,c,d,e$. 
+    How do you determine the $40th$ one (in alphabetical order) quickly?
+}
+\sol{
+    We know that the first permutation starts with $a$. Additionally, with 
+    $4$ remaining letters to permute, there are $4!=24$ permutations that start 
+    with $a$. So, permutations starting with $a$ are in between $1$ and $24$. 
+    Permutations with $b$ are between $25$ and $48$. So, we know that the 40th 
+    permutation starts with $b$. Similarly, permutations starting with $ba$ 
+    are in the range of $25$ to $30$, $bc$ are in the range of $31$ to $36$,
+    $bd$ are in the range of $37$ to $42$. So, the 40th permutation starts
+    with $bd$. Contuining on $bda$ are in the range of $37$ to $38$ and 
+    $bdc$ are in the range of $39$ to $40$. So, the 40th permutation is
+    $bdcea$. 
+}
+
+\subsection*{Basic Combination Question}
+
+How many ways are there to select an \_r-combination\_ (size $r$ multi-subset) of a multiset?
+
+\subsubsection*{Example}
+For the $I,L,L,I,N,O,I,S$ example, if $r=3$, possible 3-combinations are: 
+$$\{I,L,I\},\{I,I,I\}, \{N,O,S\}, \dots$$
+
+\thm{}{
+    The number of $r$-combinations of $k$ distinct objects, each with 
+    unlimited supply is $C(k+r-1,r)$.
+}
+
+\begin{subproof}
+    Let $x_1, x_2, \cdots, x_k$ be the number of times one uses object 
+    $A_1, A_2, \cdots, A_k$. So, we know: 
+
+    \begin{align*}
+        x_1 + x_2 + \cdots + x_k = r
+    \end{align*}
+
+    \noindent
+    and each $x_i \ge 0$ is a nonnegative integer.
+    This is counted by $C(k+r-1,r)$. (Keep reading, we need to prove this)
+\end{subproof}
+
+\subsubsection*{Proof that compositions are counted by $C(k+r-1,r)$}
+
+We need to prove that the number of 
+
+\begin{itemize}
+    \item Compositions of $r$ into nonnegative integers
+    \item Number of ways of selecting $r$ things from $k$ objects with repetition
+\end{itemize}
+
+\noindent
+is counted by $C(k+r-1,r)$.
+
+\begin{subproof}
+    Based on our previous problem, we know that each of these is counted 
+    by the same thing. Consider the following construction, \\
+
+    Lay out $r$ objects in a row. Then, in order to to form $k$ groups, 
+    we can place down $k-1$ dividers. So, we have $k-1$ choices of where 
+    to place the dividers and $r+k-1$ positions in which they can be placed.
+    So, the number of ways to place the dividers is 
+
+    \begin{align*}
+        C(r+k-1,k-1) &= \binom{r+k-1}{k-1} \\
+        &= \binom{r+k-1}{r+k-1-(k-1)} \\ 
+        &= \binom{r+k-1}{r}
+    \end{align*}
+\end{subproof}
+
+\nt{
+    This proof is known as the Stars and Bars proof.
+}
+
+\qs{}{
+    What is the number of integral solutions of 
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 = 20
+    \end{align*}
+
+    where $x_1 \ge 3$, $x_2 \ge 1$, $x_3 \ge 0$, and $x_4 \ge 5$. 
+}
+
+\sol{
+    We can rewrite this problem by redefining the bounds to ensure each  
+    $x_i \ge 0$. Our new problem is
+
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 = 11
+    \end{align*}
+
+    Trivially, the solution to this is $\binom{11 + 4 - 1}{11}$.
+}
+
 \section{L6: Permutations and Combinations of multisets II}
+
+\qs{}{
+    How many ways are there to select six hot dogs if there are three 
+    varieties of hot dogs?
+}
+\sol{
+    This is the equivalent problem of the number of integral solutions to 
+
+    \begin{align*}
+        x_1 + x_2 + x_3 = 6
+    \end{align*}
+
+    where $x_1 \ge 0$, $x_2 \ge 0$, and $x_3 \ge 0$.
+
+    So, the solution is $\binom{6 + 3 - 1}{6} = \binom{8}{6}$.
+}
+
+\qs{}{
+    How many ways are there to fill a box with a dozen doughnuts 
+    chosen from five varieties with the requirement that at least 
+    one doughnut of each kind is picked?
+}
+\sol{
+    This is the equivalent problem of the number of integral solutions to 
+
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 + x_5 = 12
+    \end{align*}
+
+    where $x_1 \ge 1$, $x_2 \ge 1$, $x_3 \ge 1$, $x_4 \ge 1$, and $x_5 \ge 1$.
+
+    The bounds can be rewritten to ensure that each $x_i \ge 0$. So, the
+    new problem is
+    
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 + x_5 = 7
+    \end{align*}
+
+    And thus, the answer is $\binom{7 + 5 - 1}{7} = \binom{11}{7}$.
+}
+
+\qs{}{
+    If there are $10$ options of donuts, and one is buying 
+    $48$ donuts, what is the expected range of options that do not 
+    get taken?
+}
+\sol{
+    This solution is very long. So I will only show part of it. \\
+
+    To calculate this, we can compute the likelihood that $k$ options are 
+    not taken where $k \in \{0,1,2,3,4,5,6,7,8,9,10\}$. \\
+
+    \begin{itemize}
+        \item $k = 0$: The probability that no options are not taken is
+        calculated by the equation
+
+        \begin{align*}
+            x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_{10} = 48
+        \end{align*}
+
+        where each $x_i \ge 1$. 
+
+        There are $\binom{38+10-1}{38}$ solutions to this equation. There are $\binom{10}{0}$ 
+        ways to pick the $0$ elements that are not taken. So, the probability is
+        
+        \begin{align*}
+            \frac{\binom{38+10-1}{38}\cdot \binom{10}{0}}{\binom{48+10-1}{48}}
+        \end{align*}
+
+        \item Continue this exact template by taking a way $k$ $x_i$'s and
+        computing the number of integral solutions. 
+    \end{itemize}
+}
 
 \chapter{The Pigeonhole Principle}
 
