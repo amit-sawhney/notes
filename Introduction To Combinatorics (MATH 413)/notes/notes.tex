@@ -24,30 +24,30 @@
 \section{L2: Four Basic Counting Principles}
 
 \dfn{Addition Principle}{
-    If $S_1$, $S_2$, $\dots$, $S_k$ are disjoint sets, then 
+    If $S_1$, $S_2$, $\dots$, $S_k$ are disjoint sets, then
 
     \begin{align*}
-        \Big | S = \cup_{i=1}^{k} S_i \Big | = |S_1| + |S_2| + \cdots + |S_k| 
+        \Big | S = \cup_{i=1}^{k} S_i \Big | = |S_1| + |S_2| + \cdots + |S_k|
     \end{align*}
 }
 
 \dfn{Multiplication Principle}{
-    If $S = A \times B$ then $|S| = |A|\cdot|B|$. 
+    If $S = A \times B$ then $|S| = |A|\cdot|B|$.
 }
 
 \ex{}{
-    How many ways are there to match $2n$ people? \\ 
+    How many ways are there to match $2n$ people? \\
 
-    There are clearly $(2n)!$ ways to arrange $2n$ poeople. Let the first 
+    There are clearly $(2n)!$ ways to arrange $2n$ poeople. Let the first
     two people be on a team, the next two people be on a team, and so on.
     We can swap the people in each team to generate an equivalent arragement
-    of people. Given that there are $n$ pairs, there are $2^n$ ways to pick which 
-    pairs are being swapped. Moreso, there are $n$ pairs so $n!$ ways to 
+    of people. Given that there are $n$ pairs, there are $2^n$ ways to pick which
+    pairs are being swapped. Moreso, there are $n$ pairs so $n!$ ways to
     arrange the pairs. Thus, the number of pairs is $\frac{(2n)!}{2^n\cdot n!}$.
 }
 
 \qs{}{
-    How many ways are there to form a three-letter sequence using the 
+    How many ways are there to form a three-letter sequence using the
     letters a,b,c,d,e,f?
 
     \begin{itemize}
@@ -60,88 +60,88 @@
 \sol{
     \begin{itemize}
         \item with repetition of letters allowed
-        
-        Trivially, there are $6$ choices at each of the three positions in the  
-        sequence, so there are $6^3 = 216$ ways to form the sequence. 
+
+              Trivially, there are $6$ choices at each of the three positions in the
+              sequence, so there are $6^3 = 216$ ways to form the sequence.
 
         \item without repetition of any letter
-        
-        There are $6$ choices for the first letter, $5$ choices for the second letter,
-        and $4$ choices for the third letter. Thus, there are $6\cdot5\cdot4 = 120$ ways
-        to form the sequence. 
+
+              There are $6$ choices for the first letter, $5$ choices for the second letter,
+              and $4$ choices for the third letter. Thus, there are $6\cdot5\cdot4 = 120$ ways
+              to form the sequence.
 
         \item without repetition and containing the letter e
-        
-        There are three posibilities. The first letteer is e, the second 
-        letter is e, or the third letter is e. Each of the arragements within 
-        each of these three cases are disjoint. So, we can use the Addition
-        Principle. In each case there are $5$ choices for the first free position 
-        and $4$ choices for the second free position. Thus, there are $3\cdot5\cdot4 = 60$
-        ways to form the sequence. 
+
+              There are three posibilities. The first letteer is e, the second
+              letter is e, or the third letter is e. Each of the arragements within
+              each of these three cases are disjoint. So, we can use the Addition
+              Principle. In each case there are $5$ choices for the first free position
+              and $4$ choices for the second free position. Thus, there are $3\cdot5\cdot4 = 60$
+              ways to form the sequence.
 
         \item with repetition and containing the letter e
-        
-        There are three cases: there is $1$ e, $2$ e's, or $3$ e's \\
 
-        In case 1, there are $\binom{3}{1}$ ways to pick the position of the 
-        $1$ e. Then, there are $5$ choices for the first free position and $5$ choices 
-        for the second free position. Thus, there are $\binom{3}{1}\cdot5\cdot5 = 75$ 
-        the sequence. \\
+              There are three cases: there is $1$ e, $2$ e's, or $3$ e's \\
 
-        In case 2, there are $\binom{3}{2}$ ways to pick the position of the $2$ e's. 
-        Then, there are $5$ choices for the remaining free position. Thus, there are 
-        $\binom{3}{2}\cdot5 = 15$ ways to form the sequence. \\
+              In case 1, there are $\binom{3}{1}$ ways to pick the position of the
+              $1$ e. Then, there are $5$ choices for the first free position and $5$ choices
+              for the second free position. Thus, there are $\binom{3}{1}\cdot5\cdot5 = 75$
+              the sequence. \\
 
-        In total, there are $75 + 15 + 1=91$ ways to form this sequence. 
+              In case 2, there are $\binom{3}{2}$ ways to pick the position of the $2$ e's.
+              Then, there are $5$ choices for the remaining free position. Thus, there are
+              $\binom{3}{2}\cdot5 = 15$ ways to form the sequence. \\
+
+              In total, there are $75 + 15 + 1=91$ ways to form this sequence.
     \end{itemize}
 }
 
 \qs{}{
-    A rumor is spread randomly among a group of 10 people by 
-    successively choosing one specified person (who will start the 
-    rumor) to call someone, who calls someone etc. A person can pass a 
+    A rumor is spread randomly among a group of 10 people by
+    successively choosing one specified person (who will start the
+    rumor) to call someone, who calls someone etc. A person can pass a
     rumor to anyone except the person who just called and him/herself. \\
 
     \begin{itemize}
         \item How many different paths can a rumor travel through
-        the group in three calls? $n$ calls?
-        \item What is the probability that if $A$ starts the rumor, 
-        $A$ received the third call?
+              the group in three calls? $n$ calls?
+        \item What is the probability that if $A$ starts the rumor,
+              $A$ received the third call?
 
     \end{itemize}
 }
 \sol{
     \begin{itemize}
-        \item First question 
-        
-        There are $10$ ways to pick the first person that starts the rumor.
-        The first person can call anyone except himself/herself. So, 
-        there are $9$ choices. Each the of the next people can call 
-        anyone except the person who just called and himself/herself. 
-        So, there are $8$ choices. Thus, there are $10\cdot 9\cdot8 = 72$ ways
-        This logic applies to the third group of calls. Thus, there are 
-        $10\cdot 9\cdot 8\cdot 8 = 5760$ ways to travel through the group in three calls. 
+        \item First question
 
-        In $n$ calls, there  are $10\cdot 9\cdot 8\cdot \cdots \cdot 8 = 10\cdot 9\cdot 8^{n-1}$ ways
-        to travel through the group. 
+              There are $10$ ways to pick the first person that starts the rumor.
+              The first person can call anyone except himself/herself. So,
+              there are $9$ choices. Each the of the next people can call
+              anyone except the person who just called and himself/herself.
+              So, there are $8$ choices. Thus, there are $10\cdot 9\cdot8 = 72$ ways
+              This logic applies to the third group of calls. Thus, there are
+              $10\cdot 9\cdot 8\cdot 8 = 5760$ ways to travel through the group in three calls.
 
-        \item Second question 
-        
-        By our previous logic, there are $9\cdot 8^{2}$ ways to travel
-        through the group in $3$ calls starting from $A$. (Note: we fixed 
-        the starting person to be $A$). The number of paths that start at $A$, 
-        travel through an intermediate person $B$ for the first call, 
-        travel through an intermediate person $C$ for the second call,
-        and travel through $A$ for the third call is $9\cdot 8$ as there 
-        are $9$ choices for the first call, $8$ choices for the second call, 
-        and $1$ choice for the last call. So the probability is 
-        $\frac{9\cdot 8}{9\cdot 8\cdot 8} = \frac{1}{8}$.
+              In $n$ calls, there  are $10\cdot 9\cdot 8\cdot \cdots \cdot 8 = 10\cdot 9\cdot 8^{n-1}$ ways
+              to travel through the group.
+
+        \item Second question
+
+              By our previous logic, there are $9\cdot 8^{2}$ ways to travel
+              through the group in $3$ calls starting from $A$. (Note: we fixed
+              the starting person to be $A$). The number of paths that start at $A$,
+              travel through an intermediate person $B$ for the first call,
+              travel through an intermediate person $C$ for the second call,
+              and travel through $A$ for the third call is $9\cdot 8$ as there
+              are $9$ choices for the first call, $8$ choices for the second call,
+              and $1$ choice for the last call. So the probability is
+              $\frac{9\cdot 8}{9\cdot 8\cdot 8} = \frac{1}{8}$.
     \end{itemize}
 }
 
 \dfn{Subtraction Principle}{
-    If $A$ is contained in $U$ and $A^c$ is the complement then 
-    
+    If $A$ is contained in $U$ and $A^c$ is the complement then
+
     \begin{align*}
         |A^c| = |U| - |A|
     \end{align*}
@@ -155,14 +155,14 @@
         \item The secon digit must be a $0$ or $1$
     \end{enumerate}
 
-    In 1995 this was abandoned when 360 was used in parts of western 
+    In 1995 this was abandoned when 360 was used in parts of western
     Washington state (0 still can't be the first number).
 }
 
 \sol{
-    This is an application of subtraction principle. There are 
-    $8\cdot 2\cdot 10$ total area codes before the new rule. There are 
-    $9\cdot 10\cdot 10$ total area codes after the new rule. Thus, 
+    This is an application of subtraction principle. There are
+    $8\cdot 2\cdot 10$ total area codes before the new rule. There are
+    $9\cdot 10\cdot 10$ total area codes after the new rule. Thus,
     the number of area codes that were created is:
 
     \begin{align*}
@@ -174,113 +174,113 @@
 
 \subsection*{Permutations of sets}
 
-Let $S = \{a, b, c\}$. There are $3 \times 2 \times 1 = 3!$ ways to rearrange this set. 
-This can also be thought of as creating a bijection from an $n$-set to another $n$-set.\\ 
+Let $S = \{a, b, c\}$. There are $3 \times 2 \times 1 = 3!$ ways to rearrange this set.
+This can also be thought of as creating a bijection from an $n$-set to another $n$-set.\\
 
-In this class, we think of permutations is to think of them in the context of the set 
-$\{1, 2,\dots, n\}$. 
+In this class, we think of permutations is to think of them in the context of the set
+$\{1, 2,\dots, n\}$.
 
 \ex{}{
-    Let $S = \{\text{A deck of cards}\}$. Then a permutation of $S$ is a shuffling of the deck. 
+    Let $S = \{\text{A deck of cards}\}$. Then a permutation of $S$ is a shuffling of the deck.
 }
 
 \dfn{$r$-permutation}{
-    We can think of this as shuffling a subset $r < n=52$ of all cards. 
+    We can think of this as shuffling a subset $r < n=52$ of all cards.
 }
 
 \thm{}{
     Let $P(n,r)$ be the number of $r$-permutations of an $n$-set. Clearly, by the multiplication
-    principle, we get that if $r \le n$: 
+    principle, we get that if $r \le n$:
 
     \begin{align*}
         P(n,r) = n \times (n-1) \times (n-2) \times \cdots \times (n - r + 1)
     \end{align*}
 
-    Clearly, $P(n,n) = n!$ (i.e. when $r=n$). 
+    Clearly, $P(n,n) = n!$ (i.e. when $r=n$).
 }
 
 \qs{}{
-    Consider the Movable $15$ puzzle problem: 
+    Consider the Movable $15$ puzzle problem:
 
     \begin{align*}
         \begin{matrix*}
             4 & 15 & 8 & 13 \\
-            5 & 11 &   & 7 \\ 
+            5 & 11 &   & 7 \\
             1 & 12 & 3 & 10 \\
-            14 & 2 & 6 & 9 
+            14 & 2 & 6 & 9
         \end{matrix*}
     \end{align*}
 
-    The goal is to order the numbers from $1$ to $15$ by utilizing the empty space to move 
-    the numbers around. How many starting puzzles are possible? 
+    The goal is to order the numbers from $1$ to $15$ by utilizing the empty space to move
+    the numbers around. How many starting puzzles are possible?
 }
 \sol{
     There are $16!$ ways to arrange $16$ symbols to start $(1, 2, \dots 15)$ and the empty square.
 }
 
 \ex{}{
-    Consider the TV show episode where James Randi asks an auro reader to guess the order of 
+    Consider the TV show episode where James Randi asks an auro reader to guess the order of
     $5$ people behind a curtain without seeing them and simply be reading their auro. \\
 
     \begin{itemize}
-        \item Why is it less than a $1\%$ chance that the "auro reader" gets it right? 
+        \item Why is it less than a $1\%$ chance that the "auro reader" gets it right?
         \item (Harder) Why is the expectation $1$. (Try the case of three people first.)
     \end{itemize}
 }
 \sol{
     \begin{itemize}
         \item Probability
-        
-        There are $5!$ ways to arrange the $5$ people. So the probability is 
-        $\frac{1}{5!} = \frac{1}{120} < 1\%$.
 
-        \item Expectation 
-        
-        We need dearragements. The expectation is 
-        
-        \begin{align*}
-            \sum_{i=0}^5 i \times \text{ Prob(exactly i correct)}
-        \end{align*}
+              There are $5!$ ways to arrange the $5$ people. So the probability is
+              $\frac{1}{5!} = \frac{1}{120} < 1\%$.
+
+        \item Expectation
+
+              We need dearragements. The expectation is
+
+              \begin{align*}
+                  \sum_{i=0}^5 i \times \text{ Prob(exactly i correct)}
+              \end{align*}
     \end{itemize}
 }
 
 \ex{Circular Permutations}{
     Suppose $n$ children are arranged in a circle. How many arrangemens are there? \\
 
-    There are $n!$ ways to arrange the children in this circle. However $n$ of the circles 
+    There are $n!$ ways to arrange the children in this circle. However $n$ of the circles
     generated will just be rotations of each other. So the number of distinct arrangements
-    is $\frac{n!}{n} = (n-1)!$. 
+    is $\frac{n!}{n} = (n-1)!$.
 }
 
-Similarly, we can derive the following theorem: 
+Similarly, we can derive the following theorem:
 
 \thm{}{
     The number of circular permutations of a set of $n$ elements is $$\frac{P(n,r)}{r}$$
 }
 
 \qs{}{
-    Ten people, including two who don't want to sit next to one another are seated at a round table. 
-    How many arrangements are possible? 
+    Ten people, including two who don't want to sit next to one another are seated at a round table.
+    How many arrangements are possible?
 }
 \sol{
-    Let $A$ and $B$ be the people that do not want to sit by each other. Construct an algorithm that 
+    Let $A$ and $B$ be the people that do not want to sit by each other. Construct an algorithm that
     places $A$ and $B$ at the table and then places the remaining $8$ people. \\
 
-    There are $10$ choices for $A$. Because $B$ cannot sit next to $A$, there are only $7$ 
-    choices for $B$. There are $8!$ ways to arrange the remaining $8$ people at the table. However, 
-    $10$ of the arrangements of this algorithm will be rotations of each other. So the number of 
-    ways to arrange the $10$ people such that $A$ and $B$ don't sit next to each other is 
+    There are $10$ choices for $A$. Because $B$ cannot sit next to $A$, there are only $7$
+    choices for $B$. There are $8!$ ways to arrange the remaining $8$ people at the table. However,
+    $10$ of the arrangements of this algorithm will be rotations of each other. So the number of
+    ways to arrange the $10$ people such that $A$ and $B$ don't sit next to each other is
     $$\frac{10\cdot 7 \cdot 8!}{10}$$
 }
 \sol{
-    Another way to approach this problem is to determine the number of possible arragements with 
+    Another way to approach this problem is to determine the number of possible arragements with
     no restrictions and take out the bad arragements. Clearly, there are $\frac{10!}{10}$ arragements
-    of $10$ people at a round table. To determine the number of bad permutations, 
-    join person $A$ and $B$ to be represented under one symbol. There are $9$ symbols to 
-    seat at the table now. By the same principle as above, there are $\frac{9!}{9}=8!$ ways to 
-    construct this arragement. However, within the joined symbol there could be $AB$ or $BA$. 
+    of $10$ people at a round table. To determine the number of bad permutations,
+    join person $A$ and $B$ to be represented under one symbol. There are $9$ symbols to
+    seat at the table now. By the same principle as above, there are $\frac{9!}{9}=8!$ ways to
+    construct this arragement. However, within the joined symbol there could be $AB$ or $BA$.
     So the total number of bad arragements is $2\cdot 8!$. So the total number of arragements
-    where $A$ and $B$ are not sitting next to each other is $9! - 2\cdot 8!$. 
+    where $A$ and $B$ are not sitting next to each other is $9! - 2\cdot 8!$.
 
 }
 
@@ -291,96 +291,96 @@ Similarly, we can derive the following theorem:
         C(n,r) := \binom{n}{k} = \frac{P(n,r)}{r!} = \frac{n!}{r!(n-r)!}
     \end{align*}
 
-    to be the binomial coeicient. This is the number o ways o choosing $r$ elements in an $n$ 
+    to be the binomial coeicient. This is the number o ways o choosing $r$ elements in an $n$
     element set.
 }
 
 \qs{}{
-    If a 5-card hand is chosen at random, what is the probability of obtaining a flush 
-    (all cards are the same suit?) How about a full house? (Three cards of the same kind, 
+    If a 5-card hand is chosen at random, what is the probability of obtaining a flush
+    (all cards are the same suit?) How about a full house? (Three cards of the same kind,
     and two of another kind, e.g., three queens and two "4"'s)
 }
 \sol{
     For a flush, there are $\binom{4}{1}$ ways to choose the suit and $\binom{13}{5}$ ways to
-    choose $5$ cards of that suit. There are $\binom{52}{5}$ possible hands of $5$ cards. 
+    choose $5$ cards of that suit. There are $\binom{52}{5}$ possible hands of $5$ cards.
     So the probability of getting a flush is $$\frac{\binom{4}{1} \binom{13}{5}}{\binom{52}{5}}$$
 
-    For a full house, there are $\binom{13}{1}$ ways to choose the three of a kind card and 
+    For a full house, there are $\binom{13}{1}$ ways to choose the three of a kind card and
     $\binom{4}{3}$ ways to pick the suits from the cards. Similarly, there are $\binom{12}{1}$
-    remaining ways to pick the two of a kind card and $\binom{4}{2}$ ways to pick the suits. So, 
-    the totoal probability is 
+    remaining ways to pick the two of a kind card and $\binom{4}{2}$ ways to pick the suits. So,
+    the totoal probability is
     $$\frac{\binom{13}{1}\binom{4}{3}\binom{12}{1}\binom{4}{2}}{\binom{52}{5}}$$
 }
 
 \qs{}{
-    How many starting setups are there in Chess 960? In this game, the back row can be rearranged 
+    How many starting setups are there in Chess 960? In this game, the back row can be rearranged
     in any way before the game starts as long as it abides by the following two rules:
 
     \begin{enumerate}
-        \item The bishops are placed on opposite colors. 
-        \item The king is between the two rooks. 
+        \item The bishops are placed on opposite colors.
+        \item The king is between the two rooks.
     \end{enumerate}
 }
 
 \sol{
-    There are two ways to solve this question. 
+    There are two ways to solve this question.
 
     \begin{enumerate}
         \item First way
-        
-        We will construct an algorith that places the bishops down, then places the rooks and king together, 
-        and then places the remaining pieces. \\ 
 
-        There are $\binom{4}{1}$ ways to place one bishop and $\binom{4}{1}$ ways to place the other. Thus,
-        $\binom{4}{1} \binom{4}{1} = 4\cdot 4 = 16$ ways to place the bishops. We can then imagine the board with 
-         6 remaining places. We then must place the rooks and king together. There are 4 cases where the king can be
-         on any ".":
-         \begin{itemize}
-            \item R.R 
-            
-            There are $4$ ways to place the rooks this distance apart.
-            There is only $1$ way to place the king in this arrangement. 
-            So there are $4$ possible arrangements of this form.
+              We will construct an algorith that places the bishops down, then places the rooks and king together,
+              and then places the remaining pieces. \\
 
-            \item R..R
-            
-            There are 3 ways to place the rooks this distance apart. 
-            Thee are 2 ways to place the king in between these rooks. 
-            So there are $3\cdot 2 = 6$ possible arrangements of this form.
+              There are $\binom{4}{1}$ ways to place one bishop and $\binom{4}{1}$ ways to place the other. Thus,
+              $\binom{4}{1} \binom{4}{1} = 4\cdot 4 = 16$ ways to place the bishops. We can then imagine the board with
+              6 remaining places. We then must place the rooks and king together. There are 4 cases where the king can be
+              on any ".":
+              \begin{itemize}
+                  \item R.R
 
-            \item R...R
-            
-            There are $2$ ways to place the rooks this distance apart.
-            There are $3$ ways to place the king in between these rooks.
-            So there are $2\cdot 3 = 6$ possible arrangements of this form.
+                        There are $4$ ways to place the rooks this distance apart.
+                        There is only $1$ way to place the king in this arrangement.
+                        So there are $4$ possible arrangements of this form.
 
-            \item R....R
-            
-            There is $1$ way to place the rooks this distance apart.
-            There are $4$ ways to place the king in between these rooks.
-            So there are $1\cdot 4 = 4$ possible arrangements of this form.
-         \end{itemize}
+                  \item R..R
 
-         At this point we have placed 5 of the 8 pieces. So there are $\frac{3!}{2!}$ 
-         ways to place the next three pieces, given that their are two knights
-         which are identitcal. 
+                        There are 3 ways to place the rooks this distance apart.
+                        Thee are 2 ways to place the king in between these rooks.
+                        So there are $3\cdot 2 = 6$ possible arrangements of this form.
 
-         All in all, there are $16\cdot (4 + 6 + 6 + 4)\cdot 3 = 960$. Hence,
-         why it is called Chess 960. 
-        
-        \item Second way, 
-        
-        We can start by repeating the start of the previous algorithm. So,
-        we place the bishops down in 16 ways. Then we place the queen. There are 
-        6 ways to do this. Then we place the knights which is possible in $5 choose 2$ ways. 
-        At this point, the position of the king and two rooks are forced. So, 
-        there are $16\cdot 6\cdot \binom{5}{2} = 960$ ways to arrange the pieces.
+                  \item R...R
+
+                        There are $2$ ways to place the rooks this distance apart.
+                        There are $3$ ways to place the king in between these rooks.
+                        So there are $2\cdot 3 = 6$ possible arrangements of this form.
+
+                  \item R....R
+
+                        There is $1$ way to place the rooks this distance apart.
+                        There are $4$ ways to place the king in between these rooks.
+                        So there are $1\cdot 4 = 4$ possible arrangements of this form.
+              \end{itemize}
+
+              At this point we have placed 5 of the 8 pieces. So there are $\frac{3!}{2!}$
+              ways to place the next three pieces, given that their are two knights
+              which are identitcal.
+
+              All in all, there are $16\cdot (4 + 6 + 6 + 4)\cdot 3 = 960$. Hence,
+              why it is called Chess 960.
+
+        \item Second way,
+
+              We can start by repeating the start of the previous algorithm. So,
+              we place the bishops down in 16 ways. Then we place the queen. There are
+              6 ways to do this. Then we place the knights which is possible in $5 choose 2$ ways.
+              At this point, the position of the king and two rooks are forced. So,
+              there are $16\cdot 6\cdot \binom{5}{2} = 960$ ways to arrange the pieces.
     \end{enumerate}
 
     \nt{
-        A really important part of this chapter to take away is the process 
+        A really important part of this chapter to take away is the process
         of constructing an algorithm to calculate the number of ways to arrange
-        a set of objects. 
+        a set of objects.
     }
 }
 
@@ -388,34 +388,34 @@ Similarly, we can derive the following theorem:
 
 \subsection*{Binomial Identities}
 
-These are incredibly useful for combinatorics. Typically, if you are going to try 
-to prove binomial identities algabraically (i.e. directly from the definition), 
-they can be quite difficult, but thinking about them combinatorically can make 
-them easier to understand. 
+These are incredibly useful for combinatorics. Typically, if you are going to try
+to prove binomial identities algabraically (i.e. directly from the definition),
+they can be quite difficult, but thinking about them combinatorically can make
+them easier to understand.
 
 \thm{}{
     For $0 \le r \le n$, we have $$\binom{n}{r} = \binom{n}{n - r}$$
 }
 
 \begin{subproof}{(Algabraic)}
-    Obviously, 
+    Obviously,
 
     \begin{align*}
-        \binom{n}{r} &= \frac{n!}{r!(n-r)!} \\
-        &= \frac{n!}{(n-r)!r!} \\
-        &= \frac{n!}{(n-r)! (n - (n - r))!} \\
-        &= \binom{n}{n-r}
+        \binom{n}{r} & = \frac{n!}{r!(n-r)!}              \\
+                     & = \frac{n!}{(n-r)!r!}              \\
+                     & = \frac{n!}{(n-r)! (n - (n - r))!} \\
+                     & = \binom{n}{n-r}
     \end{align*}
 
-    However, this only works for simple binomial identities. 
+    However, this only works for simple binomial identities.
 \end{subproof}
 
 \begin{subproof}{(Combinatoric)}
-    The LHS counts the number of ways to choose $r$ people from $n$ people. 
-    This equivalent to counting which of the $n$ people to exclude from our 
-    group. There are $n-r$ people to exclude. So, there are $\binom{n}{n-r}$. 
-    Clearly, this is the RHS. So the LHS and the RHS count the same set and thus 
-    are equivalent. 
+    The LHS counts the number of ways to choose $r$ people from $n$ people.
+    This equivalent to counting which of the $n$ people to exclude from our
+    group. There are $n-r$ people to exclude. So, there are $\binom{n}{n-r}$.
+    Clearly, this is the RHS. So the LHS and the RHS count the same set and thus
+    are equivalent.
 \end{subproof}
 
 \thm{Pascal's Formula}{
@@ -426,18 +426,18 @@ them easier to understand.
     \end{align*}
 }
 \begin{subproof}
-    Let $T$ be a set of $n$ elements such that $T=\{x_1, x_2, \dots, x_n\}$. Suppose $S$ is a subset of $T$ with 
-    $k$ elements. There are two cases: 
+    Let $T$ be a set of $n$ elements such that $T=\{x_1, x_2, \dots, x_n\}$. Suppose $S$ is a subset of $T$ with
+    $k$ elements. There are two cases:
 
     \begin{itemize}
-        \item $x_1 \in S$. Then, there are $\binom{n-1}{k-1}$ ways 
-        to choose the remaining elements in $S$. 
+        \item $x_1 \in S$. Then, there are $\binom{n-1}{k-1}$ ways
+              to choose the remaining elements in $S$.
         \item $s_1 \not\in S$. Then, there are $\binom{n-1}{k}$ ways to
-        to choose the elements in $S$. 
+              to choose the elements in $S$.
     \end{itemize}
 
-    By the addition principle there are $\binom{n-1}{k-1} + \binom{n-1}{k}$ ways 
-    to choose $k$ elements from $T$. So, the equality holds as the LHS and RHS 
+    By the addition principle there are $\binom{n-1}{k-1} + \binom{n-1}{k}$ ways
+    to choose $k$ elements from $T$. So, the equality holds as the LHS and RHS
     count the same set (i.e. the set of all subsets of $T$ with $k$ elements).
 \end{subproof}
 
@@ -448,30 +448,30 @@ them easier to understand.
 }
 
 \ex{}{
-    Prove that 
+    Prove that
 
     \begin{align*}
         \sum_{j=0}^{b} \binom{a+j-1}{a-1} = \binom{a+b}{a}
     \end{align*}
 
     \begin{subproof}
-        Let $S$ be the set of all lattice paths from $(0,0)$ to $(a,b)$ using 
-        only right (east) and up (north) moves. Clearly, the RHS counts the 
-        the number of paths in $S$. Now decompose each path in $S$ into the paths 
-        at the last time that the path touches the verticle line $x=a-1$. There are 
-        $b+1$ places that a path can touch the line $x=a-1$. After the last time 
-        it touches this line, the remaining path to $(a,b)$ is fixed (directly up). 
-        Each of these elements in the resulting decomposition is disjoint. So, we 
-        can apply the addition principle. Suppose $j$ is the $y$-coordinate that the 
+        Let $S$ be the set of all lattice paths from $(0,0)$ to $(a,b)$ using
+        only right (east) and up (north) moves. Clearly, the RHS counts the
+        the number of paths in $S$. Now decompose each path in $S$ into the paths
+        at the last time that the path touches the verticle line $x=a-1$. There are
+        $b+1$ places that a path can touch the line $x=a-1$. After the last time
+        it touches this line, the remaining path to $(a,b)$ is fixed (directly up).
+        Each of these elements in the resulting decomposition is disjoint. So, we
+        can apply the addition principle. Suppose $j$ is the $y$-coordinate that the
         path touches the line $x=a-1$. Then, there are $\binom{a+j-1}{a-1}$ ways
         to reach this point. So, there are $\sum_{j=0}^{b} \binom{a+j-1}{a-1}$ ways
-        to count all of the paths that last touch the line $x=a-1$ which is the 
+        to count all of the paths that last touch the line $x=a-1$ which is the
         LHS. So, the LHS and RHS count the same set and thus are equivalent.
     \end{subproof}
 }
 
 \qs{}{
-    Prove the same identity as above, expressed diferently: 
+    Prove the same identity as above, expressed diferently:
 
     \begin{align*}
         \sum_{k=0}^{n} \binom{k}{r} = \binom{n+1}{r+1}
@@ -480,23 +480,23 @@ them easier to understand.
 
 \sol{
     \begin{subproof}
-        Let $S$ be the set of all sequences with $n+1$ elements containing only 
-    $0$ and $1$ and $r+1$ $1$'s. Clearly, the RHS counts the number of 
-    sequences by picking which of the $n+1$ positions will be $1$. We can 
-    decompose $S$ by removing the last instance of $1$ from each sequence.
-    This $1$ could be at position $0, 1, \dots, n+1$. Let $k$ be the position 
-    before the last $1$. Then, there are $\binom{k}{r}$ ways to choose the 
-    remaining $1$'s in the sequence. Given this, $k$ can range from $0$ to $n$ 
-    as it cannot be greater than $n$ as that would imply there are $0$ $1$'s
-    in the sequence. So, by the addition principle there are 
-    $$\sum_{k=0}^{n} \binom{k}{r}$$ 
-    total ways to count this decomposition. So, the LHS and RHS count the same
-    set and thus are equivalent.
+        Let $S$ be the set of all sequences with $n+1$ elements containing only
+        $0$ and $1$ and $r+1$ $1$'s. Clearly, the RHS counts the number of
+        sequences by picking which of the $n+1$ positions will be $1$. We can
+        decompose $S$ by removing the last instance of $1$ from each sequence.
+        This $1$ could be at position $0, 1, \dots, n+1$. Let $k$ be the position
+        before the last $1$. Then, there are $\binom{k}{r}$ ways to choose the
+        remaining $1$'s in the sequence. Given this, $k$ can range from $0$ to $n$
+        as it cannot be greater than $n$ as that would imply there are $0$ $1$'s
+        in the sequence. So, by the addition principle there are
+        $$\sum_{k=0}^{n} \binom{k}{r}$$
+        total ways to count this decomposition. So, the LHS and RHS count the same
+        set and thus are equivalent.
     \end{subproof}
 }
 
 \qs{}{
-    Prove 
+    Prove
 
     \begin{align*}
         \sum_{j=0}^{n} \binom{n}{j}^2 = \binom{2n}{n}
@@ -504,16 +504,16 @@ them easier to understand.
 }
 \sol{
     \begin{subproof}
-        Let $S$ be the set of all lattice paths from $(0,0)$ to $(n,n)$. The 
-        RHS clealy counts this set. Consider the line $y=n-x$ and the point 
-        $(j, n-j)$. Decompose $S$ into the paths that touch this line at an 
-        arbitrary point $(j, n-j)$. Clearly, the number of lattice paths to 
-        this point is $\binom{j + (n - j)}{j} = \binom{n}{j}$. Additionally, 
-        the number of paths from this point to 
+        Let $S$ be the set of all lattice paths from $(0,0)$ to $(n,n)$. The
+        RHS clealy counts this set. Consider the line $y=n-x$ and the point
+        $(j, n-j)$. Decompose $S$ into the paths that touch this line at an
+        arbitrary point $(j, n-j)$. Clearly, the number of lattice paths to
+        this point is $\binom{j + (n - j)}{j} = \binom{n}{j}$. Additionally,
+        the number of paths from this point to
         $(n,n)$ is $\binom{n-j + j}{n-j} = \binom{n}{n-j} = \binom{n}{j}$.
-        This is because we can rewrite the destination point as 
-        $(n-j, n - (n-j)) = (n-j, j)$ and think of the starting point as 
-        the origin. By the addition principle, 
+        This is because we can rewrite the destination point as
+        $(n-j, n - (n-j)) = (n-j, j)$ and think of the starting point as
+        the origin. By the addition principle,
 
         \begin{align*}
             \sum_{j=0}^{n} \binom{n}{j}^2
@@ -524,29 +524,29 @@ them easier to understand.
 }
 
 \qs{}{
-    Prove that $\binom{a+b}{a}$ equals the number of partitions 
-    $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_b$ satisfying 
-    $\lambda_1 \le a$. 
+    Prove that $\binom{a+b}{a}$ equals the number of partitions
+    $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_b$ satisfying
+    $\lambda_1 \le a$.
 }
 \sol{
-    It may help to read a later chapter to fully understand what a 
-    partition is. Essentially, these lattice paths must trace the edge 
-    of a Ferrer Diagram. Each lattice path trivially has a bijection with 
+    It may help to read a later chapter to fully understand what a
+    partition is. Essentially, these lattice paths must trace the edge
+    of a Ferrer Diagram. Each lattice path trivially has a bijection with
     a Ferrer Diagram. The Ferrer Diagrams generated can only have $b$ parts
-    as the lattice path ends at $y=b$. Similarly, the largest part 
+    as the lattice path ends at $y=b$. Similarly, the largest part
     ($\lambda_1$) must be $\le a$ because the lattice path ends at $x=a$.
-    
-    Because a bijection exists between lattice paths and Ferrer Diagrams 
-    with these conditions, the claim must be true. 
+
+    Because a bijection exists between lattice paths and Ferrer Diagrams
+    with these conditions, the claim must be true.
 }
 
 \subsection*{Committees approach}
 
-Another way to view binomial identities is to think of them as two different 
-ways of picking a committee under some constraints. 
+Another way to view binomial identities is to think of them as two different
+ways of picking a committee under some constraints.
 
 \qs{}{
-    Prove 
+    Prove
 
     \begin{align*}
         \binom{n}{m}\binom{m}{k} = \binom{n}{m}\binom{n-m}{k-m}
@@ -554,27 +554,27 @@ ways of picking a committee under some constraints.
 }
 \sol{
     \begin{subproof}
-        Let $S$ be the set of all commitees formed from $n$ people with 
-        size $k$ with subcomittees of size $m$. For the LHS. There are clearly $\binom{n}{k}$ ways to choose the 
-        committee members and $\binom{k}{m}$ ways to choose the subcommitee. For the RHS. We can choose the $m$ members of the subcommitee first. 
-        After, there are $n-m$ people left to choose from and $k-m$ spots on the 
-        entire commitee. So, there are $\binom{n-m}{k-m}$ ways to choose the 
+        Let $S$ be the set of all commitees formed from $n$ people with
+        size $k$ with subcomittees of size $m$. For the LHS. There are clearly $\binom{n}{k}$ ways to choose the
+        committee members and $\binom{k}{m}$ ways to choose the subcommitee. For the RHS. We can choose the $m$ members of the subcommitee first.
+        After, there are $n-m$ people left to choose from and $k-m$ spots on the
+        entire commitee. So, there are $\binom{n-m}{k-m}$ ways to choose the
         rest of the commitee. Clearly, the LHS and RHS count the same set and thus are equivalent.
     \end{subproof}
 }
 
 \qs{}{
-    Prove 
+    Prove
     \begin{align*}
-        \sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k} = \binom{m+n}{r} 
+        \sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k} = \binom{m+n}{r}
     \end{align*}
 }
 \sol{
-    Let $S$ be the set of all committees of size $r$ that we can form 
-    with $m$ men and $n$ women. Clearly, there are $\binom{m+n}{r}$ ways 
-    to choose the commitees. Similarly, we can construct an algorithm that $k$ 
-    members from the men and then the remainder from the women. This is represented 
-    by $\binom{m}{k}\binom{n}{r-k}$. The number of $k$ men on the team can range from 
+    Let $S$ be the set of all committees of size $r$ that we can form
+    with $m$ men and $n$ women. Clearly, there are $\binom{m+n}{r}$ ways
+    to choose the commitees. Similarly, we can construct an algorithm that $k$
+    members from the men and then the remainder from the women. This is represented
+    by $\binom{m}{k}\binom{n}{r-k}$. The number of $k$ men on the team can range from
     $0$ to $r$. So, by the addition principle,
     $$\sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k}$$
 
@@ -586,13 +586,13 @@ ways of picking a committee under some constraints.
 \textbf{Multisets}: A multiset is a set that allows for repeated elements. \\
 
 \noindent
-This leads us to a common question regarding permutations: How many permutations 
-are there in a multiset. 
+This leads us to a common question regarding permutations: How many permutations
+are there in a multiset.
 
 \thm{}{
-    The number of "words" (meaning permutations) one can generate out of $k$ 
-    letters (elements in the multiset) which appears 
-    $n_1, n_2, \cdots, n_k$ times is 
+    The number of "words" (meaning permutations) one can generate out of $k$
+    letters (elements in the multiset) which appears
+    $n_1, n_2, \cdots, n_k$ times is
 
     \begin{align*}
         \frac{n!}{n_1!n_2!\cdots n_k!}
@@ -610,8 +610,8 @@ are there in a multiset.
     \end{align*}
 
     There are $n!= 8!$ ways to arrange the letters. Ignoring the subscripts,
-    we can see how many times we overcount. For example, there are $3$ Is. Which means 
-    we overcount by a factor of $3!$. Similarly, there are $2$ Ls, $1$ O, 
+    we can see how many times we overcount. For example, there are $3$ Is. Which means
+    we overcount by a factor of $3!$. Similarly, there are $2$ Ls, $1$ O,
     $1$ N, and $1$ S. So, the number of permutations is
 
     \begin{align*}
@@ -620,20 +620,20 @@ are there in a multiset.
 \end{subproof}
 
 \qs{}{
-    Consider the $5!=120$ permutations of the letters $a,b,c,d,e$. 
+    Consider the $5!=120$ permutations of the letters $a,b,c,d,e$.
     How do you determine the $40th$ one (in alphabetical order) quickly?
 }
 \sol{
-    We know that the first permutation starts with $a$. Additionally, with 
-    $4$ remaining letters to permute, there are $4!=24$ permutations that start 
-    with $a$. So, permutations starting with $a$ are in between $1$ and $24$. 
-    Permutations with $b$ are between $25$ and $48$. So, we know that the 40th 
-    permutation starts with $b$. Similarly, permutations starting with $ba$ 
+    We know that the first permutation starts with $a$. Additionally, with
+    $4$ remaining letters to permute, there are $4!=24$ permutations that start
+    with $a$. So, permutations starting with $a$ are in between $1$ and $24$.
+    Permutations with $b$ are between $25$ and $48$. So, we know that the 40th
+    permutation starts with $b$. Similarly, permutations starting with $ba$
     are in the range of $25$ to $30$, $bc$ are in the range of $31$ to $36$,
     $bd$ are in the range of $37$ to $42$. So, the 40th permutation starts
-    with $bd$. Contuining on $bda$ are in the range of $37$ to $38$ and 
+    with $bd$. Contuining on $bda$ are in the range of $37$ to $38$ and
     $bdc$ are in the range of $39$ to $40$. So, the 40th permutation is
-    $bdcea$. 
+    $bdcea$.
 }
 
 \subsection*{Basic Combination Question}
@@ -641,17 +641,17 @@ are there in a multiset.
 How many ways are there to select an \_r-combination\_ (size $r$ multi-subset) of a multiset?
 
 \subsubsection*{Example}
-For the $I,L,L,I,N,O,I,S$ example, if $r=3$, possible 3-combinations are: 
+For the $I,L,L,I,N,O,I,S$ example, if $r=3$, possible 3-combinations are:
 $$\{I,L,I\},\{I,I,I\}, \{N,O,S\}, \dots$$
 
 \thm{}{
-    The number of $r$-combinations of $k$ distinct objects, each with 
+    The number of $r$-combinations of $k$ distinct objects, each with
     unlimited supply is $C(k+r-1,r)$.
 }
 
 \begin{subproof}
-    Let $x_1, x_2, \cdots, x_k$ be the number of times one uses object 
-    $A_1, A_2, \cdots, A_k$. So, we know: 
+    Let $x_1, x_2, \cdots, x_k$ be the number of times one uses object
+    $A_1, A_2, \cdots, A_k$. So, we know:
 
     \begin{align*}
         x_1 + x_2 + \cdots + x_k = r
@@ -664,7 +664,7 @@ $$\{I,L,I\},\{I,I,I\}, \{N,O,S\}, \dots$$
 
 \subsubsection*{Proof that compositions are counted by $C(k+r-1,r)$}
 
-We need to prove that the number of 
+We need to prove that the number of
 
 \begin{itemize}
     \item Compositions of $r$ into nonnegative integers
@@ -675,18 +675,18 @@ We need to prove that the number of
 is counted by $C(k+r-1,r)$.
 
 \begin{subproof}
-    Based on our previous problem, we know that each of these is counted 
+    Based on our previous problem, we know that each of these is counted
     by the same thing. Consider the following construction, \\
 
-    Lay out $r$ objects in a row. Then, in order to to form $k$ groups, 
-    we can place down $k-1$ dividers. So, we have $k-1$ choices of where 
+    Lay out $r$ objects in a row. Then, in order to to form $k$ groups,
+    we can place down $k-1$ dividers. So, we have $k-1$ choices of where
     to place the dividers and $r+k-1$ positions in which they can be placed.
-    So, the number of ways to place the dividers is 
+    So, the number of ways to place the dividers is
 
     \begin{align*}
-        C(r+k-1,k-1) &= \binom{r+k-1}{k-1} \\
-        &= \binom{r+k-1}{r+k-1-(k-1)} \\ 
-        &= \binom{r+k-1}{r}
+        C(r+k-1,k-1) & = \binom{r+k-1}{k-1}         \\
+                     & = \binom{r+k-1}{r+k-1-(k-1)} \\
+                     & = \binom{r+k-1}{r}
     \end{align*}
 \end{subproof}
 
@@ -695,16 +695,16 @@ is counted by $C(k+r-1,r)$.
 }
 
 \qs{}{
-    What is the number of integral solutions of 
+    What is the number of integral solutions of
     \begin{align*}
         x_1 + x_2 + x_3 + x_4 = 20
     \end{align*}
 
-    where $x_1 \ge 3$, $x_2 \ge 1$, $x_3 \ge 0$, and $x_4 \ge 5$. 
+    where $x_1 \ge 3$, $x_2 \ge 1$, $x_3 \ge 0$, and $x_4 \ge 5$.
 }
 
 \sol{
-    We can rewrite this problem by redefining the bounds to ensure each  
+    We can rewrite this problem by redefining the bounds to ensure each
     $x_i \ge 0$. Our new problem is
 
     \begin{align*}
@@ -717,11 +717,11 @@ is counted by $C(k+r-1,r)$.
 \section{L6: Permutations and Combinations of multisets II}
 
 \qs{}{
-    How many ways are there to select six hot dogs if there are three 
+    How many ways are there to select six hot dogs if there are three
     varieties of hot dogs?
 }
 \sol{
-    This is the equivalent problem of the number of integral solutions to 
+    This is the equivalent problem of the number of integral solutions to
 
     \begin{align*}
         x_1 + x_2 + x_3 = 6
@@ -733,12 +733,12 @@ is counted by $C(k+r-1,r)$.
 }
 
 \qs{}{
-    How many ways are there to fill a box with a dozen doughnuts 
-    chosen from five varieties with the requirement that at least 
+    How many ways are there to fill a box with a dozen doughnuts
+    chosen from five varieties with the requirement that at least
     one doughnut of each kind is picked?
 }
 \sol{
-    This is the equivalent problem of the number of integral solutions to 
+    This is the equivalent problem of the number of integral solutions to
 
     \begin{align*}
         x_1 + x_2 + x_3 + x_4 + x_5 = 12
@@ -748,7 +748,7 @@ is counted by $C(k+r-1,r)$.
 
     The bounds can be rewritten to ensure that each $x_i \ge 0$. So, the
     new problem is
-    
+
     \begin{align*}
         x_1 + x_2 + x_3 + x_4 + x_5 = 7
     \end{align*}
@@ -757,35 +757,35 @@ is counted by $C(k+r-1,r)$.
 }
 
 \qs{}{
-    If there are $10$ options of donuts, and one is buying 
-    $48$ donuts, what is the expected range of options that do not 
+    If there are $10$ options of donuts, and one is buying
+    $48$ donuts, what is the expected range of options that do not
     get taken?
 }
 \sol{
     This solution is very long. So I will only show part of it. \\
 
-    To calculate this, we can compute the likelihood that $k$ options are 
+    To calculate this, we can compute the likelihood that $k$ options are
     not taken where $k \in \{0,1,2,3,4,5,6,7,8,9,10\}$. \\
 
     \begin{itemize}
         \item $k = 0$: The probability that no options are not taken is
-        calculated by the equation
+              calculated by the equation
 
-        \begin{align*}
-            x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_{10} = 48
-        \end{align*}
+              \begin{align*}
+                  x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_{10} = 48
+              \end{align*}
 
-        where each $x_i \ge 1$. 
+              where each $x_i \ge 1$.
 
-        There are $\binom{38+10-1}{38}$ solutions to this equation. There are $\binom{10}{0}$ 
-        ways to pick the $0$ elements that are not taken. So, the probability is
-        
-        \begin{align*}
-            \frac{\binom{38+10-1}{38}\cdot \binom{10}{0}}{\binom{48+10-1}{48}}
-        \end{align*}
+              There are $\binom{38+10-1}{38}$ solutions to this equation. There are $\binom{10}{0}$
+              ways to pick the $0$ elements that are not taken. So, the probability is
+
+              \begin{align*}
+                  \frac{\binom{38+10-1}{38}\cdot \binom{10}{0}}{\binom{48+10-1}{48}}
+              \end{align*}
 
         \item Continue this exact template by taking a way $k$ $x_i$'s and
-        computing the number of integral solutions. 
+              computing the number of integral solutions.
     \end{itemize}
 }
 
@@ -793,9 +793,406 @@ is counted by $C(k+r-1,r)$.
 
 \section{L7: The pigeonhole principle}
 
+\dfn{}{
+    The \textit{Pigeonhole Principle}: If $n+1$ objects are distributed
+    into $n$ boxes then at least one box contains two or more objects.
+}
+
+\qs{}{
+    There are $n$ married couples. How many of the $2n$ people must be
+    selected to guarantee that a married couple is selected?
+}
+\sol{
+    Imagine each box is a married couple. There are $n$ boxes. So, by the pigeonhole
+    principle, if we select $n+1$ people there must be at least one box
+    with both married counterparts in it.
+}
+
+\qs{}{
+    Show that i $n+1$ integers are chosen from
+    $\{1,2,\dots, 2n\}$ then there are always two which differ by $1$.
+}
+\sol{
+    Create a bucket for each pair of consecutive integers (i.e. (1,2), (3,4), etc)
+    There are $n$ buckets. Each time we select an integer, put it in the corresponding
+    bucket. By the pigeonhole principle, after we select $n+1$ integers, two of the buckets
+    must have at least two integers. Since each bucket contains two consecutive integers,
+    there must be two integers that differ by $1$.
+}
+
+\qs{}{
+    A chess master has $11$ weeks to prepare for a tournament plays at least one game per day,
+    but not more than $12$ games during any calendar week. Prove there is a succession of
+    consecutive days where the master plays exactly $21$ games.
+}
+\sol{
+    Let $a_i$ be the number of cummulative hours the chess master plays on day $i$. Clearly,
+
+    \begin{align*}
+        1 \le a_1 \le a_2 \le \cdots \le a_{77} \le 132
+    \end{align*}
+
+    Extending upon this, we see that:
+
+    \begin{align*}
+        22 \le a_1 + 21 \le a_2 + 21 \le \cdots \le a_{77} + 21 \le 153
+    \end{align*}
+
+    We need to show that there exists some $a_i$ such that
+    $a_i = a_j + 21$ for some $j \le i$. \\
+
+    There are $154$ possible numbers from $a_1$ to $a_{77}$ and
+    $a_1 + 22$ to $a_{77} + 21$. However, there are only $153$ values
+    these numbers can be assigned to. Therefore, there must be two
+    numbers that are the same by the pigeonhole principle. \\
+
+    Note that these numbers cannot appear in the same sequence (i.e.
+    $a_1$ to $a_{77}$ or $a_1 + 22$ to $a_{77} + 21$). So, there must
+    be a number $a_i$ such that $a_i = a_j + 21$ for some $j \le i$.
+}
+
+\qs{}{
+    A student views TikTok at least one hour each day for 7 weeks but
+    not more than 11 hours in any one week. Prove there is some period
+    of consecutive days where the student watches exactly 20 hours of
+    TikTok. (Assume a whole number of hours of TikTok watched each day.)
+}
+\sol{
+    Let $a_i$ be the cummulative hours that a student watchings TikTok
+    on day $i$. Clearly,
+
+    \begin{align*}
+        1 \le a_1 \le a_2 \le \cdots \le a_{49} \le 77
+    \end{align*}
+
+    Extending upon this, we see that:
+
+    \begin{align*}
+        21 \le a_1 + 20 \le a_2 + 20 \le \cdots \le a_{49} + 20 \le 97
+    \end{align*}
+
+    We need to show that there exists some $a_i$ such that
+    $a_i = a_j + 20$ for some $j \le i$. \\
+
+    There are $98$ possible numbers from $a_1$ to $a_{49}$ and
+    $a_1 + 21$ to $a_{49} + 20$. However, there are only $97$ values
+    these numbers can be assigned to. Therefore, there must be two
+    numbers that are the same by the pigeonhole principle.
+}
+
+\qs{}{
+    From the integers $1,2,\cdots,200$ we choose $101$ integers.
+    Show that two of the chosen integers have the property that one
+    divides the other.
+}
+\sol{
+    Write each of the in the form $2^s \cdot a$ where $a$ is an odd
+    integer. This is a unique expansion of each integer. So, $a$ must
+    be in the set$\{1, 3, 5, \cdots, 199\}$. So, $a$ has $100$ possible
+    values. After selecting $101$ integers, two of the integres must
+    share the same $a$. Let these be $2^s \cdot a$ and $2^t \cdot a$.
+    Then, $2^s \cdot a = 2^t \cdot a$. Assume $s \le t$. Without loss
+    of generality, the first number divides the second.
+}
+
+\qs{}{
+    Suppose you are given any nine 3-dimensional lattice points
+    (nine points in 3-space with integer coordinates). Prove that
+    between some two points, the open line segment connecting these
+    points must again pass through some other lattice point.
+}
+
+\subsubsection*{Philosophy of the Pigeonhole Principle}
+
+By nature, the pigeonhole principle creates structure in randomness. In other words,
+if there is a long enough sequence of random numbers, there must be a random structure.
+The $n+1$ of the pigeonhole principle, is where the structure transitions
+from solid to fluid, a freezing point of sorts. More philsophically, out of
+chaos comes order.
+
+\qs{}{
+    In the past thousand years, YOU had ancestors $A$ and $P$ such that $P$
+    was an ancestor to both the father and mother of $A$. (That is,
+    no-one's family tree is really a tree.) [You can make some
+            assumptions about the total population of the world etc.]
+}
+\sol{
+    Assume that it takes $25$ years for a generation to create a new
+    generation. This means there have been $40$ generations. So,
+    the number of nodes in the tree is
+
+    \begin{align*}
+        \sum{i=0}^{40} 2^i = 2^{41} - 1
+    \end{align*}
+
+    Currently, there are less than $10^10$ people on Earth and there were
+    less people in previous generations. Thus, we know that an upper bound
+    for the number of people who have lived on Earth in the past 40 generations
+    is $40\cdot 10^{10}$. \\
+
+    However, we know that $40\cdot 10^{10} < 2^{41} - 1$. So, by the pigeonhole
+    principle, two of the nodes in the ancestral must be the same and thus,
+    you are inbred.
+}
+
 \section{L8: The strong pigeonhole principle}
 
+\dfn{Strong Pigeonhole Principle}{
+    Let $q_1, q_2, \cdots, q_n$ be positive integers. If
+
+    \begin{align*}
+        q_1 + q_2 + \cdots + q_n - n + 1
+    \end{align*}
+
+    obects are distributed into $n$ boxes, the either box $1$ contains
+    $q_1$ objects, or box $2$ contains $q_2$ objects, or $\cdots$, or
+    box $n$ contains $q_n$ objects.
+}
+\begin{subproof}
+    Suppose not. That is suppose that no box contains $q_i$ objects.
+    Then there are at most
+
+    \begin{align*}
+        (q_1 - 1) + (q_2 - 1) + \cdots + (q_n - 1) = q_1 + q_2 + \cdots + q_n - n
+    \end{align*}
+
+    objects in the $n$ boxes. However this is a contradiction because we
+    distributed $q_1 + q_2 + \cdots + q_n - n + 1$ objects into $n$ boxes.
+\end{subproof}
+
+\subsubsection*{Special cases}
+
+There are two special cases of the strong pigeonhole principle.
+
+\begin{enumerate}
+    \item If $q_i=2$ for each $i$, this implies the weak pigeonhole principle.
+
+          For clarity, let $q_i=2$ for each $i$. Then, the strong pigeonhole
+          principle says that if
+
+          \begin{align*}
+              q_1 + q_2 + \cdots + q_n - n + 1 = 2n - n + 1
+               & = n + 1
+          \end{align*}
+          objects are distributed into $n$ boxes, then either box $1$ contains
+          $2$ objects, or box $2$ contains $2$ objects, or $\dots$, or box $n$
+          contains $2$ objects. In other words, one of the boxes contains $2$
+          objects.
+
+    \item Suppose $q_i=r$ for each $i$. This implies that if you distribute
+          $rn - n + 1 = n(r-1)+1$ objects into $n$ boxes, then one of the boxes
+          contains at least $r$ objects.
+
+          A small reformation of this case is that if the average of
+          $a_1, a_2, \cdots, a_n > r-1$ then at least one $a_i \ge r$. This is
+          pretty easy to see.
+
+          \begin{subproof}
+              Suppose not. That is suppose that no $a_i \ge r$. Then each
+              $a_i \le r-1$. So, at most the average of $a_1, a_2, \cdots, a_n$
+              is $r-1$. However, this is a contradiction because the average
+              is greater than $r-1$.
+          \end{subproof}
+\end{enumerate}
+
+\qs{}{
+    Grades A,B,C,D,F are to be given in a class.
+    What's the smallest size of a class to ensure that there is at
+    least $5$ A's, $5$ B's, $4$ C's, $2$ D's OR $1$ F?
+}
+\sol{
+    This is an application of the strong pigeonhole principle. Let
+    $q_1=5$, $q_2=5$, $q_3=4$, $q_4=2$, $q_5=1$. In order to guarantee
+    at least $q_i$ objects in each box $i$, by the strong pigeonhole
+    principle to show we need at least $q_1 + q_2 + q_3 + q_4 + q_5 - 5 + 1$.
+    This is $5 + 5 + 4 + 2 + 1 - 5 + 1 = 13$. So, we need at least
+    $13$ students.
+}
+
+\qs{}{
+    Show that any sequence of $n^2 +1$ real numbers $a_1, a_2, \dots, a_{n^2+1}$
+    has an increasing subsequence of length $n+1$ or a decreasing subsequence
+    of length $n+1$.
+}
+\sol{
+    \begin{subproof}
+        Without loss of generality, assume that $a_1, a_2, \dots, a_{n^2+1}$
+        does not have an increasing subsequence of length $n+1$. Let
+        $L_k$ be the longest increasing subsequence starting at $a_k$. Clearly,
+        $1 \le L_k \le n$ as there is no increasing subsequence of length
+        $n+1$.
+
+        Consider the sequence, $L_1, L_2, \dots, L_{n^2 + 1}$.
+        Note that $n^2 + 1 = n((n+1)-1)+1$. By the strong pigeonhole
+        principle, where $r=n+1$, this implies that $n+1$ of the $L_k$'s
+        are equal which can be denoted by
+        $L_{k_1} = L_{k_2} = \cdots = L_{k_{n+1}}$. From this, we can
+        construct a sequence:
+
+        \begin{align*}
+            a_{k_1} \ge a_{k_2} \ge \cdots \ge a_{k_{n+1}}
+        \end{align*}
+
+        which is a decresaing subsequence of length $n+1$. \\
+
+        It may not be clear that this is a decreasing subsequence. Suppose not.
+        That is, suppose that $a_{k_i} < a_{k_{i+1}}$ for some $i$. Then,
+        $L_{k_i} > L_{k_{i+1}}$ because we can construct a longer increasing
+        subsequence than $L_{k_{i+1}}$ by adding $a_{k_i}$ to the start of the
+        sequence that starts at $a_{k_{i+1}}$. However, this is a contradiction
+        because $L_{k_i} = L_{k_{i+1}}$. So, this must be a decreasing subsequence.
+    \end{subproof}
+}
+
 \section{L9: Ramsey Theory}
+
+\ex{}{
+    Consider a party with six people. For any two of these people,
+    either they've met before (acquaintances) or not (strangers).
+    Prove that there is either three people who are mutual acquaintances
+    or three people who are mutual strangers. \\
+
+    \begin{subproof}
+        Draw a graph with six vertices with each vertex representing a
+        person blue. Draw a red edge between two vertices if they
+        are acquaintances and a blue edge if they are strangers. We want
+        to show that there is red triangle or a blue triangle. \\
+
+        Consider a vertex $v$. There are 5 edges incoming to $v$. We
+        need to distrubte 2 colors across 5 edges. By the strong pigeonhole
+        principle where $r=3$, $2(3-1)+1=5$ which implies that there are
+        either $3$ red edges or $3$ blue edges. Without loss of generality,
+        assume that there are $3$ blue edges connecting to vertices $x, y, z$.
+        If any of $(x,y),(y,z),(z,x)$ are blue, then we have a blue triangle.
+        (e.g. if $(x,y)$ is blue then our triangle is $(x,y), (y,v), (x,v)$).
+        If none of them are red, then they form a red triangle among themselves,
+        and so in either case, there is a red triangle or blue triangle.
+    \end{subproof}
+}
+
+\dfn{Ramsey Numbers}{
+    Let $R(r,s)$ be the least integer such that a complete graph with
+    $R(r,s)$ vertices (i.e. one that has all possible edges)
+    and is colored with red and blue, MUST either have a red complete
+    subgraph on $r$ vertices or a blue complete subgraph on
+    $s$ vertices.
+}
+
+\qs{}{
+    Show that $R(3,3) \ne 5$.
+}
+\sol{
+    We have already shown $R(3,3) = 6$. In order to show that
+    $R(3,3) \ne 5$, we need to show that there is a complete graph
+    with $5$ vertices that does not have a red complete subgraph on
+    $3$ vertices or a blue complete subgraph on $3$ vertices. \\
+
+    Consider the following graph:
+
+    \begin{center}
+        \begin{tikzpicture}
+            \node (a) at (0,0) {$a$};
+            \node (b) at (2.5,1.5) {$b$};
+            \node (c) at (5,0) {$c$};
+            \node (d) at (1.15,-2) {$d$};
+            \node (e) at (3.85,-2) {$e$};
+            \draw[red] (a) -- (b);
+            \draw[blue] (a) -- (c);
+            \draw[red] (a) -- (d);
+            \draw[blue] (a) -- (e);
+            \draw[red] (b) -- (a);
+            \draw[red] (b) -- (c);
+            \draw[blue] (b) -- (d);
+            \draw[blue] (b) -- (e);
+            \draw[blue] (c) -- (d);
+            \draw[red] (c) -- (e);
+            \draw[red] (d) -- (e);
+        \end{tikzpicture}
+    \end{center}
+
+    Clearly, this does not have a red complete subgraph on $3$ vertices
+    nor a blue complete subgraph on $3$ vertices.
+}
+
+\nt{
+    No one knows what $R(5,5)$ is. It is expected that
+    no one will ever know what $R(6,6)$ is.
+}
+
+\thm{}{
+    $R(r,s)$ always exists. In fact,
+
+    \begin{align*}
+        R(r,s) \le R(r-1,s) + R(r,s-1)
+    \end{align*}
+}
+
+\begin{subproof}
+    This is done by double induction on $r,s \ge 1$. \\
+
+    \subsubsection*{Base Case}
+
+    \begin{align*}
+        R(r,1) = R(1,s)= 1
+    \end{align*}
+
+    This is clearly true, because a complete graph with $1$ vertex is gaurunteed to have a
+    subgraph on $1$ vertex that is blue or red. The color chosen is irrelevant because there are no edges
+    so the color is implicit. \\
+
+    Trivially the inequality (i.e. the base case holds true) holds because:
+
+    \begin{align*}
+         & R(r,1) \le R(r-1,1) + R(r,1-1) \iff 1 \le 1 + 0 \iff 1 \le 1 \\
+         & R(1,s) \le R(1-1,s) + R(1,s-1) \iff 1 \le 0 + 1 \iff 1 \le 1
+    \end{align*}
+
+    \subsubsection*{Inductive Step}
+
+    Suppose that $R(r-1,s)$ and $R(r,s-1)$ exist and consider the complete graph with
+    $R(r-1,s) + R(r,s-1)$ vertices. Pick a vertex $v$. There are $R(r-1,s) + R(r,s-1) - 1$
+    edges incident to $v$. Split the adjacent vertices $w$ into two classes, RED and BLUE,
+    depending on if $(v,w)$ is a red or blue edge. Clearly,
+
+    \begin{align*}
+        R(r-1,s) + R(r,s-1) = |RED| + |BLUE| + 1
+    \end{align*}
+
+    The LHS represnts the total number of vertices in the original graph we constructed. The RHS is the
+    decomposition of this graph based on an arbitrary vertex $v$ based on the adjacent edge
+    colors. Because the graph is complete, RED and BLUE will contain every vertex in the original
+    graph except the arbitrary vertex $v$ which is why we add $1$. Thus, I claim that one of the
+    following must be true:
+
+    \begin{align*}
+        |RED|  & \ge R(r-1,s) \\
+        |BLUE| & \ge R(r,s-1)
+    \end{align*}
+
+    Suppose not. That is suppose that both $|RED| < R(r-1,s)$ and $|BLUE| < R(r,s-1)$.
+    Then, $|RED| + 1 \le R(r-1,s)$ and $|BLUE| + 1 \le R(r,s-1)$
+
+    \begin{align*}
+        |RED| + |BLUE| + 2 & \le R(r-1,s) + R(r,s-1) \\
+        |RED| + |BLUE| + 1 & < R(r-1,s) + R(r,s-1)
+    \end{align*}
+
+    But this is a contradiction as $|RED| + |BLUE| + 1 = R(r-1,s) + R(r,s-1)$. So either
+    $|RED| \ge R(r-1,s)$ or $|BLUE| \ge R(r,s-1)$ \\
+
+    Without loss of generality, suppose that $|RED| = R(r-1,s)$. Then, the vertices
+    in RED, must have a red $K_{r-1}$ or a blue $K_{s}$. If the former is true, then
+    this $K_{r-1}$ with $v$ forms a $K_{r}$ within the original graph (as each vertex in
+    RED was connected to $v$ with a red edge). Otherwise, the latter is true and thus the original
+    graph contains a $K_{s}$. In either case, the original graph contains a $K_{r}$ or
+    a $K_{s}$. Thus, not only does $R(r,s)$ exist but the inequality holds true as we
+    either need one less vertices than what is in $R(r-1,s) + R(r,s-1)$ or we need
+    to include the same number of vertices as $R(r-1,s) + R(r,s-1)$.
+
+    \begin{align*}
+        R(r,s) \le R(r-1,s) + R(r,s-1)
+    \end{align*}
+\end{subproof}
 
 \setcounter{chapter}{4}
 
@@ -803,9 +1200,248 @@ is counted by $C(k+r-1,r)$.
 
 \section{L10: Binomial coefficients and the binomial theorem I}
 
+Recall the following two facts:
+
+\begin{itemize}
+    \item $\binom{n}{k} = \binom{n}{n-k}$
+    \item $\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}$
+\end{itemize}
+
+\nt{
+    One can think o Pascal's formula (the second fact) as the recursive definition the compute
+    binomial coefficients with the following initial conditions:
+
+    \begin{align*}
+        \binom{n}{0} = \binom{n}{n} = 1
+    \end{align*}
+}
+
+\subsubsection*{Properties of the Binomial Coefficients}
+
+\begin{itemize}
+    \item The row sums give powers of $2$
+    \item The symmetry of the binomial coefficient.
+    \item The number $\binom{n}{k}$ is the number of paths SW-NE "/" and NW-SE "$\backslash$" steps from
+          $\binom{0}{0}$ to $(n,k)$.
+\end{itemize}
+
+\begin{subproof}
+    Proof of third property: \\
+
+    The only way to get to $\binom{n}{k}$ is to pass through $\binom{n-1}{k}$ or $\binom{n-1}{k-1}$.
+    From here, we can apply induction and pascal's formula to show that this is true.
+\end{subproof}
+
+\qs{}{
+    Write Pascal's triangle as follows:
+    \begin{align*}
+        \begin{matrix*}
+            1 & & & & & \\
+            1 & 1 & & & & \\
+            1 & 2 & 1 & & & \\
+            1 & 3 & 3 & 1 & & \\
+            1 & 4 & 6 & 4 & 1 & \\
+            1 & 5 & 10 & 10 & 5 & 1 \\
+        \end{matrix*}
+    \end{align*}
+
+    Now consider the sums along SW to NE: $1, 1, 1+1, 1+2, 1+3+1, 1+4+3, \dots$ We've seen
+    these numbers beore. What are they? (Can you give a proof?)
+}
+
+\sol{
+    Clearly this sequence is $1, 1, 2, 3, 5, 8, \dots$. This is the Fibonacci sequence. \\
+
+    The Fibonacci sequence is defined as:
+
+    \begin{align*}
+        a_n = a_{n-1} + a_{n-2}
+    \end{align*}
+
+    While this can be solved with recursion we can craft a combinatorial model to represent this
+    situation. Consider the $n$-the Fibonacci number and a strip of length $n$. Imagine we are going
+    to fill this strip with Rabbits (size $1$) and Cadillacs (size $2$). At a point $n$, we have two
+    choices,
+
+    \begin{enumerate}
+        \item Place a Rabbit and lose one space
+        \item Place a caddilac and lose two spaces
+    \end{enumerate}
+
+    Clearly, this is defined by the recurrence above. We can use a Rabbit and thus there are $a_{n-1}$
+    ways to fill the strip or we can use a Cadillac and thus there are $a_{n-2}$ ways to fill the strip.
+}
+
+\dfn{The Binomial Theorem}{
+    Let $n \in \mathbb{Z}_{> 0}$. Then,
+
+    \begin{align*}
+        (x+y)^n & = x^n + \binom{n}{1}x^{n-1}y + \binom{n}{2}x^{n-2}y^2 + \dots + \binom{n}{n-1}x y^{n-1} + y^n \\
+                & = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k                                                       \\
+    \end{align*}
+}
+
+\begin{subproof}
+    Consider the expression $(x+y)^n$ exanded such that:
+
+    \begin{align*}
+        (x+y)^n = (x+y)(x+y)(x+y)\cdots
+    \end{align*}
+
+    Consider the process of FOIL to exapnd this expression. The term $x^iy^j$ The coefficient of this term
+    is the number of ways to choose $i$ $x$s and $j$ $y$s where $i+j=n$ which is:
+
+    \begin{align*}
+        \binom{i + j}{i} & = \binom{n}{i}         \\
+                         & = \binom{n}{n-i}       \\
+                         & = \binom{i+j}{(i+j)-i} \\
+                         & = \binom{i+j}{j}       \\
+                         & = \binom{n}{j}
+    \end{align*}
+\end{subproof}
+
+\subsubsection*{Binomial Identities}
+
+\begin{itemize}
+    \item $\binom{n}{0} + \binom{n}{1} + \cdots + \binom{n}{n} = 2^n$.
+
+          \begin{subproof}
+              Set $x = y = 1$ and apply binomial theorem.
+          \end{subproof}
+
+    \item $\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \cdots + (-1)^n \binom{n}{n} = 0$.
+
+          \begin{subproof}
+              Set $x = 1$ and $y=-1$. Apply Binomial Theorem.
+          \end{subproof}
+
+    \item $\binom{n}{0} + \binom{n}{2} + \cdots = \binom{n}{1} + \binom{n}{3} + \cdots$
+
+          \begin{subproof}
+              Use the previous property and move the negative coefficients to the RHS.
+          \end{subproof}
+
+    \item $\binom{n}{0} + \binom{n}{2} + \binom{n}{4} + \cdots = 2^{n-1} = \binom{n}{1} + \binom{n}{3} + \cdots$
+          \begin{subproof}
+              Using the first property, we know the total sum of the coefficients to be $2^n$. In each of these
+              equations, we have removed half of the terms so the new sum is $\frac{2^n}{2} = 2^{n-1}$.
+          \end{subproof}
+\end{itemize}
+
+\qs{}{
+    Evaluate:
+
+    \begin{align*}
+        \binom{n}{0} - 2\binom{n}{1} + 3\binom{n}{2} + \cdots + (-1)^n(n + 1)\binom{n}{n}
+    \end{align*}
+}
+\sol{
+
+    \begin{subproof}
+        Consider a simplified binomial theorem where $y=1$:
+
+        \begin{align*}
+            (x+1)^n = \sum_{i=0}^{n} \binom{n}{i}x^i
+        \end{align*}
+
+        By taking the derivative of both sides:
+
+        \begin{align*}
+            n(x+1)^{n-1} = \sum_{i=1}^{n} i \binom{n}{i} x^{i-1}
+        \end{align*}
+
+        Let $x=-1$.
+
+        \begin{align*}
+            0           & = \sum_{i=1}^n i \binom{n}{i} (-1)^{i-1}      \\
+            (-1)\cdot 0 & = (-1) \sum_{i=1}^n i \binom{n}{i} (-1)^{i-1} \\
+            0           & = \sum_{i=1}^n i \binom{n}{i} (-1)^{i}
+        \end{align*}
+
+        Lastly, we can add this with property $2$ above to obtain the desired result.
+    \end{subproof}
+}
+
+\qs{}{
+    Prove that the sequence of numbers in each row of Pascal's triangle is a power of 11. 
+    I.e., $\{1,2,1\} \to 121=112$. For this you need to "carry over" numbers bigger than 9 to 
+    the left. So for example $\{1,5,10,10,5,1\}$ is $161051=115$.
+}
+\sol{
+    Consider the binomial expansion of $(1+x)^n$ and let $x=10$: 
+
+    \begin{align*}
+        (x+1)^n &= \sum_{i=0}^{n} \binom{n}{i}x^i \\ 
+        11^n &= \sum_{i=0}^{n} \binom{n}{i}10^i \\
+        11^n &= \binom{n}{0} + \binom{n}{1}10 + \binom{n}{2}100 + \cdots + \binom{n}{n}10^n
+    \end{align*}
+}
+
+\qs{}{
+    Give a combinatorial proof that the number of ways to select even sized 
+    subsets equals the number of ways to select odd sized subsets (equals $2^{n-1}$).
+}
+\sol{
+    We can encode a an even sized subset by recording which numbers from $1$ to $n-1$ 
+    are being used. If this encoded subset is odd, then it can be inferred that 
+    $n$ must have been used (since this is a encoding of an even sized subset). If 
+    this encoded subset is even, then it can be inferred that $n$ was not used. Because 
+    of this, the number of even subsets is simply the number of subsets that we can 
+    create using elements of the set $\{1, 2, \dots, n-1\}$ which is $2^{n-1}$. The 
+    same reasoning and connclusion applies to the odd sized subsets.
+}
+
 \section{L11: Binomial coefficients and the binomial theorem II}
 
+
+
 \section{L12: Binomial coefficients and the binomial theorem III}
+
+\subsection*{Applied and Abstract Context}
+
+\subsubsection*{Applied}
+
+Suppose that you're a designer of houses that you plan to put in a newly 
+constructed neighbourhood. Each house is basically the same, but can be adorned with 
+some of the following $n$ upgrades: 
+
+\begin{itemize}
+    \item Hard wood floors 
+    \item Skylight
+    \item Granite Countertops
+    \item Stainless stell appliances
+    \item $\dots$
+\end{itemize}
+
+\noindent
+In order to be unique, you want to give each house a different set of options, BUT, 
+no house A has upgrades that are a subset of another house B's upgrades (otherwise 
+the owner of house A would be majorized by house B). By doing this, no two houses 
+are comparable (one house may have hardwood floors, and other a sun roof). \\
+
+\noindent
+What is the maximum number of houses you can design under these conditions?
+
+\subsubsection*{Abstract}
+
+Consider the following poset (partially ordered set) for $S=\{x,y,z\}$: 
+
+\begin{center}
+    \begin{tikzpicture}
+        \node (max) at (0,4) {$\{x,y,z\}$};
+        \node (a) at (-2,2) {$\{x,y\}$};
+        \node (b) at (0,2) {$\{x,z\}$};
+        \node (c) at (2,2) {$\{y,z\}$};
+        \node (d) at (-2,0) {$\{x\}$};
+        \node (e) at (0,0) {$\{y\}$};
+        \node (f) at (2,0) {$\{z\}$};
+        \node (min) at (0,-2) {$\{\emptyset\}$};
+        \draw (min) -- (d) -- (a) -- (max) -- (b) -- (f)
+        (e) -- (min) -- (f) -- (c) -- (max)
+        (d) -- (b);
+        \draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+    \end{tikzpicture}
+\end{center}
 
 \chapter{The Inclusion-Exclusion Principle and Applications}
 
@@ -855,9 +1491,9 @@ This is the basis of the inclusion-exclusion principle.
     Then we want to find $|A_1^c \cap A_2^c \cap A_3^c|$. \\
 
     \begin{align*}
-        |A_1^c \cap A_2^c \cap A_3^c| & = |S| - |A_1 \cup A_2 \cup A_3|                                                                                            \\
+        |A_1^c \cap A_2^c \cap A_3^c| & = |S| - |A_1 \cup A_2 \cup A_3|                                           \\
                                       & = |S| - \bigg ( |A_1| + |A_2| + |A_3| - |A_1 \cap A_2| - |A_1 \cap A_3| -
-                                       |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3| \bigg ) \\
+        |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3| \bigg )                                                          \\
     \end{align*}
 
     Obviously, $|S| = 1000$. To obtain the number of integers between $a$
@@ -982,8 +1618,6 @@ This is the basis of the inclusion-exclusion principle.
 \textbf{Question}: You all get up from your chairs, and randomly move to a different
 chair. What's the probability that no one ends up sitting down
 in the same chair? What if it were a class of $300$ students? \\
-
-
 
 \nt{
     I find this definition a little hard to initially interpret. \\
