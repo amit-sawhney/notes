@@ -27,7 +27,7 @@
     If $S_1$, $S_2$, $\dots$, $S_k$ are disjoint sets, then
 
     \begin{align*}
-        \Big | S = \cup_{i=1}^{k} S_i \Big | = |S_1| + |S_2| + \cdots + |S_k|
+        \Big | S = \bigcup_{i=1}^{k} S_i \Big | = |S_1| + |S_2| + \cdots + |S_k|
     \end{align*}
 }
 
@@ -922,10 +922,10 @@ chaos comes order.
     the number of nodes in the tree is
 
     \begin{align*}
-        \sum{i=0}^{40} 2^i = 2^{41} - 1
+        \sum_{i=0}^{40} 2^i = 2^{41} - 1
     \end{align*}
 
-    Currently, there are less than $10^10$ people on Earth and there were
+    Currently, there are less than $10^{10}$ people on Earth and there were
     less people in previous generations. Thus, we know that an upper bound
     for the number of people who have lived on Earth in the past 40 generations
     is $40\cdot 10^{10}$. \\
@@ -1363,37 +1363,141 @@ Recall the following two facts:
 }
 
 \qs{}{
-    Prove that the sequence of numbers in each row of Pascal's triangle is a power of 11. 
-    I.e., $\{1,2,1\} \to 121=112$. For this you need to "carry over" numbers bigger than 9 to 
+    Prove that the sequence of numbers in each row of Pascal's triangle is a power of 11.
+    I.e., $\{1,2,1\} \to 121=112$. For this you need to "carry over" numbers bigger than 9 to
     the left. So for example $\{1,5,10,10,5,1\}$ is $161051=115$.
 }
 \sol{
-    Consider the binomial expansion of $(1+x)^n$ and let $x=10$: 
+    Consider the binomial expansion of $(1+x)^n$ and let $x=10$:
 
     \begin{align*}
-        (x+1)^n &= \sum_{i=0}^{n} \binom{n}{i}x^i \\ 
-        11^n &= \sum_{i=0}^{n} \binom{n}{i}10^i \\
-        11^n &= \binom{n}{0} + \binom{n}{1}10 + \binom{n}{2}100 + \cdots + \binom{n}{n}10^n
+        (x+1)^n & = \sum_{i=0}^{n} \binom{n}{i}x^i                                              \\
+        11^n    & = \sum_{i=0}^{n} \binom{n}{i}10^i                                             \\
+        11^n    & = \binom{n}{0} + \binom{n}{1}10 + \binom{n}{2}100 + \cdots + \binom{n}{n}10^n
     \end{align*}
 }
 
 \qs{}{
-    Give a combinatorial proof that the number of ways to select even sized 
+    Give a combinatorial proof that the number of ways to select even sized
     subsets equals the number of ways to select odd sized subsets (equals $2^{n-1}$).
 }
 \sol{
-    We can encode a an even sized subset by recording which numbers from $1$ to $n-1$ 
-    are being used. If this encoded subset is odd, then it can be inferred that 
-    $n$ must have been used (since this is a encoding of an even sized subset). If 
-    this encoded subset is even, then it can be inferred that $n$ was not used. Because 
-    of this, the number of even subsets is simply the number of subsets that we can 
-    create using elements of the set $\{1, 2, \dots, n-1\}$ which is $2^{n-1}$. The 
+    We can encode a an even sized subset by recording which numbers from $1$ to $n-1$
+    are being used. If this encoded subset is odd, then it can be inferred that
+    $n$ must have been used (since this is a encoding of an even sized subset). If
+    this encoded subset is even, then it can be inferred that $n$ was not used. Because
+    of this, the number of even subsets is simply the number of subsets that we can
+    create using elements of the set $\{1, 2, \dots, n-1\}$ which is $2^{n-1}$. The
     same reasoning and connclusion applies to the odd sized subsets.
 }
 
 \section{L11: Binomial coefficients and the binomial theorem II}
 
+\nt{
+    Note that the rows of Pascal's triangle increase to some maximum and then decrease. This is
+    called \textit{unimodality}. Observe the following sequences:
 
+    \begin{itemize}
+        \item $1,2,5,7,5,2,1$ is unimodal and symmetric
+        \item $1,6,8,10,9,3,2$ is unimodal but not symmetric
+        \item $1,5,3,8,3,5,1$ is symmetric but not unimodal
+        \item $43, 2, 1, 33, 2$ is just nothing
+    \end{itemize}
+}
+
+\thm{Unimodality of Binomial Coefficients}{
+    Binomial Coefficients are unimodal.
+}
+
+\subsubsection*{Intuition/Philosophy}
+
+Consider a unimodal sequence of natural numbers
+$$a_1 \le a_2 \le \cdots \le a_m \ge a_{m+1} \ge \cdots \ge a_n$$
+
+This sequence should lead you to some conclusions:
+
+\begin{itemize}
+    \item Let $a_1 = \#S_1$, $a_2 = \#S_2$, $\dots$, $a_n = \#S_n$. So this original sequence counts the size
+          of some sets:
+
+          \begin{align*}
+              S_1, S_2, \dots, S_m, \dots, S_n
+          \end{align*}
+
+          Our main motivation for this representation is because of what follows:
+
+    \item Recall that if there exists an injection from a set $A \to B$, then $A \le B$. Using this logic,
+          it is clear that there are injective maps:
+
+          \begin{align*}
+              S_1 \hookrightarrow S_2, S_2 \hookrightarrow S_3, \dots, S_{m-1} \hookrightarrow S_m, \dots, S_{n-1} \hookrightarrow S_n
+          \end{align*}
+
+    \item Similarly, recall that if there is a surjection from a set $A \to B$, then $A \ge B$. Using
+          this logic, it is clear that there are surjective maps:
+
+          \begin{align*}
+              S_m \twoheadrightarrow S_{m+1}, S_{m+1} \twoheadrightarrow S_{m+2}, \dots, S_{n-1} \twoheadrightarrow S_n
+          \end{align*}
+
+          Thus, to clarify some syntax:
+
+          \begin{align*}
+              |A| \le |B| & \iff A \hookrightarrow B    \\
+              |A| \ge |B| & \iff A \twoheadrightarrow B
+          \end{align*}
+\end{itemize}
+
+\subsubsection*{Proof of Binomial Coefficient Unimodality}
+
+\begin{subproof}
+    Consider the fact that $\binom{n}{k}$ counts the lattice paths from $(0,0)$ to $v=(k,n-k)$. using
+    "N" and "E" steps. Similarly, $\binom{n}{k+1}$ (the next binomial coefficient in the sequence/pascal's
+    triangle) counts the lattice paths from $(0,0)$ to $w=(k+1,n-k-1)$. Assume that $k < \frac{n}{2}$. We can
+    draw a perpendicular bisector between $\overline{vw}$. At this point, note that this bisector must
+    intersect the lattice path from $(0,0)$ to $v$ at some point. This is because this lattice path
+    must pass through the points $(k, n-k-1)$, $(k-1,n-k-2)$, $\dots$, to some point on the $y$-axis below $n-k$.
+    This is because the perpendicular bisector must have a slope of $-1$. Thus, the lattice path must intersect
+    with one of these points to get to $k,n-k$. For every lattice path from $(0,0)$ to $v$,
+    we can construct a new lattice path from $(0,0)$ to $w$ by applying a reflexive property, reflex
+    the lattice path across the perpendicular bisector for every step after the last time the lattice path touches
+    the perpendicular bisector. Lastly, this reflected path must reach $w$. Consider the last point $a$ that the
+    lattice path touches the bisector. At $a$, the lattice path must take 2 steps up for every step to the right
+    in order to reach $v$. Similarly, at this point the lattice path would need to take 2 steps to the right
+    for every step up in order to reach $w$ Thus, when reflected at this point, the path that was going to
+    reach $v$ must reach $w$. Hence, there exists a injection between the binomial coefficients while
+    $k < \frac{n}{2}$. This function must be injective because given two paths that reach
+    $w$, we can simply reflect the paths across the perpendicular bisector from the last point of intersection
+    to the end of the path and reveal that the paths are the same lattice path to $v$.
+    So, for each $k$ where $k < \frac{n}{2}$: We trivially have that $\binom{n}{k} \ne \binom{n}{k+1}$ because
+    we can consider lattice paths that go directly to $w$. There is no lattice
+    path that goes directly to $v$ that can be a pre-image of this path.
+
+    \begin{align*}
+        \binom{n}{k} < \binom{n}{k+1}
+    \end{align*}
+
+    \noindent
+    Similarly, take $k > \frac{n}{2}$. We can construct the same situtation, except prove that there is an injection
+    from point $w$ to $v$ which would imply that:
+
+    \begin{align*}
+        \binom{n}{k+1} < \binom{n}{k} \iff \binom{n}{k} > \binom{n}{k+1}
+    \end{align*}
+
+    Hence, we have proven that the binomial coefficients are unimodal.
+\end{subproof}
+
+\cor{}{
+    The largest binomial coefficient among
+
+    \begin{align*}
+        \binom{n}{0}, \binom{n}{1}, \dots, \binom{n}{n}
+    \end{align*}
+
+    is $\binom{n}{\frac{n}{2}}$ if $n$ is even and
+    $\binom{n}{\floor{\frac{n}{2}}} = \binom{n}{\ceil{\frac{n}{2}}}$ if $n$ is odd.
+}
 
 \section{L12: Binomial coefficients and the binomial theorem III}
 
@@ -1401,12 +1505,12 @@ Recall the following two facts:
 
 \subsubsection*{Applied}
 
-Suppose that you're a designer of houses that you plan to put in a newly 
-constructed neighbourhood. Each house is basically the same, but can be adorned with 
-some of the following $n$ upgrades: 
+Suppose that you're a designer of houses that you plan to put in a newly
+constructed neighbourhood. Each house is basically the same, but can be adorned with
+some of the following $n$ upgrades:
 
 \begin{itemize}
-    \item Hard wood floors 
+    \item Hard wood floors
     \item Skylight
     \item Granite Countertops
     \item Stainless stell appliances
@@ -1414,9 +1518,9 @@ some of the following $n$ upgrades:
 \end{itemize}
 
 \noindent
-In order to be unique, you want to give each house a different set of options, BUT, 
-no house A has upgrades that are a subset of another house B's upgrades (otherwise 
-the owner of house A would be majorized by house B). By doing this, no two houses 
+In order to be unique, you want to give each house a different set of options, BUT,
+no house A has upgrades that are a subset of another house B's upgrades (otherwise
+the owner of house A would be majorized by house B). By doing this, no two houses
 are comparable (one house may have hardwood floors, and other a sun roof). \\
 
 \noindent
@@ -1424,7 +1528,7 @@ What is the maximum number of houses you can design under these conditions?
 
 \subsubsection*{Abstract}
 
-Consider the following poset (partially ordered set) for $S=\{x,y,z\}$: 
+Consider the following poset (partially ordered set) for $S=\{x,y,z\}$:
 
 \begin{center}
     \begin{tikzpicture}
@@ -1442,6 +1546,126 @@ Consider the following poset (partially ordered set) for $S=\{x,y,z\}$:
         \draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
     \end{tikzpicture}
 \end{center}
+
+\dfn{Anti-chains}{
+    Let $S$ be an arbitrary set. This is a collection of subsets that no subset is a
+    subset of another subset. \\
+
+    Consider a set $S = \{a,b,c,d,e\}$. Then:
+
+    \begin{itemize}
+        \item $\Big \{ \{a,b\}, \{b,c,d\}, \{a,d\}, \{a,c\} \Big \}$ is an anti-chain.
+        \item $\Big \{ \{a,b\}, \{a,b,c\}, \{c,d\} \Big \}$ is not.
+    \end{itemize}
+}
+
+\noindent
+What is the largest size of any antichain on $n$ elements? Note that this is the same
+question we posed before in the Applied section above. The answer to this question is
+given by Sperner's Theorem.
+
+
+\dfn{Chains}{
+    A \textit{chain} is a collection $\mathcal{C}$ of subsets of $\{1,2,\dots,n\}$ such that
+    if $A, B \in \mathcal{C}$, the either:
+
+    \begin{itemize}
+        \item $A \subseteq B$ or
+        \item $B \subseteq A$
+    \end{itemize}
+
+    A chain is considered \textit{maximal} if the chain contains one subset
+    of each possible size.
+}
+
+\qs{}{
+    How many maximal chains of $\{1,2, \dots, n\}$ are there?
+}
+\sol{
+    By the properties of constructing a chain, we can think of building a chain one
+    element at a time. There are $n$ choices for the first element in the the chain.
+    Let the first choice be called $a$. Then the start of our chain is $\{a\}$. Continuing
+    on there are $n-1$ choices for the next part of the chain. Call this $b$. Clearly,
+    our chain will be $\Big \{ \{a\}, \{a,b\}, \dots \Big \}$. Following this, there are cleary
+    $n!$ possible chains.
+}
+
+\thm{Sperner's Theorem}{
+    Let $S$ be a set of $n$ elements. Then the maximum size of an antichain is
+    $\binom{n}{\floor{\frac{n}{2}}}$
+}
+
+\begin{subproof}
+    Fix an antichain $\mathcal{A}$. Let $S$ be a set defined by
+
+    \begin{align*}
+        S = \{ (a,\mathcal{C}) : a \in \mathcal{A}, \text{ where } \mathcal{C} \text{ is a maximal chain with } a \in \mathcal{C} \}
+    \end{align*}
+
+    Note that $a \in \mathcal{C}$ and $a \in \mathcal{A}$. Every maximal chain can only
+    intersect with an antichain in one place. Suppose not. That is suppose that
+    a maximal chain $\mathcal{C}$ and antichain intersect in more than one place.
+    Without loss of generality assume that the chain and anti-chain intersect at
+    two subsets, $T_1, T_2$. By the definition of a chain, we have that either
+    $T_1 \subseteq T_2$ or $T_2 \subseteq T_1$. Assume $T_1 \subseteq T_2$. Then,
+    this is a contradiction. Since $T_1$ and $T_2$ are elements of the antichain,
+    they cannot be subsets of each other. So, chains and anti-chains can only intersect
+    \textit{once}. Because of this it is clear that the number of maximal chains is
+    an upperbound on the size of set $S$. Thus,
+
+    \begin{align*}
+        \#S \le n!
+    \end{align*}
+
+    Fix $a \in \mathcal{A}$ of size $k$. Exactly $k!(n-k)!$ maximal chains must contain
+    $a$. This is because in a maximal chain, it must contain subsets of each size so there
+    must be subsets of sizes $1,2, \dots, k-1$. Each of these subsets must be a subset
+    of $a$. Thus, with $k$ elements, there are $k!$ ways to build a maximal chain up to
+    $a$. Similarly, there are $n-k$ elements left to build the remaining maximal chain.
+
+    Define $a_k$ such that $a_k$ is the number of subsets in $\mathcal{A}$ that are
+    of size $k$.
+
+    \begin{align*}
+        a_k = \#\{a \in \mathcal{A} : \#a = k\}
+    \end{align*}
+
+    It follows that:
+
+    \begin{align*}
+        \#A = \sum_{k \ge 0} a_k
+    \end{align*}
+
+    This sum counts the number of subsets in $\mathcal{A}$ that are of size $k$ for
+    all sizes $k$ so it must be the number of elements in the antichain. At this point,
+    it can be recognized that:
+
+    \begin{align*}
+        \#S = \sum_{k \ge 0} a_k k!(n-k)!
+    \end{align*}
+
+    This is because for an arbitrary $k$, there are $a_k$ subsets of size $k$ in
+    $\mathcal{A}$ and each of these subsets can be paired with $k!(n-k)!$ maximal chains.
+    Thus, the total number of elements in $S$ (i.e. the total number of elments in the
+    antichain that are in any number of maximal chains) is the sum over all $k$. Thus,
+
+    \begin{align*}
+        \#S & = \sum_{k \ge 0} a_k k!(n-k)! \le n!                                                                             \\
+            & \iff \frac{1}{n!} \sum_{k \ge 0} a_k k!(n-k)! \le \frac{1}{n!} n!                                                \\
+            & \iff \sum_{k \ge 0} a_k \frac{k!(n-k)!}{n!} \le 1                                                                \\
+            & \iff \sum_{k \ge 0} a_k \frac{1}{\binom{n}{k}} \le 1                                                             \\
+            & \iff \binom{n}{\floor{\frac{n}{n}}} \sum_{k \ge 0} a_k \frac{1}{\binom{n}{k}} \le \binom{n}{\floor{\frac{n}{n}}} \\
+            & \iff \sum_{k \ge 0} a_k \le \binom{n}{\floor{\frac{n}{2}}}
+    \end{align*}
+
+    Thus,
+
+    \begin{align*}
+        \#\mathcal{A} = \sum_{k \ge 0} a_k \le \binom{n}{\floor{\frac{n}{2}}}
+    \end{align*}
+
+    So $\binom{n}{\floor{\frac{n}{2}}}$ is an upperbound on the size of an antichain.
+\end{subproof}
 
 \chapter{The Inclusion-Exclusion Principle and Applications}
 
@@ -1928,8 +2152,6 @@ subject to $0 \le x_i \le a_i$ for each $i$. \\
     the theorem.
 
 \end{subproof}
-
-\section{Practice Problems}
 
 \chapter{Recurrence Relations and Generating Functions}
 \section{L17: Some Number Sequences}
@@ -2776,7 +2998,7 @@ So,
 \end{align*}
 
 
-\section{L21: Exponential generating series}
+\section{L21: Exponential generating series (7.3)}
 
 Given a number sequence $$h_0, h_1, h_2, \dots$$ consider
 using the \textit{exponential} series:
@@ -2930,402 +3152,1176 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 \end{align*}
 }
 
+\section{L23: Catalan Numbers}
+
+\dfn{Rooted binary Tree}{
+    A \textit{rooted binary tree} is a tree with a root such that each vertex has a left
+    and right subtree. Let $G$ be the combinatorial set of these trees and
+    $\omega : G \to \mathbb{Z}_{\ge 0}$ be the weight function that counts the number
+    of vertices in the tree. Then a decomposition is as follows:
+
+    \begin{align*}
+        G \to \{ \emptyset \} \cup \{ \bullet \} \times G^2
+    \end{align*}
+
+    this is a weight preserving bijection. Hence we can obtain the functional equation:
+
+    \begin{align*}
+        g(x) = 1 + xg(x)^2
+    \end{align*}
+
+    Solving this formula for the quadratic equation gives us:
+
+    \begin{align*}
+        g(x) = \frac{1 \pm \sqrt{1 - 4x}}{2x}
+    \end{align*}
+
+    However, when exanding these equations we get that $\frac{1 + \sqrt{1 - 4x}}{2x}$ has
+    negative coefficients and thus is not a valid solution. Therefore, we have
+    (by expansion of taylor series)
+
+    \begin{align*}
+        g(x) = \frac{1 - \sqrt{1 - 4x}}{2x} = 1 + x + 2x^2 + 5x^3 + 14x^4 + 42x^5 \cdots
+    \end{align*}
+
+    Note that by our studies of generating series, $[x^n]g(x)$ is the number of rooted
+    binary trees with $n$ vertices. The coefficients of this expansion are the Catalan
+    numbers.
+}
+
+\subsubsection*{Dyck Paths}
+
+Note that catalan numbers also count the number of Dyck paths. A Dyck path is a path
+that starts at $(0,0)$ and ends at some arbitrary $(x,0)$. It will never fall below
+the $x$-axis and will only use / and $\backslash$ to move from point $(x,y)$ to
+$(x+1,y+1)$ or $(x+1,y-1)$.
+
+
+\qs{}{
+    Prove that the number of Dyck paths from $(0,0)$ to $(2n,0)$ is
+
+    \begin{align*}
+        C_n = \frac{1}{n + 1} \binom{2n}{n}
+    \end{align*}
+
+    in steps as follows:
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Count the number of paths from $(0,0)$ to $(2n,0)$.
+        \item Show the number of bad paths is equal to the number of paths from $(0,0)$
+              to $(2n,-2)$. Hint: consider the first time a path dips below the $x$-axis
+              and "reflect" every step after that first step below the x-axis.
+        \item Use the subtraction principle and simplify.
+    \end{enumerate}
+}
+
+\sol{
+
+    \begin{enumerate}[label=(\alph*)]
+        \item  We will first begin by counting the number of paths from $(0,0)$ to $(2n,0)$. There
+              are two ways to approach this. Since, we have to end at the same "level" as we start
+              we need the same amount of steps up as we have down. Thus, there are $\binom{2n}{n}$ ways
+              to pick the steps up and thus, the steps down are fixed. Second, we can consider all
+              of the steps between these points as one big set. There must be $n$ steps up and $n$
+              steps down. These steps can happen in any arragement. So, this question is just
+              the number of permutations of this set which is $\frac{(2n)!}{n!n!} = \binom{2n}{n}$.
+              Note that we must divide by $n!$ twice to account for the $n$ up steps that are
+              identical and the $n$ down steps that are identical.
+        \item We will now count the number of bad paths. A bad path is defined as any path
+              that crosses below the $x$-axis. We can count this by creating a bijection
+              bijection for a bad path from the first point that it crosses below the $x$-axis
+              and taking a reflected step for every step after that below the x-axis. This path
+              must end at $(2n,-2)$ because after it takes the bad step, there must have been more
+              down steps than up steps. Because of this in the original graph there must be 1 more
+              up step than down steps in the remaining path. Because we are reflecting each step,
+              the bijected path will end up with 1 more down step from the point at which it crossed
+              the $x$-axis which is at $y=-2$. To count the number of these paths, we can choose
+              the $n+1$ steps that had to be taken down so $\binom{2n}{n+1}$.
+        \item Lastly, using the subtraction principle, we have that the number of Dyck paths
+              is
+
+              \begin{align*}
+                  \binom{2n}{n} - \binom{2n}{n+1} & = \frac{(2n)!}{n!n!} - \frac{(2n)!}{(n+1)!(n-1!)}                  \\
+                                                  & = \frac{(2n!)}{n(n-1)!n!} - \frac{(2n)!}{(n+1)(n)!(n-1)!}          \\
+                                                  & = \frac{(2n)!}{n!(n-1)!} \Big ( \frac{1}{n} - \frac{1}{n+1} \Big ) \\
+                                                  & = \frac{(2n)!}{n!(n-1)!} \Big ( \frac{n+1 - n}{n(n+1)} \Big )      \\
+                                                  & = \frac{(2n)!}{n!(n-1)!} \Big ( \frac{1}{n(n+1)} \Big )            \\
+                                                  & =  \frac{(2n!)}{n!(n-1)! n(n+1)}                                   \\
+                                                  & = \frac{1}{n+1} \Big ( \frac{(2n)!}{n!(n-1)!n} \Big )              \\
+                                                  & = \frac{1}{n+1} \Big ( \frac{(2n)!}{n!n!} \Big )                   \\
+                                                  & = \frac{1}{n+1} \binom{2n}{n}
+              \end{align*}
+    \end{enumerate}
+}
+
+\qs{}{
+    A modification of the same argument shows the following: suppose $A$ and $B$ are
+    being voted upon and $A$ gets $a$ votes and $B$ gets $b$ votes with $a \ge b$. Now suppose
+    we count the votes one at a time, tracking who is leading at each step. Then the
+    total number of ways $A$ is always leading (or tied with) $B$ throughout the count
+    is $C(a+b,a)-C(a+b,a+1)$. How?
+}
+\sol{
+    This situation is counting the number of paths from $(0,0)$ to
+    $(a+b,a-b)$. Similar to the previous question we can first
+    calculate the number of total paths to $(a+b,a-b)$ and then
+    subtract out the bad paths. The number of paths from $(0,0)$ to
+    $(a+b,a-b)$ is $\binom{a+b}{a}$. To find the number of bad paths
+    we can apply the reflection principle. Suppose they are tied at
+    $k$ votes each meaning there have been $2k$ votes. Assume that the
+    $2k+1$ vote goes to $b$. There are $a-k$ votes left for $A$ and
+    $b-k-1$ votes left for $B$. Construct a bijection that reflects
+    every vote (i.e. gives votes for $A$ to $B$ and vis-versa) after
+    vote $2k+1$. Thus we will end with $b-1$ votes for $A$ and
+    $a+1$ votes for $B$ and thus the graph will end at $(a+b,b-a-2)$
+    because $b-1 - (a+1) = b-a-2$. Thus, the number of bad paths is
+    the number of ways to choose the $a+1$ votes for $B$ which is
+    $\binom{a+b}{a+1}$. Thus, the number of good paths is
+
+    \begin{align*}
+        \binom{a+b}{a} - \binom{a+b}{a+1}
+    \end{align*}
+}
+
+\qs{}{
+    Show
+
+    \begin{align*}
+        C_n = \frac{4n-2}{n+1} C_{n-1}
+    \end{align*}
+}
+\sol{
+    \begin{align*}
+        C_n & = \frac{4n-2}{n+1} C_{n-1}                                                  \\
+            & = \frac{4n-2}{n+1} \Bigg ( \frac{1}{n} \binom{2n-2}{n-1} \Bigg )            \\
+            & = \frac{4n-2}{n+1} \Bigg ( \frac{1}{n} \frac{(2n-2)!}{(n-1)!(n-1)!} \Bigg ) \\
+            & = \frac{4n-2}{n+1} \Bigg ( \frac{(2n-2)!}{(n-1)!n!} \Bigg )                 \\
+            & = \frac{2(2n-1)(2n-2)!}{(n+1)(n-1)!n!}                                      \\
+            & = \frac{n}{n} \Bigg ( \frac{2(2n-1)(2n-2)!}{(n+1)(n-1)!n!} \Bigg )          \\
+            & = \frac{2n(2n-1)(2n-2)!}{(n+1)(n!)(n!)}                                     \\
+            & = \frac{1}{n+1} \Bigg ( \frac{2n!}{n!n!} \Bigg )                            \\
+            & = \frac{1}{n+1} \binom{2n}{n}                                               \\
+            & = C_n
+    \end{align*}
+}
+
+\qs{}{
+    Show
+
+    \begin{align*}
+        C_n = \sum_{k=0}^n C_{k}C_{n-k+1}
+    \end{align*}
+}
+\sol{
+Let $S$ be the set of all Dyck paths from $(0,0)$ to $(2n,0)$.
+The LHS trivially counts the number of elements in $S$. Let $2k+2$
+be the arbitrary point on the $x$-axis where the path first
+touches. The path can be decomposed into two paths, one of
+length $2k$ (i.e. the part) and one of length $2n-2k-2$
+(i.e. the tail). Thus, this is counted by $C_kC_{n-k+1}$, so
+in total,
+
+\begin{align*}
+    \sum_{k=0}^n C_{k}C_{n-k+1}
+\end{align*}
+
+Thus, the LHS and RHS count the same set in two different ways
+and are equal.
+}
+
+\qs{}{
+    Let $2n$ equally spaced points on a circle be chosen.
+    Show the number of ways to join them in pairs with lines,
+    with no lines crossing is $C_n$. Hint: Use the recursion.
+    (Can you give a bijection?)
+}
+\sol{
+    Construct a bijection such that the first timee a line is touched
+    (i.e. a connector between two points within the circle), you move
+    up in the Dyck path and the second time you see the line, you move
+    down. This is well-defined, injective, and bijective. It is clearly,
+    well-defined because you can only get Dyck paths from this function.
+    It isn't possible to see the end of the line without seeing the
+    start of the line. Because of this, it is impossible to see
+    more down moves than up moves at any point. It is injective
+    because given a two Dyck paths that are the same, you can construct
+    two circles that are connected by reversing this process to
+    build the circle. Lastly, it is surjective because if you have
+    an arbitrary Dyck path, there will always be a circle that has
+    $2n$ points that will map to the Dyck path.
+}
+
+\qs{}{
+    Show that the number of SYT (Standard Young Tableau) of shape $(n,n)$ is $C_n$ \\
+
+    For clarity, a SYT of shape $(n,n)$ is a Ferrer Diagram with 2 rows with $n$ columns
+    each. In this shape, the boxes are labeled $1,2,\dots, 2n$ and each row
+    and column must be increasing.
+}
+\sol{
+    Construct a bijection between the set of SYT of shape $(n,n)$ and Dyck paths.
+    If the $k$-th element is in the first row, move up, else move down. This is
+    well-defined because in order to be a valid SYT, each row and column must be
+    increasing. If an invalid Dyck path is generated (i.e. goes below the
+    $x$-axis, then there must have been a row or column that was not increasing.)
+    The process of creating Dyck paths using this function is clearly injective
+    and bijective because each number is unique to a Dyck path.
+}
+
+
 \chapter{Homework}
 
 \section{Homework 1}
 
+\begin{enumerate}
+    \item How many nonempty words can be formed from three As and five B's? (The "words" are
+          "mathematical words" not necessarily "dictionary words". For example B, BAAB, ABABABBB are
+          possible words you need to count.)
+
+          \sol{
+              We must consider each possible length from $1$ to $8$. At each length
+              we can decompose by the number of $A$'s in the word. So, at
+              each length:
+
+              \begin{align*}
+                  \text{length 1: } & \binom{1}{0} + \binom{1}{1}                               \\
+                  \text{length 2: } & \binom{2}{0} + \binom{2}{1} + \binom{2}{2}                \\
+                  \text{length 3: } & \binom{3}{0} + \binom{3}{1} + \binom{3}{2} + \binom{3}{3} \\
+                  \text{length 4: } & \binom{4}{0} + \binom{4}{1} + \binom{4}{2} + \binom{4}{3} \\
+                  \text{length 5: } & \binom{5}{0} + \binom{5}{1} + \binom{5}{2} + \binom{5}{3} \\
+                  \text{length 6: } & \binom{6}{1} + \binom{6}{2} + \binom{6}{3}                \\
+                  \text{length 7: } & \binom{7}{2} + \binom{7}{3}                               \\
+                  \text{length 8: } & \binom{8}{3}
+              \end{align*}
+
+              Thus, the total number of words is: $200$
+          }
+
+    \item How many ternary $(0,1,2)$ sequences of length $10$ are there without any consecutive digits
+          the same?
+
+          \sol{
+              For the first digit in the sequence, there are $3$ choices. For every choice
+              after this, there can be no repeats with the previous digit. Hence there
+              are only $2$ choices. Thus, the total number of sequences is: $3 \cdot 2^9 = 1536$
+          }
+
+    \item What is the probability that if one letter is chosen at random from the word RECURRENCE and
+          one letter is chosen from RELATION, the two letters are the same?
+
+          \sol{
+              We need to consider the probability of drawing the same letter from both words.
+              There are only $3$ letters in common: $R, E, N$. So, the probablity must be
+
+              \begin{align*}
+                  \frac{3}{10}\cdot \frac{1}{8} + \frac{3}{10}\cdot \frac{1}{8} + \frac{1}{10}\cdot \frac{1}{8} = \frac{7}{80} = \frac{3}{28}
+              \end{align*}
+          }
+
+    \item Corrupt professor Z has a class of $50$ students. He needs to give exactly $10$ A's.
+          However five students already have a special deal (they are professor Z's nephews and nieces) and
+          will get A's for sure. How many ways can the $10$ A's be distributed?
+
+          \sol{
+              Given that $5$ students have fixed grades of $A$, there are only $5$ $A$'s
+              that can be distributed among the remaining $45$ students. So there are
+              $\binom{45}{5}$ ways to distribute the $A$'s in this situation.
+          }
+
+    \item Prove the identity: $$\sum_{i=1}^{n-1} i = \frac{n(n-1)}{2}$$ COMBINATORIALLY by counting the same
+          combinatorial set in two different ways (in other words, "double count"). (Do NOT give the standard
+          induction proof, nor the "Gauss argument" of summing $1+2+\cdots+n$ and layering with $n+\cdots+2+1$.)
+
+          \sol{
+              Let $S$ be a set of distinct handshakes between $n$ people. We
+              will count this in two ways:
+
+              \begin{itemize}
+                  \item There are clearly $\binom{n}{2}$ ways to form pairs in the room
+                        which much give each other handshakes. Following this,
+                        $\binom{n}{2} = \frac{n!}{2!(n-2)! = \frac{n(n-1)}{2}}$. This is
+                        exactly the RHS.
+                  \item Decompose the set $S$ by individuals initiating the handshake.
+                        The first person has $n-1$ choices to initiate a handshake.
+                        The second has $n-2$ choices, and so on. By the addition principle,
+                        we have $(n-1) + (n-2) + \cdots + 1 = \sum_{i=1}^{n-1} i$. which is
+                        exactly the LHS.
+              \end{itemize}
+
+              Thus, because the LHS and RHS count the same set. It is clear that
+              they are equivalent.
+          }
+\end{enumerate}
+
 \section{Homework 2}
+
+\begin{enumerate}
+    \item In how many ways can two red and four blue rooks be placed on an 8-by-8 board
+          so that no two rooks can attack one another?
+
+          \sol{
+              Construct an algorithm that places the rooks on the board. First,
+              place the red rooks individually on the board. Then, place the remaining
+              blue rooks. Each time a rook is placed, the board loses one row and column
+              of possible placements. Thus, there are $\frac{8^2\cdot 7^2}{2!}$. We must
+              divide by $2!$ because the rooks are identical. Similarly for the blue rooks,
+              there are $\frac{6^2\cdot 5^2\cdot 4^2 \cdot 3^2}{4!}$. Thus, the total number of ways is
+
+              \begin{align*}
+                  \frac{64\cdot 49\cdot 36\cdot 25\cdot 16\cdot 9}{2!\cdot 4!} = 8467200
+              \end{align*}
+          }
+
+    \item Prove that the number of permutations of $m$ $A$'s and at most $n$ $B$'s equals
+          $$\binom{m+n+1}{m+1}$$
+
+          \sol{
+              Consider the number of permutations of $m+1$ $A's$ and
+              $n$ $B$'s. This is trivially counted by
+
+              \begin{align*}
+                  \binom{m+n+1}{m+1}
+              \end{align*}
+
+              This is because there are $m+n+1$ positions to place the $A$'s and $B$'s.
+              There are $m+1$ positions to place the $A$'s which fixes the positions of $B$'s.
+              Consider a bijective function $f$ from set the set of permutations of $m+1$ $A$'s and $n$ $B$'s
+              to the set of permutations of $m$ $A$'s and at most $n$ $B$'s. \\
+
+              $f$ can be defined by the following process. Find the last occurance of
+              $A$ in the permutation and truncate the permutation at that point, removing
+              every letter after this $A$. We must show that this function is well-defined,
+              injective, and surjective. \\
+
+              This function is obviously \textit{well-defined}. There is gaurunteed to be
+              at least $1$ $A$. Thus, the output of this function will have $m+1-1=m$ $A$'s.
+              Similarly, there could have been $0$ to $n$ $B$'s after the last $A$. So,
+              there are at most $n$ $B$'s in the output. \\
+
+              This function is \textit{injective} because this process is reversible.
+              Consider $f(a_1) = f(a_2)$ where $a_1$ and $a_2$ are permutations of $m+1$ $A$'s and $n$ $B$'s.
+              This means that they each had an $A$ truncated at the same position and the
+              same number of $B$'s removed. Thus, $a_1=a_2$ which makes $f$ injective. \\
+
+              This function is \textit{surjective}. Consider a permutation $\pi$ with $m$ $A$'s
+              and at most $n$ $B$'s. We can append an $A$ to the end of $\pi$ and then append
+              $n - |\pi|$. This must be a permutation with $m+1$ $A$'s and $n$ $B$'s. So,
+              $f$ is surjective. \\
+          }
+
+    \item Determine the number of towers of the form
+          $\emptyset \subseteq A \subseteq B \subseteq \{1,2,\dots, n\}$. Note: there is no meaning to the word
+          "towers" other than what is given.
+
+          \sol{
+              Consider $x \in \{1,2,\dots,n\}$. There are three cases for $x$:
+
+              \begin{itemize}
+                  \item $x \in A$
+                  \item $x \in B$ (implying it is not in $A$)
+                  \item $x \in \{1,2,\dots,n\}$
+              \end{itemize}
+
+              With $n$ possibilities for $x$, there are $3^n$ possible towers. \\
+          }
+
+    \item Show by a combinatorial argument that $$\binom{2n}{2} = 2\binom{n}{2} + n^2$$
+
+          \sol{
+              Consider an arbitrary group $n$ boys and $n$ girls. Let $S$ be the set
+              of all pairs that we can form from these two groups. \\
+
+              The LHS precisely counts this because there are $\binom{2n}{2}$ ways
+              to pick pairs from $2n$ total people. Decompose $S$ into the girl-girl
+              pairs, boy-girl pairs, and boy-boy pairs. Clearly, there are $\binom{n}{2}$
+              ways to form pairs in both the girl-girl pairs and boy-boy pairs individually.
+              In the case of boy-girl pairs, we have $n$ choices for the first selection
+              and $n$ choices for the second. Thus, there are $n^2$ ways to form boy-girl
+              pairs. In total this is $2\binom{n}{2} + n^2$ which is the RHS. \\
+
+              Since the LHS and RHS count the same set, they are equivalent.
+          }
+
+    \item By counting the same set in two ways, prove the following identity:
+          $$\sum_{k=0}^n {k\choose m}{n\choose k}={n\choose m}2^{n-m}$$
+
+          \sol{
+          Let $S$ be the set of all commitees we can form with a subcomittee of $m$
+          members. The LHS counts the number of ways to form a committee and then
+          form a subcomittee of $m$ members across all $n$ which is exactly $S$.
+          The RHS forms the subcomittee first and then for the remaining $n-m$ people
+          they are either in the commitee or not which is counted by $\binom{n}{m}2^{n-m}$.
+          Since the LHS and RHS count the same set, they are equivalent. \\
+          }
+\end{enumerate}
 
 \section{Homework 3}
 
+\begin{enumerate}
+    \item You are an amazingly successful hotelier; one of your properties is "Chez Four-Thirteen".
+          Suppose there are $8$ distinguishable hotel rooms (numbered $101, 102,\dots,108$), each with maximum
+          occupancy of $4$ people. A bus comes in with anywhere from $1$ to $32$ (distinguishable) people, but you
+          do not know exactly how many. While waiting, you decide to calculate (making use of your UIUC Math
+          413 education) the number of possible ways the people on the bus can spend the night in those hotel
+          rooms so you can make a welcome sign. Determine this number. Use a computer to express the answer
+          with all the digits (e.g., $31415926535897932384626433832795$); write down for your check-in clerk
+          the order of magnitude (e.g., $10^{31}$). I recommend python to do the computation.
+    \item What is the probability that a poker hand contains exactly one pair
+          (that is, a poker hand with exactly four different ranks?)
+
+          \sol{
+              There are $\binom{52}{5}$ possible poker hands of size $5$. We can
+              construct an algorithm to count the number of hands with exactly one pair.
+
+              There are $\binom{13}{1}$ ways to choose the rank of the pair and
+              $\binom{4}{2}$ ways to pick the actual cards in the hand. For the remaing cards in the hand,
+              there are $\binom{12}{3}$ ways to pick ranks and $\binom{4}{1}$ choices
+              for each rank selected. In total, the probability is:
+
+              \begin{align*}
+                  \frac{\binom{13}{1} \binom{4}{2} \binom{12}{3}\binom{4}{1}^3}{\binom{52}{5}}
+              \end{align*}
+          }
+
+    \item A bagel store sells six different kinds of bagels. Suppose you choose $15$ bagels at random.
+          What is the probability that your choice contains at least one bagel of each kind?
+          If one of the bagels types is Sesame, what is the probability that your choice contains at
+          least three Sesame bagels AND AT LEAST ONE BAGEL OF EACH KIND?
+
+          \sol{
+              In the first situation we are solving the question:
+
+              \begin{align*}
+                  x_1 + x_2 + x_3 + x_4 + x_5 + x_6 = 15
+              \end{align*}
+
+              where each $x_i \ge 1$. This problem can equivalently rewritten such that
+
+              \begin{align*}
+                  y_1 + y_2 + y_3 + y_4 + y_5 + y_6 = 9
+              \end{align*}
+
+              where each $y_i \ge 0$. This has the solution:
+
+              \begin{align*}
+                  \binom{9+6-1}{6-1}=\binom{14}{5}
+              \end{align*}
+
+              Similarly, for the second question we have
+
+              \begin{align*}
+                  x_1 + x_2 + x_3 + x_4 + x_5 + x_6 = 15 \\
+              \end{align*}
+
+              where $x_1 \ge 3$ and $x_i \ge 1$ for $i \ne 1$. Equivalently written:
+
+              \begin{align*}
+                  y_1 + y_2 + y_3 + y_4 + y_5 + y_6 = 7 \\
+              \end{align*}
+
+              where each $y_i \ge 0$. This has a solution of
+
+              \begin{align*}
+                  \binom{7+6-1}{6-1}=\binom{12}{5}
+              \end{align*}
+
+              There are a total of $\binom{15+6-1}{6-1}=\binom{20}{5}$ ways to choose 15 bagels
+              without restrictions. Thus, the probabilities, respectively, are:
+
+              \begin{align*}
+                  \frac{\binom{14}{5}}{\binom{20}{5}} \quad \frac{\binom{12}{5}}{\binom{20}{5}}
+              \end{align*}
+          }
+
+    \item Let $n$ be a positive integer. Suppose we choose a sequence $i_1,i_2,\dots,i_n$ of integers
+          between $1$ and $n$ at random. What is the probability that the sequence contains
+          exactly $n-2$ different integers?
+
+          \sol{
+              If $n-2$ integers are different that means either $1$ digit is repeated $3$ times
+              or $2$ digits are repeated $2$ times. We can count the number of ways there are
+              to form sequences of each type.
+
+              \begin{itemize}
+                  \item $1$ digit is repeated $3$ times:
+
+                        \begin{align*}
+                            \binom{n}{1} \binom{n-1}{n-3} \frac{n!}{3!}
+                        \end{align*}
+
+                  \item $2$ digits are repeated $2$ times:
+
+                        \begin{align*}
+                            \binom{n}{2} \binom{n-2}{n-4} \frac{n!}{2!2!}
+                        \end{align*}
+              \end{itemize}
+
+              In total, there are obviously $n!$ ways to create sequence. So,
+              the probabilities is:
+
+              \begin{align*}
+                  \frac{\binom{n}{1} \binom{n-1}{n-3} \frac{n!}{3!} + \binom{n}{2} \binom{n-2}{n-4} \frac{n!}{2!2!}}{n!}
+              \end{align*}
+          }
+
+    \item Suppose $n$ people line up to get into $q$ different clubs. How many ways are there to do it?
+          (The people are distinguishable and the order people are in line matters.)
+
+          \sol{
+              This is simply stars and bars/string cutting problem. We have $n$
+              people total distributed among $q$ "boxes" where each box has at least
+              $0$ people in it. Thus, the number of ways to split this group up is:
+
+              \begin{align*}
+                  \binom{n+q-1}{q-1}
+              \end{align*}
+
+              However, the order of the line matters, so we must account for all
+              permutations of the line:
+
+              \begin{align*}
+                  \binom{n+q-1}{q-1}n!
+              \end{align*}
+          }
+
+
+\end{enumerate}
+
 \section{Homework 4}
+
+\begin{enumerate}
+    \item Use the pigeonhole principle to prove that the decimal expansion of a rational
+          number $\frac{m}{n}$ eventually is repeating. For example,
+          $$\frac{34,478}{99,900} = 0.34512512512512512\cdots$$
+
+    \item A student has $37$ days to prepare for an examination. From past experience she
+          knows that she will require no more than $60$ hours of study. She also wishes to
+          study at least $1$ hour per day. Show that no matter how she schedules her study
+          time (a whole number of hours per day, however), there is a succession of days
+          during which she will have studied exactly $13$ hours.
+
+          Consider the sequence of days where she has studied for $a_i$
+          hours on day $i$ (cummulative).
+
+          \begin{align*}
+              1 \le a_1 < a_2 < \cdots a_{37} \le 60
+          \end{align*}
+
+          It follows then that:
+
+          \begin{align*}
+              14 \le a_1 + 13 < a_2 + 13 < \cdots a_{37} + 13 \le 73
+          \end{align*}
+
+          We want to show that there exists $a_i = a_j + 13$ such that $j \le i$ as
+          this would imply a sequence of days where she studied for $13$ hours.
+
+          Between the two sequences, there are clearly, $37\cdot2 = 74$ numbers ranging in
+          value from $1$ to $73$. By the pigeonhole principle, there
+          are $74$ variables (pigeons) and $73$ numbers (pigeonholes) so
+          there must be two "variables", i.e. an $a_i$ and $a_j + 13$
+          such that $a_i = a_j + 13$.
+
+          Thus, the student must have studied for exactly $13$ hours on some sequence
+          of days.
+
+    \item Prove that, for any $n + 1$ integers $a_1, a_2, \cdots ,a_{n+1}$, there exist two of the integers
+          $a_i$ and $a_j$ with $i\ne j$ such that $a_i - a_j$ is divisible by $n$.
+
+          When dividing numbers by $n$, there are only $n$ possible remainders
+          $0,1,2,\cdots,n-1$. Since we have $n+1$ numbers, two of them must share
+          the same remainder. Define the following:
+
+          \begin{align*}
+              a_i & = c_1n+r \\
+              a_j & = c_2n+r
+          \end{align*}
+
+          It follows that:
+
+          \begin{align*}
+              a_i - b_j & = (c_1n + r) - (c_2n + r) \\
+                        & = c_1n - c_2n             \\
+                        & = n(c_1-c_2)
+          \end{align*}
+
+          Thus, by the definition of division, $n$ divides some $a_i - a_j$.
+
+    \item There are $100$ people at a party. Each person has an even number (possibly
+          zero) of acquaintances. Prove that there are three people at the party with the
+          same number of acquaintances.
+
+
+
+    \item Suppose that the $mn$ people of a marching band are standing in a rectangular
+          formation of $m$ rows and $n$ columns in such a way that in each row each person
+          is taller than the one to his or her left. Suppose that the leader rearranges the
+          people in each column in increasing order of height from front to back. Show
+          that the rows are still arranged in increasing order of height from left to right.
+
+\end{enumerate}
 
 \section{Homework 5}
 
+\begin{enumerate}
+    \item Use \textit{combinatorial} reasoning to prove the identity (in the form given)
+          $$\binom{n}{k} - \binom{n-3}{k} = \binom{n-1}{k-1} + \binom{n-2}{k-1}+\binom{n-3}{k-1}$$
+          (\textit{Hint}: Let $S$ be a set with three distinguished elements $a,b$ and $c$ and count certain
+          $k$-subsets o $S$.)
+
+    \item Let $n$ be a positive integer. Prove that
+          $$
+              \sum_{k=0}^n (-1)^k \binom{n}{k}^2 = \begin{cases}
+                  0                      & \text{if } n \text{ is odd} \\
+                  (-1)^{m} \binom{2m}{m} & \text{if } n=2m
+              \end{cases}
+          $$
+          (\textit{Hint}: For $n=2m$, consider the coefficient of $x^n$ in $(1-x^2)^n=(1+x)^n(1-x)^{-n}$.)\
+
+    \item By integrating the binomial expansion, prove that, for a positive integer $n$,
+          $$1 + \frac{1}{2}\binom{n}{1} + \frac{1}{3}\binom{n}{2} + \cdots + \frac{1}{n+1}\binom{n}{n} = \frac{2^{n+1}-1}{n+1}$$
+
+    \item Let $n$ and $k$ be positive integers. Give a combinatorial proof of the identity
+          $$n(n+1)2^{n-2} = \sum_{k=1}^{n}k^2\binom{n}{k}$$
+
+    \item Let nand k be positive integers. Give a combinatorial proof that
+          $$\sum_{k=1}^{n} k \binom{n}{k}^2 = n \binom{2n-1}{n-1}$$
+\end{enumerate}
+
 \section{Homework 6}
+
+\begin{enumerate}
+    \item Prove that the only antichain of $S = {1, 2, 3, 4}$ of size $6$ is the antichain of all
+          $2$-subsets of $S$.
+
+    \item Construct a partition of the subsets of ${1, 2, 3, 4, 5}$ into symmetric chains.
+
+    \item A talk show host has just bought $10$ new jokes. Each night he tells some of the
+          jokes. What is the largest number of nights on which you can tune in so that
+          you never hear on one night at least all the jokes you heard on one of the other
+          nights? (Thus, for instance, it is acceptable that you hear jokes $1$, $2$, and $3$ on
+          one night, jokes $3$ and $4$ on another, and jokes $1$, $2$, and $4$ on a third. It is not
+          acceptable that you hear jokes $1$ and $2$ on one night and joke $2$ on another night.)
+
+    \item Prove the identity of Exercise 25 using the binomial theorem and the relation
+          $(1+x)^{m_1}(1+x)^{m_2} = (1+x)^{m1+m2}$.
+
+    \item Prove that $$\sum_{n_1 + n_2 + n_3 = n} \binom{n}{n_1\cdot n_2\cdot n_3}(-1)^{n_1 + n_2 + n_3} = 1$$
+          where the summation extends over all nonnegative integral solutions of $n_1 + n_2 + n_3 = n$.
+\end{enumerate}
 
 \section{Homework 7}
 
-\qs{}{
-    Determine the number of integral solutions of the equation
+\begin{enumerate}
+    \item Determine the number of integral solutions of the equation $$x_1 + x_2 + x_3 + x_4 = 20$$ that satisfy
+          $$1 \le x_1 \le 6, 0 \le x_2 \le 7, 4 \le x_3 \le 8, 2 \le x_4 \le 6$$
 
-    \begin{align*}
-        x_1 + x_2 + x_3 + x_4 = 20
-    \end{align*}
+          \sol{
+              We first need to reformat the question with adjusted restrictions:
 
-    that satisfy
+              \begin{align*}
+                   & y_1 + y_2 + y_3 + y_4 = 13                                         \\
+                   & 0 \le y_1 \le 5, 0 \le y_2 \le 7, 0 \le y_3 \le 4, 0 \le y_4 \le 4
+              \end{align*}
 
-    \begin{align*}
-        1 \le x_1 \le 6, 0 \le x_2 \le 7, 4 \le x_3 \le 8, 2 \le x_4 \le 6
-    \end{align*}
-}
-\sol{
-    We first need to reformat the question with adjusted restrictions:
+              This can be solved using the inclusion-exclusion principle: \\
 
-    \begin{align*}
-         & y_1 + y_2 + y_3 + y_4 = 13                                         \\
-         & 0 \le y_1 \le 5, 0 \le y_2 \le 7, 0 \le y_3 \le 4, 0 \le y_4 \le 4
-    \end{align*}
+              Let $S$ be the set of all solutions to the above equations where
+              each $y_i \ge 0$. By stars and bars,
 
-    This can be solved using the inclusion-exclusion principle: \\
+              $$
+                  |S| = \binom{13 + 4 - 1}{13} = \binom{16}{13}
+              $$
 
-    Let $S$ be the set of all solutions to the above equations where
-    each $y_i \ge 0$. By stars and bars,
+              Let $A_i$ be the set of all solutions such that $y_i \ge a_i$ where
+              $a_i$ is the exclusive upper integral bound for $y_i$ (e.g. $y_1 \ge 6$) \\
 
-    $$
-        |S| = \binom{13 + 4 - 1}{13} = \binom{16}{13}
-    $$
+              \begin{align*}
+                  |A_1| = \binom{7 + 4 - 1}{7} = \binom{10}{7}         \\
+                  |A_2| = \binom{5 + 4 - 1}{5} = \binom{8}{5}          \\
+                  |A_3| = \binom{8 + 4 - 1}{8} = \binom{11}{8}         \\
+                  |A_4| = \binom{8 + 4 - 1}{8} = \binom{11}{8}         \\
+                  |A_1 \cap A_2| = 0                                   \\
+                  |A_1 \cap A_3| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
+                  |A_1 \cap A_4| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
+                  |A_2 \cap A_3| = \binom{0 + 4 - 1}{0} = \binom{3}{0} \\
+                  |A_2 \cap A_4| = \binom{0 + 4 - 1}{0} = \binom{3}{0} \\
+                  |A_3 \cap A_4| = \binom{3 + 4 - 1}{3} = \binom{6}{3}
+              \end{align*}
 
-    Let $A_i$ be the set of all solutions such that $y_i \ge a_i$ where
-    $a_i$ is the exclusive upper integral bound for $y_i$ (e.g. $y_1 \ge 6$) \\
+              Note that the intersection of any 3 sets will have no solution. \\
 
-    \begin{align*}
-        |A_1| = \binom{7 + 4 - 1}{7} = \binom{10}{7}         \\
-        |A_2| = \binom{5 + 4 - 1}{5} = \binom{8}{5}          \\
-        |A_3| = \binom{8 + 4 - 1}{8} = \binom{11}{8}         \\
-        |A_4| = \binom{8 + 4 - 1}{8} = \binom{11}{8}         \\
-        |A_1 \cap A_2| = 0                                   \\
-        |A_1 \cap A_3| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
-        |A_1 \cap A_4| = \binom{2 + 4 - 1}{2} = \binom{5}{2} \\
-        |A_2 \cap A_3| = \binom{0 + 4 - 1}{0} = \binom{3}{0} \\
-        |A_2 \cap A_4| = \binom{0 + 4 - 1}{0} = \binom{3}{0} \\
-        |A_3 \cap A_4| = \binom{3 + 4 - 1}{3} = \binom{6}{3}
-    \end{align*}
+              Substituting this into the complementary form of the inclusion-exclusion
+              principle, we get:
 
-    Note that the intersection of any 3 sets will have no solution. \\
+              \begin{align*}
+                  \binom{16}{13} - \Bigg ( & \binom{10}{7} + \binom{8}{5} + \binom{11}{8} + \binom{11}{8}                       \\
+                                           & - \binom{5}{2} - \binom{5}{2} - \binom{3}{0} - \binom{3}{0} - \binom{6}{3} \Bigg ) \\
+                                           & = 96
+              \end{align*}
+          }
 
-    Substituting this into the complementary form of the inclusion-exclusion
-    principle, we get:
+    \item Determine the number of permutations of $\{1, 2, \dots, 9\}$ in
+          which at least one odd integer is in its natural position.
+          \sol{
+              This is an application of the inclusion-exclusion principle. \\
 
-    \begin{align*}
-        \binom{16}{13} - \Bigg ( & \binom{10}{7} + \binom{8}{5} + \binom{11}{8} + \binom{11}{8}                       \\
-                                 & - \binom{5}{2} - \binom{5}{2} - \binom{3}{0} - \binom{3}{0} - \binom{6}{3} \Bigg ) \\
-                                 & = 96
-    \end{align*}
-}
+              Let $A_i$ be the set of all permutations such that $i$ is in its natural
+              position. \\
 
-\qs{}{
-    Determine the number of permutations of $\{1, 2, \dots, 9\}$ in
-    which at least one odd integer is in its natural position.
-}
-\sol{
-    This is an application of the inclusion-exclusion principle. \\
+              We must calculate $|A_1 \cup A_3 \cup A_5 \cup A_7 \cup A_9|$ for the inclusion-exclusion
+              principle. \\
 
-    Let $A_i$ be the set of all permutations such that $i$ is in its natural
-    position. \\
+              For the sizes of each set individually, the size of each set
+              must be $8!$ because there is one option for the position that
+              must be in place and then we  must place the 8 remaining numbers.
+              There are $\binom{5}{1}$ ways to pick the odd number in place. \\
 
-    We must calculate $|A_1 \cup A_3 \cup A_5 \cup A_7 \cup A_9|$ for the inclusion-exclusion
-    principle. \\
+              Following this pattern we can build the inclusion-exclusion principle
+              as follows:
 
-    For the sizes of each set individually, the size of each set
-    must be $8!$ because there is one option for the position that
-    must be in place and then we  must place the 8 remaining numbers.
-    There are $\binom{5}{1}$ ways to pick the odd number in place. \\
+              \begin{align*}
+                   & = \binom{5}{1} 8! - \binom{5}{2}7! + \binom{5}{3} 6! - \binom{5}{4} 5! + \binom{5}{5}4! \\
+                   & = 157824
+              \end{align*}
+          }
 
-    Following this pattern we can build the inclusion-exclusion principle
-    as follows:
+    \item What is the number of ways to place six nonattacking rooks on
+          the 6-by-6 boards with forbidden positions as shown?
 
-    \begin{align*}
-         & = \binom{5}{1} 8! - \binom{5}{2}7! + \binom{5}{3} 6! - \binom{5}{4} 5! + \binom{5}{5}4! \\
-         & = 157824
-    \end{align*}
-}
+          \begin{align*}
+              \young(\times\times~~~~,\times\times~~~~,~~\times\times~~,~~\times\times~~,~~~~\times\times,~~~~\times\times)
+          \end{align*}
 
-\qs{}{
-    What is the number of ways to place six nonattacking rooks on
-    the 6-by-6 boards with forbidden positions as shown?
+          \sol{
+              This is an application of the inclusion-exclusion principle. \\
 
-    \begin{align*}
-        \young(\times\times~~~~,\times\times~~~~,~~\times\times~~,~~\times\times~~,~~~~\times\times,~~~~\times\times)
-    \end{align*}
-}
-\sol{
-    This is an application of the inclusion-exclusion principle. \\
+              Let $S_n$ be the set of all boards with nonattacking rooks on an $n \times n$ board.
+              Clearly, there are $n!$ boards within $S_n$. This can be
+              observed by constructing an algorithm to place one rook at a time. \\
 
-    Let $S_n$ be the set of all boards with nonattacking rooks on an $n \times n$ board.
-    Clearly, there are $n!$ boards within $S_n$. This can be
-    observed by constructing an algorithm to place one rook at a time. \\
+              Let $A_i$ be the set of all boards with exactly 1 rook in the forbidden
+              in row $i$. \\
 
-    Let $A_i$ be the set of all boards with exactly 1 rook in the forbidden
-    in row $i$. \\
+              We must calculate $$|A_1^c \cap A_2^c \cap \cdots \cap A_n^c|$$
 
-    We must calculate $$|A_1^c \cap A_2^c \cap \cdots \cap A_n^c|$$
+              Note that it is unecessary to consider each subset of $A_i$ individually,
+              but rather we should consider the sum of the selected subsets. This gives
+              the following identity
 
-    Note that it is unecessary to consider each subset of $A_i$ individually,
-    but rather we should consider the sum of the selected subsets. This gives
-    the following identity
+              \begin{align*}
+                  \sum |A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}| = r_k (n - k)!
+              \end{align*}
 
-    \begin{align*}
-        \sum |A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_k}| = r_k (n - k)!
-    \end{align*}
+              where $r_k$ is the number of ways to place $k$ rooks in forbidden positions. \\
 
-    where $r_k$ is the number of ways to place $k$ rooks in forbidden positions. \\
+              Substituting this into the complementary form of the inclusion-exclusion
+              principle, we get:
 
-    Substituting this into the complementary form of the inclusion-exclusion
-    principle, we get:
+              \begin{align*}
+                   & 6! - (r_1(6 - 1)! - r_2(6 - 2)! + r_3(6 - 3)! - r_4(6 - 4)! + r_5(6 - 5)! - r_6(6 - 6)!) \\
+                   & = 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5(1!) + r_6(0!)                         \\
+                   & = 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5 + r_6
+              \end{align*}
 
-    \begin{align*}
-         & 6! - (r_1(6 - 1)! - r_2(6 - 2)! + r_3(6 - 3)! - r_4(6 - 4)! + r_5(6 - 5)! - r_6(6 - 6)!) \\
-         & = 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5(1!) + r_6(0!)                         \\
-         & = 6! - r_1(5!) + r_2(4!) - r_3(3!) + r_4(2!) - r_5 + r_6
-    \end{align*}
+              All that remains is to calculate $r_1, r_2, \dots, r_6$. \\
 
-    All that remains is to calculate $r_1, r_2, \dots, r_6$. \\
+              \begin{align*}
+                   & r_1 = 12                                                                                                                                         \\
+                   & r_2 = \binom{3}{1}\cdot (2)+ \binom{3}{2} (4\cdot 4) = 3 \cdot 2 + 3 \cdot 16 = 6 + 48 = 54                                                      \\
+                   & r_3 = \binom{3}{2} \binom{2}{1} \cdot (2 \cdot 4) + \binom{3}{3} (4 \cdot 4 \cdot 4) = 3\cdot 2 \cdot 2 \cdot 4 + 1\cdot 64 = 48+64= 112         \\
+                   & r_4 = \binom{3}{2} \binom{2}{1} \cdot 2 + \binom{3}{1} \cdot 2 \cdot 4 \cdot 4 = 3\cdot 2\cdot 2\cdot 2 + 3\cdot 2\cdot 4\cdot 4 = 12 + 96 = 108 \\
+                   & r_5 = \binom{3}{2} \binom{2}{1} \cdot 2 \cdot 4 = 48                                                                                             \\
+                   & r_6 = 2 \cdot 2 \cdot 2 = 8
+              \end{align*}
 
-    \begin{align*}
-         & r_1 = 12                                                                                                                                         \\
-         & r_2 = \binom{3}{1}\cdot (2)+ \binom{3}{2} (4\cdot 4) = 3 \cdot 2 + 3 \cdot 16 = 6 + 48 = 54                                                      \\
-         & r_3 = \binom{3}{2} \binom{2}{1} \cdot (2 \cdot 4) + \binom{3}{3} (4 \cdot 4 \cdot 4) = 3\cdot 2 \cdot 2 \cdot 4 + 1\cdot 64 = 48+64= 112         \\
-         & r_4 = \binom{3}{2} \binom{2}{1} \cdot 2 + \binom{3}{1} \cdot 2 \cdot 4 \cdot 4 = 3\cdot 2\cdot 2\cdot 2 + 3\cdot 2\cdot 4\cdot 4 = 12 + 96 = 108 \\
-         & r_5 = \binom{3}{2} \binom{2}{1} \cdot 2 \cdot 4 = 48                                                                                             \\
-         & r_6 = 2 \cdot 2 \cdot 2 = 8
-    \end{align*}
+              Substituting these values into the formula, we get:
 
-    Substituting these values into the formula, we get:
+              \begin{align*}
+                  6! - (12(5!) - 54(4!) + 112(3!) - 108(2!) + 48 - 8) = 80
+              \end{align*}
+          }
 
-    \begin{align*}
-        6! - (12(5!) - 54(4!) + 112(3!) - 108(2!) + 48 - 8) = 80
-    \end{align*}
-}
+\end{enumerate}
 
 \section{Homework 8}
 
-\qs{}{
-    How many ways are there to arrange the letters in INTELLIGENT
-    with at least two pairs of consecutive identical letters? (For example
-    ITTNELLGENI is an arrangement we want to count, since it has “TT”
-    and “LL”.)
-}
-\sol{
-    This is an application of the inclusion-exclusion principle. \\
+\begin{enumerate}
+    \item How many ways are there to arrange the letters in INTELLIGENT
+          with at least two pairs of consecutive identical letters? (For example
+          ITTNELLGENI is an arrangement we want to count, since it has “TT”
+          and “LL”.)
 
-    Let $A_i$ be the set of all arrangements with exactly $i$ pairs of consecutive
-    identical letters. \\
+          \sol{
+              This is an application of the inclusion-exclusion principle. \\
 
-    We must calculate $$|A_2 \cup A_3 \cup \cdots \cup A_5|$$
+              Let $A_i$ be the set of all arrangements with exactly $i$ pairs of consecutive
+              identical letters. \\
 
-    For $A_2$, there are $\binom{5}{2}$ ways to choose the two pairs of consecutive
-    identical letters. There are 7 remaining letters with 3 remaining pairs
-    which can be arranged in $\frac{7!}{2!2!2!}$ ways. \\
+              We must calculate $$|A_2 \cup A_3 \cup \cdots \cup A_5|$$
 
-    For $A_3$, there are $\binom{5}{3}$ ways to choose the three pairs of consecutive
-    identical letters. There are 5 remaining letters with 2 remaining pairs
-    which can be arranged in $\frac{5!}{2!2!}$ ways. However,
-    we must consider that the previous calculation $A_2$ double counted
-    elements of $A_3$ by the number of pairs that were chosen, which was
-    $2$. We must multiply this in to account for this.  \\
+              For $A_2$, there are $\binom{5}{2}$ ways to choose the two pairs of consecutive
+              identical letters. There are 7 remaining letters with 3 remaining pairs
+              which can be arranged in $\frac{7!}{2!2!2!}$ ways. \\
 
-    Following this pattern, we can see the final answer is
+              For $A_3$, there are $\binom{5}{3}$ ways to choose the three pairs of consecutive
+              identical letters. There are 5 remaining letters with 2 remaining pairs
+              which can be arranged in $\frac{5!}{2!2!}$ ways. However,
+              we must consider that the previous calculation $A_2$ double counted
+              elements of $A_3$ by the number of pairs that were chosen, which was
+              $2$. We must multiply this in to account for this.  \\
 
-    \begin{align*}
-        \binom{5}{2}\frac{9!}{(2!)^3} - 2\cdot \binom{5}{3}\frac{8!}{(2!)^2} + 3\cdot \binom{5}{4}\frac{7!}{(2!)} - 4\cdot \binom{5}{5}6!
-    \end{align*}
+              Following this pattern, we can see the final answer is
 
-    \nt{
-        Could probably use better explanations on why we need to multiply
-        by the number of pairs chosen in the previous calculation.
-    }
-}
+              \begin{align*}
+                  \binom{5}{2}\frac{9!}{(2!)^3} - 2\cdot \binom{5}{3}\frac{8!}{(2!)^2} + 3\cdot \binom{5}{4}\frac{7!}{(2!)} - 4\cdot \binom{5}{5}6!
+              \end{align*}
 
-\qs{}{
-    Let $n$ be a positive integer and let $p_1, p_2, \dots, p_n$ be
-    all of the different prime numbers that divide $n$. Consider the
-    Euler function $\phi$ defined by
+              \nt{
+                  Could probably use better explanations on why we need to multiply
+                  by the number of pairs chosen in the previous calculation.
+              }
+          }
 
-    \begin{align*}
-        \phi(n) = \big | \{ k : 1 \le k \le n, \gcd{(k,n)} = 1 \} \big |
-    \end{align*}
+    \item Let $n$ be a positive integer and let $p_1, p_2, \dots, p_n$ be
+          all of the different prime numbers that divide $n$. Consider the
+          Euler function $\phi$ defined by
 
-    Use the inclusion-exclusion principle to show that
+          \begin{align*}
+              \phi(n) = \big | \{ k : 1 \le k \le n, \gcd{(k,n)} = 1 \} \big |
+          \end{align*}
 
-    \begin{align*}
-        \phi(n) = n \prod_{i=1}^{n} 1 - \frac{1}{p_i}
-    \end{align*}
-}
+          Use the inclusion-exclusion principle to show that
 
-\qs{}{
-    Prove that the Fibonacci sequence is the solution of the
-    recurrence relation
+          \begin{align*}
+              \phi(n) = n \prod_{i=1}^{n} 1 - \frac{1}{p_i}
+          \end{align*}
 
-    \begin{align*}
-        a_n = 5a_{n-4} + 3a_{n-5}, (n \ge 5)
-    \end{align*}
+    \item Prove that the Fibonacci sequence is the solution of the
+          recurrence relation $$ a_n = 5a_{n-4} + 3a_{n-5}, (n \ge 5)$$
+          where $a_0=0, a_1=1, a_2=1, a_3=2, a_4=3$. Then use this formula
+          to show that the Fibonacci numbers satisfy the condition that
+          $f_n$ is divisble by $5$ if and only if $n$ is divisible by $5$.
 
-    where $a_0=0, a_1=1, a_2=1, a_3=2, a_4=3$. Then use this formula
-    to show that the Fibonacci numbers satisfy the condition that
-    $f_n$ is divisble by $5$ if and only if $n$ is divisible by $5$.
-}
+    \item Let $h_n$ equal the number of different ways in which the
+          squares of a $1 \times n$ chessboard can be colored, using the
+          colors red, white, and blue so that no two squares that are
+          colored red are adjacent. Find and verify a recurrence relation
+          that $h_n$ satisfies. Then find a formula for $h_n$ (using the
+          characteristic equation method).
 
-\qs{}{
-    Let $h_n$ equal the number of different ways in which the
-    squares of a $1 \times n$ chessboard can be colored, using the
-    colors red, white, and blue so that no two squares that are
-    colored red are adjacent. Find and verify a recurrence relation
-    that $h_n$ satisfies. Then find a formula for $h_n$ (using the
-    characteristic equation method).
-}
+    \item The \textit{Lucas numbers} $l_0, l_1, l_2, \dots, l_n, \dots$
+          are defined using the same recurrence relation defining the
+          Fibonacci numbers, but with different intial conditions:
+          $$l_n = l_{n-1} + l_{n-2}, (n \ge 2) \quad l_0 = 2, l_1 = 1$$
 
-\qs{}{
-    The \textit{Lucas numbers} $l_0, l_1, l_2, \dots, l_n, \dots$
-    are defined using the same recurrence relation defining the
-    Fibonacci numbers, but with different intial conditions:
+          \noindent
+          Prove that
 
-    \begin{align*}
-        l_n = l_{n-1} + l_{n-2}, (n \ge 2) \quad l_0 = 2, l_1 = 1
-    \end{align*}
+          \begin{itemize}
+              \item $l_n = f_{n-1} + f_{n+1} \text{ for } n \ge 1$
+              \item $l_0^2 + l_1^2 + \cdots + l_n^2 = l_n l_{n+1} + 2 \text{ for } n \ge 0$
+          \end{itemize}
 
-    Prove that
+    \item Let $a_n$ equal  the number of ternary strings of length $n$ made
+          up of $0$s, $1$s, and $2$s such that the substrings $00$, $01$, $10$,
+          and $11$ never occur. Prove that $$a_n = a_{n-1} + 2a_{n-2}$$
+          for $n \ge 2$ with $a_0 = 1$ and $a_1=3$. Then find a formula for
+          $a_n$.
 
-    \begin{itemize}
-        \item $l_n = f_{n-1} + f_{n+1} \text{ for } n \ge 1$
-        \item $l_0^2 + l_1^2 + \cdots + l_n^2 = l_n l_{n+1} + 2 \text{ for } n \ge 0$
-    \end{itemize}
-}
+    \item A population grows as follows: in the current generation,
+          each Canadian chooses one American for the next generation,
+          and each American chooses one Canadian and one American for
+          the next generation. Generation 0 consists of one Canadian.
+          What is the size of generation $n$? (Here we assume all older
+          generations leave when the new generation is chosen.)
 
-\qs{}{
-    Let $a_n$ equal  the number of ternary strings of length $n$ made
-    up of $0$s, $1$s, and $2$s such that the substrings $00$, $01$, $10$,
-    and $11$ never occur. Prove that
-
-    \begin{align*}
-        a_n = a_{n-1} + 2a_{n-2}
-    \end{align*}
-
-    for $n \ge 2$ with $a_0 = 1$ and $a_1=3$. Then find a formula for
-    $a_n$.
-}
-
-\qs{}{
-    A population grows as follows: in the current generation,
-    each Canadian chooses one American for the next generation,
-    and each American chooses one Canadian and one American for
-    the next generation. Generation 0 consists of one Canadian.
-    What is the size of generation $n$? (Here we assume all older
-    generations leave when the new generation is chosen.)
-}
-
+\end{enumerate}
 
 \section{Homework 9}
 
-\qs{}{
-    Prove that the partition function $p(n)(=\text{number of partitions of } n)$
-    satisfies $p(n+1) > p(n)$.
-}
-\sol{
-    By the definition of a partition, we know there are $p(n)$ sequences of decreasing
-    positive integers that sum to $n$. \\
+\begin{enumerate}
+    \item Prove that the partition function $p(n)(=\text{number of partitions of } n)$
+          satisfies $p(n+1) > p(n)$.
 
-    For each sequence, we can append a $1$ to the end to construct a new sequence,
-    which will still be decreasing and sum to $n+1$. Therefore, we know that $p(n+1)$
-    is \textit{at least} $p(n)$. \\
+          \sol{
+              By the definition of a partition, we know there are $p(n)$ sequences of decreasing
+              positive integers that sum to $n$. \\
 
-    Additionally, we can construct a new partition of the sequence $\{n+1, 0, 0, \dots\}$.
-    This will be a partition of $n+1$ trivially. Additionally, this partition cannot
-    be a partition of any integer less than $n+1$ as the sum is above $n$. Since,
-    this partition is not in $n$, we know that $p(n+1) > p(n)$.
-}
+              For each sequence, we can append a $1$ to the end to construct a new sequence,
+              which will still be decreasing and sum to $n+1$. Therefore, we know that $p(n+1)$
+              is \textit{at least} $p(n)$. \\
 
-\qs{}{
-    For each integer $n > 2$ determine a self-conjugate partitoin of $n$
-    that has at least two parts.
-}
-\sol{
-    There are two cases to consider:
+              Additionally, we can construct a new partition of the sequence $\{n+1, 0, 0, \dots\}$.
+              This will be a partition of $n+1$ trivially. Additionally, this partition cannot
+              be a partition of any integer less than $n+1$ as the sum is above $n$. Since,
+              this partition is not in $n$, we know that $p(n+1) > p(n)$.
+          }
 
-    \begin{itemize}
-        \item $n$ is odd \\
+    \item For each integer $n > 2$ determine a self-conjugate partitoin of $n$
+          that has at least two parts.
 
-              We can construct the follwing partition of $n$:
+          \sol{
+              There are two cases to consider:
+
+              \begin{itemize}
+                  \item $n$ is odd \\
+
+                        We can construct the follwing partition of $n$:
+
+                        \begin{align*}
+                            \{\frac{n-1}{2} + 1, 1_1, 1_2, \dots, 1_{\frac{n-1}{2}}\}
+                        \end{align*}
+
+                        where there are $\frac{n-1}{2}$ $1$s. This is self-conjugate as it will create
+                        Ferrer Diagrams of the form:
+
+                        \begin{align*}
+                            \young(~~~~,~,~,~)
+                        \end{align*}
+
+                        Since $n > 2$, we know that there are at least two parts. At $n=3$,
+                        $\frac{n-1}{2} + 1 = 2$ and $\frac{n-1}{2}=1$. So the partition is $\{2,1\}$. \\
+
+                        This is trivially bijective because $\frac{n-1}{2}$ is bijective.
+
+                  \item $n$ is even \\
+
+                        We know that $n-1$ is odd. So we can construct a sel-conjugate partition for $n-1$
+                        and then modify the generated sequence by changing one of the appended $1$s to a $2$.
+
+                        This generates Ferrer Diagrams of the form:
+
+                        \begin{align*}
+                            \young(~~~~,~~,~,~)
+                        \end{align*}
+
+                        We have shown in the odd case that this is a bijection and partition,
+                        so we know that this is a self-conjugate partition of $n$ because adding
+                        $1$ to one of the parts is still a bijective action.
+              \end{itemize}
+          }
+
+    \item Prove that the number of partitions of $n$ in which no part appears
+          exactly once is equal to the number of partitions of $n$ with no
+          parts congruent to $1$ or $5 \pmod{6}$.
+
+    \item Do part (c) of the last in class exercise of Lecture 19.
+          That is, give a bijective proof that the number of partitions
+          of $N$ using distinct parts equals the number of partitions of
+          $N$ using only odd parts. (Hint: Consider the multiplicity $m_p$
+          of each part $p$ occuring in partitions of the second type.
+          Now look at the unique expansion of $m$ as powers of $2$ and
+          distribute.)
+
+          \sol{
+              Consider an arbitrary partition $P$ that only uses odd parts for $N$:
 
               \begin{align*}
-                  \{\frac{n-1}{2} + 1, 1_1, 1_2, \dots, 1_{\frac{n-1}{2}}\}
+                  N = o_1 + o_2 + \cdots + o_k
               \end{align*}
 
-              where there are $\frac{n-1}{2}$ $1$s. This is self-conjugate as it will create
-              Ferrer Diagrams of the form:
+              Group each odd number to obtain its multiplicity $m_p$ (e.g. 1 + 1 + 1 = 3(1)):
 
               \begin{align*}
-                  \young(~~~~,~,~,~)
+                  N = m_1 (o_1) + m_2 (o_2) + \cdots + m_k (o_k)
               \end{align*}
 
-              Since $n > 2$, we know that there are at least two parts. At $n=3$,
-              $\frac{n-1}{2} + 1 = 2$ and $\frac{n-1}{2}=1$. So the partition is $\{2,1\}$. \\
-
-              This is trivially bijective because $\frac{n-1}{2}$ is bijective.
-
-        \item $n$ is even \\
-
-              We know that $n-1$ is odd. So we can construct a sel-conjugate partition for $n-1$
-              and then modify the generated sequence by changing one of the appended $1$s to a $2$.
-
-              This generates Ferrer Diagrams of the form:
+              Consider the unique expansion of $m_p$ as powers of $2$:
 
               \begin{align*}
-                  \young(~~~~,~~,~,~)
+                  m_p = 2^0 + 2^1 + \cdots + 2^r
               \end{align*}
 
-              We have shown in the odd case that this is a bijection and partition,
-              so we know that this is a self-conjugate partition of $n$ because adding
-              $1$ to one of the parts is still a bijective action.
-    \end{itemize}
-}
+              Distribute each $o_i$ across the expansion of $m_p$:
 
-\qs{}{
-    Prove that the number of partitions of $n$ in which no part appears
-    exactly once is equal to the number of partitions of $n$ with no
-    parts congruent to $1$ or $5 \pmod{6}$.
-}
+              \begin{align*}
+                   & = (2^0  + 2^1 + \cdots + 2^{r_1}) o_1 + (2^0  + 2^1 + \cdots + 2^{r_2}) o_2 + \cdots + (2^0  + 2^1 + \cdots + 2^{r_k}) o_k                                                              \\
+                   & = 2^0 (o_{\alpha_1} + o_{\alpha_2} + \cdots + o_{\alpha_x}) + 2^1 (o_{\beta_1} + o_{\beta_2} + \cdots + o_{n_2}) + \cdots + 2^{r} (o_{\gamma_y} + o_{\gamma_2} + \cdots + o_{\gamma_z}) \\
+              \end{align*}
 
-\qs{}{
-    Do part (c) of the last in class exercise of Lecture 19.
-    That is, give a bijective proof that the number of partitions
-    of $N$ using distinct parts equals the number of partitions of
-    $N$ using only odd parts. (Hint: Consider the multiplicity $m_p$
-    of each part $p$ occuring in partitions of the second type.
-    Now look at the unique expansion of $m$ as powers of $2$ and
-    distribute.)
-}
-\sol{
-    Consider an arbitrary partition $P$ that only uses odd parts for $N$:
+              Let $a_i$ be the sum of the $o_i$s that correspond to the $2^i$ term:
 
-    \begin{align*}
-        N = o_1 + o_2 + \cdots + o_k
-    \end{align*}
+              \begin{align*}
+                   & = 2^0 a_0 + 2^1 a_1 + \cdots + 2^{r} a_r
+              \end{align*}
 
-    Group each odd number to obtain its multiplicity $m_p$ (e.g. 1 + 1 + 1 = 3(1)):
+              We know that each of these terms must be unique as each power of $2$ is unique in this sequence.
 
-    \begin{align*}
-        N = m_1 (o_1) + m_2 (o_2) + \cdots + m_k (o_k)
-    \end{align*}
-
-    Consider the unique expansion of $m_p$ as powers of $2$:
-
-    \begin{align*}
-        m_p = 2^0 + 2^1 + \cdots + 2^r
-    \end{align*}
-
-    Distribute each $o_i$ across the expansion of $m_p$:
-
-    \begin{align*}
-         & = (2^0  + 2^1 + \cdots + 2^{r_1}) o_1 + (2^0  + 2^1 + \cdots + 2^{r_2}) o_2 + \cdots + (2^0  + 2^1 + \cdots + 2^{r_k}) o_k                                                              \\
-         & = 2^0 (o_{\alpha_1} + o_{\alpha_2} + \cdots + o_{\alpha_x}) + 2^1 (o_{\beta_1} + o_{\beta_2} + \cdots + o_{n_2}) + \cdots + 2^{r} (o_{\gamma_y} + o_{\gamma_2} + \cdots + o_{\gamma_z}) \\
-    \end{align*}
-
-    Let $a_i$ be the sum of the $o_i$s that correspond to the $2^i$ term:
-
-    \begin{align*}
-         & = 2^0 a_0 + 2^1 a_1 + \cdots + 2^{r} a_r
-    \end{align*}
-
-    We know that each of these terms must be unique as each power of $2$ is unique in this sequence.
-
-    Thus, we have constructed a bijection between the partitions of $N$ using only odd parts
-    and the partitions of $N$ using distinct parts.
-}
+              Thus, we have constructed a bijection between the partitions of $N$ using only odd parts
+              and the partitions of $N$ using distinct parts.
+          }
+\end{enumerate}
 
 \section{Homework 10}
 
+\begin{enumerate} %You can make lists!
+
+    \item By considering partitions with distinct (that is, non-repeated) parts, prove that
+
+          \begin{align*}
+              \prod_{k\geq 1} (1+x^k)=1+\sum_{m\geq
+                  1}\frac{x^{m(m+1)/2}}{\prod_{k=1}^m (1-x^k)}
+          \end{align*}
+
+          (Hint: look for a "maximal triangle" rather than a Durfee square.)
+
+          Consider a similar approach to the Durfee Square decomposition. We know the generating series for distinct parts is
+
+          \begin{align*}
+              \prod_{k\ge 1}(1 + x^k)
+          \end{align*}
+
+          Consider an arbitrary partition $P$ with distinct parts:
+
+          \begin{align*}
+              \young(~~~~~,~~~~,~~~,~~,~)
+          \end{align*}
+
+          This can clearly be decomposed into a unique triple with a maximal triangle with side lengths $m$:
+
+          \begin{multicols}{3}
+              \begin{align*}
+                  \young(~,~~,~~~)
+              \end{align*}
+
+              \columnbreak
+
+              \begin{align*}
+                  \young(~~~~,~~)
+              \end{align*}
+
+              \columnbreak
+
+              \begin{align*}
+                  \young(~~,~)
+              \end{align*}
+          \end{multicols}
+
+          We can construct a weight preserving bijection by conjugating the second component.
+
+          \begin{multicols}{3}
+              \begin{align*}
+                  \young(~,~~,~~~)
+              \end{align*}
+
+              \columnbreak
+
+              \begin{align*}
+                  \young(~~,~~,~,~)
+              \end{align*}
+
+              \columnbreak
+
+              \begin{align*}
+                  \young(~~,~)
+              \end{align*}
+          \end{multicols}
+
+          We can construct another weight preserving bijection by merging the second and third component as follows
+
+          \begin{multicols}{2}
+              \begin{align*}
+                  \young(~,~~,~~~)
+              \end{align*}
+
+              \columnbreak
+
+              \begin{align*}
+                  \young(~~,~~,~~,~,~,~)
+              \end{align*}
+          \end{multicols}
+
+          Suppose this tuple is $TD$ (triangle-decomposed).
+
+          \begin{align*}
+              TD \in \Big ( T_m, \text{Partitions}_{\le m \text{ wide }} \Big ) = S
+          \end{align*}
+
+          A maximal triangle of size $m$ will have $\frac{m(m+1)}{2}$ "parts" as it can be constructed by constructing a square of $m \times m + 1$ and removing the top right part to leave the maximal triangle. Additionally, partitions with no part bigger than $m$ (i.e. a Ferrer Diagram with a maximum width of $m$) is represented by the generating series $\prod_{k=1}^{m} \frac{1}{1-x^k}$. In total, it is clear that
+
+          \begin{align*}
+              g(x) & = \sum_{m\ge 1} \Bigg ( \Big ( x^{\frac{m(m+1)}{2}} \Big ) \Bigg ( \prod_{k=1}^{m} \frac{1}{1-x^k} \Bigg ) \Bigg ) \\
+                   & = \sum_{m\ge 1} \frac{x^{\frac{m(m+1)}{2}}}{\prod_{k=1}^{m}1-x^k}
+          \end{align*}
+
+          However, this bijection process does not hold for when $n=1$ as there will not be any element in the second part of the tuple. So, we must account for the $1$ missing element that is not being counted in this generating series. Thus,
+
+          \begin{align*}
+              \prod_{k\ge 1}(1 + x^k) = 1 + \sum_{m\ge 1} \frac{x^{\frac{m(m+1)}{2}}}{\prod_{k=1}^{m}1-x^k}
+          \end{align*}
+
+    \item Determine the number of $n$ digit numbers with all digits even, such that 2 and 4 each occur a nonzero, odd number of times.
+
+          We can treat this as number of ways to $n$ objects (digits) into 5 buckets ($\{0,2,4,6,8\}$ where the number of objects must be nonzero and odd. This can be represented by the generating series:
+
+          \begin{align*}
+              g_{exp}(x) = \Big (1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \Big )^3 \Big (x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots \Big )^2
+          \end{align*}
+
+          This can be simplified as follows:
+
+          \begin{align*}
+              g_{exp}(x) & = \big ( e^x \big )^3 \Big ( \frac{e^{-x} - e^{x}}{-2} \Big )^2 \\
+                         & = \big ( e^{3x} \big) \frac{(e^{-x} - e^{x})^2}{4}              \\
+                         & = \frac{ ( e^{3x} ) ( e^{-2x} - e^{0} - e^{0} + e^{2x} ) }{4}   \\
+                         & = \frac{e^{5x} + e^{x} - 2e^{3x}}{4}                            \\
+          \end{align*}
+
+          We are solving for $[x^n]g_{exp}(x)$.
+
+          \begin{align*}
+              [x^n]g(x) = \frac{5^n + 1 - 2\cdot 3^n}{4}
+          \end{align*}
+
+    \item Determine the exponential generating series for the number of ways to put (distinct) people into $n$ rooms where each room has at least five people. Now determine the actual answer for 30,50,100 people in $n=5$ rooms (hint: use a computer or Wolfram Alpha).
+
+          This is clearly recognized by the generating series:
+
+          \begin{align*}
+              g_{exp}(x) & = \Big ( \frac{x^5}{5!} + \frac{x^6}{6!} + \frac{x^7}{7!} + \cdots \Big )^n                                                              \\
+                         & = \Bigg ( \Big ( 1 + x + \frac{x^2}{2!} + \cdots \Big ) - \Big (1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!}\Big ) \Bigg )^n \\
+                         & = \Bigg ( e^{x} - \Big (1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!}\Big ) \Bigg )^n
+          \end{align*}
+
+          Let $n=5$. \begin{itemize}
+              \item 30 people: 110145542812228123200
+              \item 50 people: 80678086691658977883416415613497000
+              \item 100 people: 100! * Number1/Number2 (See last page) (Number is too large, didn't include on this document)
+          \end{itemize}
+
+    \item Show that $\frac{e^x}{(1-x)^n}$ is the exponential generating function for the number of ways to choose some subset (possibly empty) of $r$ distinct objects and distribute them into $n$ different boxes with the order in each box counted.
+
+          Let $A$ be the set of choosing $r$ distinct objects and placing them into one box. This is clearly represented by the generating series:
+
+          \begin{align*}
+              g_1(x) = e^x
+          \end{align*}
+
+          Similarly, let $B$ be the set of the chosen $r$ elements and the ways they can be placed into $n$ different boxes. This is clearly represented by the generating series
+
+          \begin{align*}
+              g_2(x) = \frac{1}{(1-x)}
+          \end{align*}
+
+          Clearly, $S = A \star B$ which is the star product and thus, we can clearly see that the number of ways to choose a subset of $r$ and distribute $r$ elements into $n$ boxes is counted by $S$ which has a generating series:
+
+          \begin{align*}
+              g(x) = \frac{e^x}{(1-x)^n}
+          \end{align*}
+
+    \item Find the exponential generating series for the number of functions $f:A\to B$ where $A=\{1,2,...,n\}$ and $B=\{1,2,...,m\}$ such that the preimage set of every element of $B$ is at least size four, i.e., $\#f^{-1}(j)\geq 4$ for each $j\in B$.
+
+          \begin{align*}
+              g(x) = \Big ( e^x - (1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}) \Big )^m
+          \end{align*}
+\end{enumerate}
+
 \chapter{Midterms}
+
+Note: The listed questions on exams are more questions than what was
+on the exam. Typically, the exams have 5 questions, 6 points each, however
+between two sections of the course, there are two variants of the exam.
 
 \section{Midterm 1}
 
@@ -3335,13 +4331,46 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 
 \subsection{Exam}
 
+\begin{enumerate}
+    \item Determine the number of integral solutions
+          $$x_1 + x_2 + x_3 + x_4 + x_5 = 413$$ subject to
+          $$x_1 \ge 40, x_2 \ge 0, x_3 \ge 20, x_4 \ge -15, x_5 \ge -35$$
+
+    \item Give a COMBINATORIAL PROOF of the following identity (i.e.,
+          double count a set). A non-combinatorial proof will receive no credit.
+          $$\sum_{k=0}^n \binom{n}{k} 412^{n-k} = 413^n$$
+
+    \item Count the number of ways to place four nonattacking rooks on a
+          $8 \times 8$ chessboard such that neither the first row nor the first column is
+          empty.
+
+    \item Remember this problem from class: \textit{Let S be the set of permutations
+              of at most $m$ $A$'s and at most $n$ $B$'s. The claim is}
+          $$\#S = \binom{m+n+2}{m+1}-1 $$ Precisely define $S'$ which
+          "obviously" has cardinality $\binom{m+n+2}{m-1}-1$ and giving a
+          bijection $f: S \to S'$. Explain why your claimed bijection is
+          WELL-DEFINED, i.e., given $w \in S'$ that indeed $f(w) \in S$.
+          You do NOT need to show $f$ is injective or surjective here.
+
+    \item Yihong and Zhuo are solving the Homework 2:
+
+          \begin{quotation}
+              \textit{In how many ways can two red and four blue rooks be
+                  placed on an $8 \times 8$ chessboard so that no two rooks can
+                  attack each other?}
+          \end{quotation}
+
+    \item What fraction of all of the arrangements of EFFLORESCENCE has
+          consecutive Cs, consecutive Fs but no consecutive Es? For example
+          ECCLROESFFENE is one such arrangement.
+
+    \item Give a COMBINATORIAL proof of the following identity:
+          $$\binom{2}{2}\binom{n}{2} + \binom{3}{2} \binom{n-1}{2} + \binom{4}{2}\binom{n-2}{2} + \cdots + \binom{n}{2} \binom{2}{2}=\binom{n+3}{5}$$
+\end{enumerate}
+
 \subsection{Exam Solutions}
 
 \section{Midterm 2}
-
-\subsection{Practice Problems}
-
-\subsection{Solutions}
 
 \subsection{Exam}
 
@@ -3351,165 +4380,158 @@ Our desired answer is $[x^{25}]g_{\text{exp}}(x)$, so the answer is as follows:
 
 \subsection{Practice Problems}
 
-\qs{}{
-    Find a recurrence relation for the number of different ways to hand
-    out a piece of chewing gum (worth $1$ cent) or a candy bar (worth $10$
-    cents) or a donut (worth $20$ cents), one item a day, until n cents worth
-    of food has been given away. Don’t worry about the initial condition.
-}
-\sol{
-    Let $f(n)$ be the number of ways to hand out a piece of chewing gum,
-    a candy bar, or a donut with $n$ cents. At any moment with $n$ cents,
-    we can either give a piece of gum, a candy bar, or a donut. This gives
+\begin{enumerate}
+    \item Find a recurrence relation for the number of different ways to hand
+          out a piece of chewing gum (worth $1$ cent) or a candy bar (worth $10$
+          cents) or a donut (worth $20$ cents), one item a day, until n cents worth
+          of food has been given away. Don’t worry about the initial condition.
 
-    \begin{align*}
-        f(n) = f(n-1) + f(n-10) + f(n-20)
-    \end{align*}
-}
+          \sol{
+              Let $f(n)$ be the number of ways to hand out a piece of chewing gum,
+              a candy bar, or a donut with $n$ cents. At any moment with $n$ cents,
+              we can either give a piece of gum, a candy bar, or a donut. This gives
 
-\qs{}{
-    By using generating series, determine the number of integer solutions
-    to the composition problem
+              \begin{align*}
+                  f(n) = f(n-1) + f(n-10) + f(n-20)
+              \end{align*}
 
-    \begin{align*}
-        e_1 + e_2 + e_3 = 22
-    \end{align*}
+          }
+    \item  By using generating series, determine the number of integer solutions
+          to the composition problem
 
-    subject to $3 \le e_1 \le 8$, $6 \le e_2 \le 10$, and $2 \le e_3 \le 7$.
-}
-\sol{
-    Clearly this can be solved by the following generating series:
+          \begin{align*}
+              e_1 + e_2 + e_3 = 22
+          \end{align*}
 
-    \begin{align*}
-        g_1(x) = (x^3+x^4+x^5+x^6+x^7+x^8) (x^6+x^7+x^8+x^9+x^{10}) (x^2+x^3+x^4+x^5+x^6+x^7)
-    \end{align*}
+          subject to $3 \le e_1 \le 8$, $6 \le e_2 \le 10$, and $2 \le e_3 \le 7$.
 
-    where the solution is $[x^22] g(x)$. However, this is difficult to extract
-    a coefficient from. Instead, rewrite the problem in terms of new variables:
+          \sol{
+              Clearly this can be solved by the following generating series:
 
-    \begin{align*}
-        e_1 + e_2 + e_3 = 11
-    \end{align*}
+              \begin{align*}
+                  g_1(x) = (x^3+x^4+x^5+x^6+x^7+x^8) (x^6+x^7+x^8+x^9+x^{10}) (x^2+x^3+x^4+x^5+x^6+x^7)
+              \end{align*}
 
-    where $0 \le e_1 \le 5$, $0 \le e_2 \le 4$, and $0 \le e_3 \le 5$.
-    The generating series now becomes:
+              where the solution is $[x^{22}] g(x)$. However, this is difficult to extract
+              a coefficient from. Instead, rewrite the problem in terms of new variables:
 
-    \begin{align*}
-        g_2(x) = (1 + x + x^2 + x^3 + x^4 + x^5) (1 + x + x^2 + x^3 + x^4) (1 + x + x^2 + x^3 + x^4 + x^5)
-    \end{align*}
+              \begin{align*}
+                  e_1 + e_2 + e_3 = 11
+              \end{align*}
 
-    where we are solving for $[x^{11}] g_2(x)$. This generating series can be simplified as follows:
+              where $0 \le e_1 \le 5$, $0 \le e_2 \le 4$, and $0 \le e_3 \le 5$.
+              The generating series now becomes:
 
-    \begin{align*}
-        g_2(x) & = (1 + x + x^2 + x^3 + x^4 + x^5) (1 + x + x^2 + x^3 + x^4) (1 + x + x^2 + x^3 + x^4 + x^5) \\
-               & = (\frac{1 - x^{6}}{1 - x}) (\frac{1 - x^5}{1 - x}) (\frac{1 - x^6}{1 - x})                 \\
-               & = \frac{(1 - x^{6}) (1 - x^5) (1 - x^6)}{(1 - x) (1 - x) (1 - x)}                           \\
-               & = \frac{(1 - x^{6}) (1 - x^5) (1 - x^6)}{(1 - x)^3}                                         \\
-               & = (1 - x^{6}) (1 - x^5) (1 - x^6) (1-x)^{-3}                                                \\
-               & = (1 - x^{5} - x^{6} + x^{11})(1-x^{6}) (1-x)^{-3}                                          \\
-               & = (1 - x^{5} - x^{6} + x^{11} - x^{6} + x^{11} + x^{12} - x^{17}) (1-x)^{-3}                \\
-               & = (1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3}                               \\
-    \end{align*}
+              \begin{align*}
+                  g_2(x) = (1 + x + x^2 + x^3 + x^4 + x^5) (1 + x + x^2 + x^3 + x^4) (1 + x + x^2 + x^3 + x^4 + x^5)
+              \end{align*}
 
-    The target solution is $[x^{11}] g_2(x)$. Using negative binomial theorem,
-    we can find the coefficient of $x^{11}$ as follows:
+              where we are solving for $[x^{11}] g_2(x)$. This generating series can be simplified as follows:
 
-    Reminder that negative binomial theorem is:
+              \begin{align*}
+                  g_2(x) & = (1 + x + x^2 + x^3 + x^4 + x^5) (1 + x + x^2 + x^3 + x^4) (1 + x + x^2 + x^3 + x^4 + x^5) \\
+                         & = (\frac{1 - x^{6}}{1 - x}) (\frac{1 - x^5}{1 - x}) (\frac{1 - x^6}{1 - x})                 \\
+                         & = \frac{(1 - x^{6}) (1 - x^5) (1 - x^6)}{(1 - x) (1 - x) (1 - x)}                           \\
+                         & = \frac{(1 - x^{6}) (1 - x^5) (1 - x^6)}{(1 - x)^3}                                         \\
+                         & = (1 - x^{6}) (1 - x^5) (1 - x^6) (1-x)^{-3}                                                \\
+                         & = (1 - x^{5} - x^{6} + x^{11})(1-x^{6}) (1-x)^{-3}                                          \\
+                         & = (1 - x^{5} - x^{6} + x^{11} - x^{6} + x^{11} + x^{12} - x^{17}) (1-x)^{-3}                \\
+                         & = (1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3}                               \\
+              \end{align*}
 
-    \begin{align*}
-        (1 - x)^{-n} = \sum_{k=0}^{\infty} \binom{n+k-1}{k} x^k
-    \end{align*}
+              The target solution is $[x^{11}] g_2(x)$. Using negative binomial theorem,
+              we can find the coefficient of $x^{11}$ as follows:
 
-    \begin{align*}
-        [x^{11}]g_2(x) & = [x^{11}]((1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3})                                                                                         \\
-                       & = [x^{11}] \Big ( (1-x)^{-3} - x^{5} (1-x)^{-3} - 2x^{6}(1-x)^{-3} + 2x^{11}(1-x)^{-3} + x^{12}(1-x)^{-3} - x^{17}(1-x)^{-3} \Big )                             \\
-                       & = [x^{11}](1-x)^{-3} - [x^{11}]x^{5} (1-x)^{-3} + [x^{11}] 2x^{6}(1-x)^{-3} + [x^{11}]2x^{{11}}(1-x)^{-3} + [x^{11}]x^{12}(1-x)^{-3} - [x^{11}]x^{17}(1-x)^{-3} \\
-                       & = [x^{11}](1-x)^{-3} - [x^6](1-x)^{-3} - 2 [x^{5}] (1-x)^{-3} + 2[x^0](1-x)^{-3} + [x^{-1}](1-x)^{-3} - [x^{-6}](1-x)^{-3}                                      \\
-                       & = \binom{3+11-1}{3-1} - \binom{3+6-1}{3-1} - 2 \binom{3+5-1}{3-1} + 2 \binom{3+0-1}{3-1} + 0 + 0                                                                \\
-                       & = \binom{13}{2} - \binom{8}{2} - 2 \binom{7}{2} + 2 \binom{2}{2}
-    \end{align*}
-}
+              Reminder that negative binomial theorem is:
 
-\qs{}{
-    Prove that the number of partitions where no part appears more
-    than two times equals the number of partitions where no part is a
-    multiple of three. (Hint: write down the generating series for the former
-    type of partition and algebraically manipulate to get to the generating
-    series for the latter type.)
-}
-\sol{
-    Number of partitions of $n$ where no part appears more than two times:
+              \begin{align*}
+                  (1 - x)^{-n} = \sum_{k=0}^{\infty} \binom{n+k-1}{k} x^k
+              \end{align*}
 
-    \begin{align*}
-        \prod_{i=1}^{\infty} (1 + x^i + x^{2i})
-    \end{align*}
+              \begin{align*}
+                  [x^{11}]g_2(x) & = [x^{11}]((1 - x^{5} - 2x^{6} + 2x^{11} + x^{12} - x^{17}) (1-x)^{-3})                                                                                         \\
+                                 & = [x^{11}] \Big ( (1-x)^{-3} - x^{5} (1-x)^{-3} - 2x^{6}(1-x)^{-3} + 2x^{11}(1-x)^{-3} + x^{12}(1-x)^{-3} - x^{17}(1-x)^{-3} \Big )                             \\
+                                 & = [x^{11}](1-x)^{-3} - [x^{11}]x^{5} (1-x)^{-3} + [x^{11}] 2x^{6}(1-x)^{-3} + [x^{11}]2x^{{11}}(1-x)^{-3} + [x^{11}]x^{12}(1-x)^{-3} - [x^{11}]x^{17}(1-x)^{-3} \\
+                                 & = [x^{11}](1-x)^{-3} - [x^6](1-x)^{-3} - 2 [x^{5}] (1-x)^{-3} + 2[x^0](1-x)^{-3} + [x^{-1}](1-x)^{-3} - [x^{-6}](1-x)^{-3}                                      \\
+                                 & = \binom{3+11-1}{3-1} - \binom{3+6-1}{3-1} - 2 \binom{3+5-1}{3-1} + 2 \binom{3+0-1}{3-1} + 0 + 0                                                                \\
+                                 & = \binom{13}{2} - \binom{8}{2} - 2 \binom{7}{2} + 2 \binom{2}{2}
+              \end{align*}
+          }
+    \item Prove that the number of partitions where no part appears more
+          than two times equals the number of partitions where no part is a
+          multiple of three. (Hint: write down the generating series for the former
+          type of partition and algebraically manipulate to get to the generating
+          series for the latter type.)
 
-    Number of partitions of $n$ where no part is a multiple of three:
+          \sol{
+              Number of partitions of $n$ where no part appears more than two times:
 
-    \begin{align*}
-        \frac{
-            \prod_{i=1}^{\infty} \frac{1}{1 - x^i}
-        }{
-            \prod_{i=1}^{\infty} \frac{1}{1 - x^{3i}}
-        } & = \prod_{i=1}^{\infty} \frac{ \frac{1}{1 - x^i} }{ \frac{1}{1 - x^{3i}} } \\
-          & = \prod_{i=1}^{\infty} \frac{1 - x^{3i}}{1 - x^i}
-    \end{align*}
+              \begin{align*}
+                  \prod_{i=1}^{\infty} (1 + x^i + x^{2i})
+              \end{align*}
 
-    Algabraic proof:
+              Number of partitions of $n$ where no part is a multiple of three:
 
-    \begin{subproof}
-        \begin{align*}
-            \prod_{i=1}^{\infty} (1 + x^i + x^{2i}) & = \prod_{i=1}^{\infty} \frac{(1+x^i+x^{2i})(1-x^i)}{1-x^i}                \\
-                                                    & = \prod_{i=1}^{\infty} \frac{1+x^i+x^{2i} - x^i - x^{2i} - x^{3i}}{1-x^i} \\
-                                                    & = \prod_{i=1}^{\infty} \frac{1 - x^{3i}}{1-x^i}                           \\
-        \end{align*}
-    \end{subproof}
-}
+              \begin{align*}
+                  \frac{
+                      \prod_{i=1}^{\infty} \frac{1}{1 - x^i}
+                  }{
+                      \prod_{i=1}^{\infty} \frac{1}{1 - x^{3i}}
+                  } & = \prod_{i=1}^{\infty} \frac{ \frac{1}{1 - x^i} }{ \frac{1}{1 - x^{3i}} } \\
+                    & = \prod_{i=1}^{\infty} \frac{1 - x^{3i}}{1 - x^i}
+              \end{align*}
 
-\qs{}{
-    Determine the number of permutations of $\{1, 2, 3, 4, 5, 6, 7, 8\}$ in
-    which no even integer is in its natural position. For example, $43258176$
-    is good, but $42358176$ is bad because of the position of the 2.
-}
-\sol{
-    This is an application of inclusion-exclusion principle. \\
+              Algabraic proof:
 
-    Let $S$ be the set of all permutations of $\{1, 2, 3, 4, 5, 6, 7, 8\}$. Clearly,
-    $|S| = 8!$. \\
+              \begin{subproof}
+                  \begin{align*}
+                      \prod_{i=1}^{\infty} (1 + x^i + x^{2i}) & = \prod_{i=1}^{\infty} \frac{(1+x^i+x^{2i})(1-x^i)}{1-x^i}                \\
+                                                              & = \prod_{i=1}^{\infty} \frac{1+x^i+x^{2i} - x^i - x^{2i} - x^{3i}}{1-x^i} \\
+                                                              & = \prod_{i=1}^{\infty} \frac{1 - x^{3i}}{1-x^i}                           \\
+                  \end{align*}
+              \end{subproof}
+          }
 
-    Let $A_i$ be the subset of permutations in $S$ where $i$ is in its natural position.
-    We are looking to calculate the following by the complementary form of the
-    inclusion-exclusion principle:
+    \item Determine the number of permutations of $\{1, 2, 3, 4, 5, 6, 7, 8\}$ in
+          which no even integer is in its natural position. For example, $43258176$
+          is good, but $42358176$ is bad because of the position of the 2.
 
-    \begin{align*}
-        |A_2^c \cap A_4^c \cap A_6^c \cap A_8^c| = |S| - \sum |A_i| + \sum |A_i \cap A_j| - \sum |A_i \cap A_j \cap A_k| + |A_2 \cap A_4 \cap A_6 \cap A_8| \\
-    \end{align*}
+          \sol{
+              This is an application of inclusion-exclusion principle. \\
 
-    Each sum can be calculated as follows:
+              Let $S$ be the set of all permutations of $\{1, 2, 3, 4, 5, 6, 7, 8\}$. Clearly,
+              $|S| = 8!$. \\
 
-    \begin{align*}
-        \sum |A_{i_1} \cap A_{i_2} \cdots A_{i_k}| & = \binom{4}{k}(8-k)! \\
-    \end{align*}
+              Let $A_i$ be the subset of permutations in $S$ where $i$ is in its natural position.
+              We are looking to calculate the following by the complementary form of the
+              inclusion-exclusion principle:
 
-    This is because there are $4$ ways to choose the even numbers that are fixed.
-    For each of these choices, there are $8-k$ ways to choose the remaining numbers. \\
+              \begin{align*}
+                  |A_2^c \cap A_4^c \cap A_6^c \cap A_8^c| = |S| - \sum |A_i| + \sum |A_i \cap A_j| - \sum |A_i \cap A_j \cap A_k| + |A_2 \cap A_4 \cap A_6 \cap A_8| \\
+              \end{align*}
 
-    So, we have:
+              Each sum can be calculated as follows:
 
-    \begin{align*}
-        8! - \binom{4}{1}7! + \binom{4}{2} 6! - \binom{4}{3} 5! + \binom{4}{4} 4!
-    \end{align*}
-}
+              \begin{align*}
+                  \sum |A_{i_1} \cap A_{i_2} \cdots A_{i_k}| & = \binom{4}{k}(8-k)! \\
+              \end{align*}
 
-\qs{}{
-    Define what it means for a pair $(S, \omega)$ means to be combinatorial
-    problem. Define generating series in these terms. State and prove the
-    product lemma. (As usual, on the test I might ask a \textbf{very precise}
-    question about these proofs (or any proof) so you must be able to
-    understand each line and symbol used in the argument.)
-}
+              This is because there are $4$ ways to choose the even numbers that are fixed.
+              For each of these choices, there are $8-k$ ways to choose the remaining numbers. \\
 
-\subsection{Solutions}
+              So, we have:
+
+              \begin{align*}
+                  8! - \binom{4}{1}7! + \binom{4}{2} 6! - \binom{4}{3} 5! + \binom{4}{4} 4!
+              \end{align*}
+          }
+
+    \item Define what it means for a pair $(S, \omega)$ means to be combinatorial
+          problem. Define generating series in these terms. State and prove the
+          product lemma. (As usual, on the test I might ask a \textbf{very precise}
+          question about these proofs (or any proof) so you must be able to
+          understand each line and symbol used in the argument.)
+\end{enumerate}
 
 \subsection{Exam}
 
