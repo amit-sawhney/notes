@@ -438,27 +438,28 @@
 %================================
 
 \makeatletter
-\newtcbtheorem{question}{Question}{enhanced,
-	breakable,
+\newtcbtheorem{question}{Question}{
+	enhanced,
+	% breakable,
 	colback=white,
-	colframe=myb!80!black,
-	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+	% colframe=myb!80!black,
+	% attach boxed title to top left={yshift*=-\tcboxedtitleheight},
 	fonttitle=\bfseries,
 	title={#2},
-	boxed title size=title,
-	boxed title style={%
-			sharp corners,
-			rounded corners=northwest,
-			colback=tcbcolframe,
-			boxrule=0pt,
-		},
-	underlay boxed title={%
-			\path[fill=tcbcolframe] (title.south west)--(title.south east)
-			to[out=0, in=180] ([xshift=5mm]title.east)--
-			(title.center-|frame.east)
-			[rounded corners=\kvtcb@arc] |-
-			(frame.north) -| cycle;
-		},
+	% boxed title size=title,
+	% boxed title style={%
+	% 		sharp corners,
+	% 		rounded corners=northwest,
+	% 		colback=tcbcolframe,
+	% 		boxrule=0pt,
+	% 	},
+	% underlay boxed title={%
+	% 		\path[fill=tcbcolframe] (title.south west)--(title.south east)
+	% 		to[out=0, in=180] ([xshift=5mm]title.east)--
+	% 		(title.center-|frame.east)
+	% 		[rounded corners=\kvtcb@arc] |-
+	% 		(frame.north) -| cycle;
+	% 	},
 	#1
 }{def}
 \makeatother
@@ -496,27 +497,28 @@
 %================================
 
 \makeatletter
-\newtcbtheorem{qstion}{Question}{enhanced,
-	breakable,
-	colback=white,
-	colframe=mygr,
-	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+\newtcbtheorem{qstion}{Question}{
+	% enhanced,
+	% breakable,
+	% colback=white,
+	% colframe=mygr,
+	% attach boxed title to top left={yshift*=-\tcboxedtitleheight},
 	fonttitle=\bfseries,
 	title={#2},
-	boxed title size=title,
-	boxed title style={%
-			sharp corners,
-			rounded corners=northwest,
-			colback=tcbcolframe,
-			boxrule=0pt,
-		},
-	underlay boxed title={%
-			\path[fill=tcbcolframe] (title.south west)--(title.south east)
-			to[out=0, in=180] ([xshift=5mm]title.east)--
-			(title.center-|frame.east)
-			[rounded corners=\kvtcb@arc] |-
-			(frame.north) -| cycle;
-		},
+	% boxed title size=title,
+	% boxed title style={%
+	% 		sharp corners,
+	% 		rounded corners=northwest,
+	% 		colback=tcbcolframe,
+	% 		boxrule=0pt,
+	% 	},
+	% underlay boxed title={%
+	% 		\path[fill=tcbcolframe] (title.south west)--(title.south east)
+	% 		to[out=0, in=180] ([xshift=5mm]title.east)--
+	% 		(title.center-|frame.east)
+	% 		[rounded corners=\kvtcb@arc] |-
+	% 		(frame.north) -| cycle;
+	% 	},
 	#1
 }{def}
 \makeatother
